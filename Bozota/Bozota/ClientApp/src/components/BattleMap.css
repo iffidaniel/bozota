@@ -1,0 +1,41 @@
+.item {
+    margin: 0px;
+    padding: 0px;
+    width: 7px;
+    height: 7px;
+}
+
+.empty {
+    background-color: rgb(194, 194, 194);
+}
+
+.health {
+    background-color: green;
+}
+
+.ammo {
+    background-color: blueviolet;
+}
+
+.wall {
+    background-color: gray;
+}
+
+.bomb {
+    background-color: red;
+}
+
+
+.battleMapContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.battleMap {
+    width:fit-content;
+    padding-right: 12px;
+    padding-left: 12px;
+    border: solid 5px black;
+}
