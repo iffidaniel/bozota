@@ -5,20 +5,17 @@ namespace Bozota.Services;
 public class GameProgressService
 {
     private readonly ILogger<GameProgressService> _logger;
-    private readonly int _mapXCellCount;
-    private readonly int _mapYCellCount;
+    private readonly GameLogicService _gameLogic;
     private readonly GameMap _gameMap;
     private bool _isGameInitialized = false;
-    private readonly Random _random = new();
 
-    public GameProgressService(ILogger<GameProgressService> logger, IConfiguration config)
+    public GameProgressService(ILogger<GameProgressService> logger, IConfiguration config,
+        GameLogicService gameLogic)
     {
         _logger = logger;
+        _gameLogic = gameLogic;
 
-        _mapXCellCount = config.GetValue("Game:MapXCellCount", 100);
-        _mapYCellCount = config.GetValue("Game:MapYCellCount", 100);
-
-        _gameMap = new(_mapXCellCount, _mapYCellCount);
+        _gameMap = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
     }
 
     public Task InitializeGameAsync()
@@ -27,15 +24,26 @@ public class GameProgressService
         {
             _logger.LogInformation("Initializing game");
 
-            for (int x = 0; x < _mapXCellCount; x++)
+            for (int x = 0; x < _gameMap.XCellCount; x++)
             {
                 var xMap = new List<CellItem>();
-                for (int y = 0; y < _mapXCellCount; y++)
+                for (int y = 0; y < _gameMap.XCellCount; y++)
                 {
                     xMap.Add(CellItem.Empty);
                 }
                 _gameMap.Map.Add(xMap);
             }
+
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Veikko", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Riku", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Ramesh", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Krishna", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Raif", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Daniel", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Diana", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Soikka", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Hessu", _gameMap.XCellCount, _gameMap.YCellCount));
+            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Mika", _gameMap.XCellCount, _gameMap.YCellCount));
 
             _isGameInitialized = true;
         }
@@ -53,50 +61,21 @@ public class GameProgressService
         return Task.FromResult<GameMap?>(null);
     }
 
-    public Task UpdateGameProgress()
+    public async Task UpdateGameProgress()
     {
         if (_isGameInitialized)
         {
-            for (int x = 0; x < _mapXCellCount; x++)
+            for (int x = 0; x < _gameMap.XCellCount; x++)
             {
-                for (int y = 0; y < _mapXCellCount; y++)
+                for (int y = 0; y < _gameMap.XCellCount; y++)
                 {
-                    _gameMap.Map[x][y] = GetRandomCellItem();
+                    _gameMap.Map[x][y] = _gameLogic.GetRandomCellItem();
                 }
             }
         }
 
-        return Task.CompletedTask;
+        await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
     }
 
     public bool IsGameInitialized() => _isGameInitialized;
-
-    private CellItem GetRandomCellItem()
-    {
-        var randomNumber = _random.Next(100);
-        if (randomNumber == 0 || randomNumber > 4)
-        {
-            return CellItem.Empty;
-        }
-        else if (randomNumber == 1)
-        {
-            return CellItem.Health;
-        }
-        else if (randomNumber == 2)
-        {
-            return CellItem.Ammo;
-        }
-        else if (randomNumber == 3)
-        {
-            return CellItem.Wall;
-        }
-        else if (randomNumber == 4)
-        {
-            return CellItem.Bomb;
-        }
-        else
-        {
-            return CellItem.Empty;
-        }
-    }
 }

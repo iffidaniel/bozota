@@ -8,11 +8,14 @@
 
         public List<List<CellItem>> Map { get; private set; }
 
-        public GameMap(int rowCount, int columnCount)
+        public List<Player> Players { get; private set; }
+
+        public GameMap(int xCellCount, int yCellCount)
         {
-            XCellCount = rowCount;
-            YCellCount = columnCount;
+            XCellCount = xCellCount;
+            YCellCount = yCellCount;
             Map = new();
+            Players = new();
         }
     }
 }

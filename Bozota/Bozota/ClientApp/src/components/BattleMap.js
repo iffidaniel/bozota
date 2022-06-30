@@ -11,9 +11,11 @@ const renderItem = (id) => {
   } else if (id === 2) {
     return <span className='ammo item' />;
   } else if (id === 3) {
-    return <span className='wall item' />;
+      return <span className='wall item' />;
   } else if (id === 4) {
-    return <span className='bomb item' />;
+      return <span className='bomb item' />;
+  } else if (id === 5) {
+      return <span className='player item' />;
   }
 };
 

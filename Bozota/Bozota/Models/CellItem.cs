@@ -6,5 +6,6 @@ public enum CellItem
     Health = 1,
     Ammo = 2,
     Wall = 3,
-    Bomb = 4
+    Bomb = 4,
+    Player = 5
 }
