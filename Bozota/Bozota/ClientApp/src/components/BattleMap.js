@@ -4,15 +4,15 @@ import './BattleMap.css';
 
 const renderItem = (id) => {
   console.log(id);
-  if (id > 3) {
+  if (id > 4 || id === 0) {
     return <span className='empty item' />;
-  } else if (id === 0) {
-    return <span className='health item' />;
   } else if (id === 1) {
-    return <span className='ammo item' />;
+    return <span className='health item' />;
   } else if (id === 2) {
-    return <span className='wall item' />;
+    return <span className='ammo item' />;
   } else if (id === 3) {
+    return <span className='wall item' />;
+  } else if (id === 4) {
     return <span className='bomb item' />;
   }
 };
