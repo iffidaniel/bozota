@@ -98,6 +98,16 @@ public class GameTickerService : IAsyncDisposable
         _logger.LogInformation("Started {service}", nameof(GameTickerService));
     }
 
+    public bool IsGameTickerRunning()
+    {
+        if (_timerTask is not null && _gameProgress.IsGameInitialized())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public async Task StopGameTicker()
     {
         _logger.LogInformation("Stopping {service}", nameof(GameTickerService));

@@ -19,24 +19,33 @@ namespace Bozota.Controllers
 
         [HttpGet]
         [Route("start")]
-        public ActionResult StartTicker()
+        public ActionResult<bool> StartTicker()
         {
             _logger.LogTrace("{request} requested", nameof(StartTicker));
 
             _gameTicker.StartGameTicker();
 
-            return Ok();
+            return _gameTicker.IsGameTickerRunning();
+        }
+
+        [HttpGet]
+        [Route("status")]
+        public ActionResult<bool> GetTickerStatus()
+        {
+            _logger.LogTrace("{request} requested", nameof(GetTickerStatus));
+
+            return _gameTicker.IsGameTickerRunning();
         }
 
         [HttpGet]
         [Route("stop")]
-        public async Task<ActionResult> StopTicker()
+        public async Task<ActionResult<bool>> StopTicker()
         {
             _logger.LogTrace("{request} requested", nameof(StopTicker));
 
             await _gameTicker.StopGameTicker();
 
-            return Ok();
+            return _gameTicker.IsGameTickerRunning();
         }
 
         [HttpGet]

@@ -19,19 +19,14 @@ namespace Bozota.Controllers
         }
 
         [HttpGet]
-        [Route("start")]
-        public async Task<ActionResult> StartGame()
+        [Route("init")]
+        public async Task<ActionResult<bool>> StartGame()
         {
             _logger.LogTrace("{request} requested", nameof(StartGame));
 
             await _gameProgress.InitializeGameAsync();
 
-            if (!_gameProgress.IsGameInitialized())
-            {
-                return StatusCode(500);
-            }
-
-            return Ok();
+            return _gameProgress.IsGameInitialized();
         }
 
         [HttpGet]
