@@ -15,7 +15,7 @@ public class GameMasterService : IHostedService
     {
         _logger.LogInformation("Starting {service}", nameof(GameMasterService));
 
-        _gameTicker.StartGameTicker();
+        //_gameTicker.StartGameTicker();
 
         return Task.CompletedTask;
     }

@@ -19,8 +19,8 @@ public class GameLogicService
         return new Player
         {
             Name = name,
-            xPos = name == "Daniel" ? 0 : _random.Next(mapXCellCount), // TODO: Hard coded Daniel's X position for testing purposes
-            yPos = name == "Daniel" ? 1 : _random.Next(mapYCellCount), // TODO: Hard coded Daniel's Y position for testing purposes
+            XPos = _random.Next(mapXCellCount), 
+            YPos = _random.Next(mapYCellCount),
         };
     }
 
@@ -28,7 +28,7 @@ public class GameLogicService
     {
         foreach (var player in players)
         {
-            map[player.xPos][player.yPos] = CellItem.Player;
+            map[player.XPos][player.YPos] = CellItem.Player;
         }
 
         return Task.CompletedTask;

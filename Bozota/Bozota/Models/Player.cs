@@ -2,11 +2,11 @@
 
 public class Player
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public string Name { get; set; } = "player";
 
-    public int xPos { get; set; } = 0;
+    public int XPos { get; set; } = 0;
 
-    public int yPos { get; set; } = 0;
+    public int YPos { get; set; } = 0;
 }

@@ -1,12 +1,12 @@
-﻿namespace Bozota.Services;
+﻿using Bozota.Models;
+
+namespace Bozota.Services;
 
 public class GameTickerService : IAsyncDisposable
 {
     private readonly ILogger<GameTickerService> _logger;
     private CancellationTokenSource _cts = new();
-    private readonly int _minimumTickerIntervalInMiliseconds;
-    private readonly int _maximumTickerIntervalInMiliseconds;
-    private TimeSpan _tickerInterval;
+    private GameTicker _gameTicker;
     private PeriodicTimer _timer;
     private Task? _timerTask;
     private readonly GameProgressService _gameProgress;
@@ -16,74 +16,52 @@ public class GameTickerService : IAsyncDisposable
     {
         _logger = logger;
 
-        _minimumTickerIntervalInMiliseconds = config.GetValue("Game:MinTickerInterval", 10);
-        _maximumTickerIntervalInMiliseconds = config.GetValue("Game:MaxTickerInterval", 1000);
-        var intervalInMilliseconds = config.GetValue("Game:TickerInterval", 500);
+        _gameTicker = new(config.GetValue("Game:MinTickerInterval", 10), config.GetValue("Game:MaxTickerInterval", 2000))
+        {
+            Interval = config.GetValue("Game:TickerInterval", 500)
+        };
 
-        if (intervalInMilliseconds <= _minimumTickerIntervalInMiliseconds)
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, _minimumTickerIntervalInMiliseconds);
-        }
-        else if (intervalInMilliseconds >= _maximumTickerIntervalInMiliseconds)
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, _maximumTickerIntervalInMiliseconds);
-        }
-        else
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
-        }
-
-        _timer = new PeriodicTimer(_tickerInterval);
+        _timer = new PeriodicTimer(new TimeSpan(0, 0, 0, 0, _gameTicker.Interval));
 
         _gameProgress = gameProgress;
     }
 
-    public int GetTickerInterval()
+    public GameTicker GetTicker()
     {
-        return (int)_tickerInterval.TotalMilliseconds;
+        _gameTicker.IsRunning = IsGameTickerRunning();
+
+        return _gameTicker;
     }
 
-    public async Task<int> SetTickerInterval(int intervalInMilliseconds)
+    public async Task<GameTicker> SetTickerInterval(int intervalInMilliseconds)
     {
-        if (GetTickerInterval() == intervalInMilliseconds)
+        if (_gameTicker.Interval == intervalInMilliseconds)
         {
-            return intervalInMilliseconds;
+            return _gameTicker;
         }
+        _gameTicker.Interval = intervalInMilliseconds;
 
-        if (intervalInMilliseconds <= _minimumTickerIntervalInMiliseconds)
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, _minimumTickerIntervalInMiliseconds);
-        }
-        else if (intervalInMilliseconds >= _maximumTickerIntervalInMiliseconds)
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, _maximumTickerIntervalInMiliseconds);
-        }
-        else
-        {
-            _tickerInterval = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
-        }
-
-        _logger.LogInformation("Game ticker interval set to {interval}ms", GetTickerInterval());
+        _logger.LogInformation("Game ticker interval set to {interval}ms", _gameTicker.Interval);
 
         if (_timerTask is not null)
         {
             await StopGameTicker();
             _timer.Dispose();
-            _timer = new PeriodicTimer(_tickerInterval);
+            _timer = new PeriodicTimer(new TimeSpan(0, 0, 0, 0, _gameTicker.Interval));
             StartGameTicker();
         }
         else
         {
-            _timer = new PeriodicTimer(_tickerInterval);
+            _timer = new PeriodicTimer(new TimeSpan(0, 0, 0, 0, _gameTicker.Interval));
         }
 
-        return GetTickerInterval();
+        _gameTicker.IsRunning = IsGameTickerRunning();
+
+        return _gameTicker;
     }
 
-    public void StartGameTicker()
+    public GameTicker StartGameTicker()
     {
-        _logger.LogInformation("Starting {service}", nameof(GameTickerService));
-
         if (_timerTask is null)
         {
             if (_cts.IsCancellationRequested)
@@ -95,23 +73,15 @@ public class GameTickerService : IAsyncDisposable
             _timerTask = DoWorkAsync();
         }
 
-        _logger.LogInformation("Started {service}", nameof(GameTickerService));
+        _gameTicker.IsRunning = IsGameTickerRunning();
+        
+        _logger.LogInformation("Game ticker started");
+
+        return _gameTicker;
     }
 
-    public bool IsGameTickerRunning()
+    public async Task<GameTicker> StopGameTicker()
     {
-        if (_timerTask is not null && _gameProgress.IsGameInitialized())
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public async Task StopGameTicker()
-    {
-        _logger.LogInformation("Stopping {service}", nameof(GameTickerService));
-
         if (_timerTask is not null)
         {
             _cts.Cancel();
@@ -119,7 +89,11 @@ public class GameTickerService : IAsyncDisposable
             _timerTask = null;
         }
 
-        _logger.LogInformation("Stopped {service}", nameof(GameTickerService));
+        _gameTicker.IsRunning = IsGameTickerRunning();
+
+        _logger.LogInformation("Game ticker stopped");
+
+        return _gameTicker;
     }
 
     public async ValueTask DisposeAsync()
@@ -137,6 +111,16 @@ public class GameTickerService : IAsyncDisposable
         _timer?.Dispose();
 
         _logger.LogInformation("Disposed {service}", nameof(GameTickerService));
+    }
+
+    private bool IsGameTickerRunning()
+    {
+        if (_timerTask is not null && _gameProgress.IsGameInitialized())
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private async Task DoWorkAsync()

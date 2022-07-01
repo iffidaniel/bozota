@@ -6,7 +6,8 @@ public class GameProgressService
 {
     private readonly ILogger<GameProgressService> _logger;
     private readonly GameLogicService _gameLogic;
-    private readonly GameMap _gameMap;
+    private GameMap _gameMap;
+    private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
 
     public GameProgressService(ILogger<GameProgressService> logger, IConfiguration config,
@@ -16,9 +17,10 @@ public class GameProgressService
         _gameLogic = gameLogic;
 
         _gameMap = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
+        _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
     }
 
-    public Task InitializeGameAsync()
+    public async Task<GameMap?> InitializeGameAsync()
     {
         if (!_isGameInitialized)
         {
@@ -29,42 +31,44 @@ public class GameProgressService
                 var xMap = new List<CellItem>();
                 for (int y = 0; y < _gameMap.XCellCount; y++)
                 {
-                    xMap.Add(CellItem.Empty);
+                    xMap.Add(_gameLogic.GetRandomCellItem());
                 }
                 _gameMap.Map.Add(xMap);
             }
 
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Veikko", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Riku", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Ramesh", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Krishna", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Raif", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Daniel", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Diana", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Soikka", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Hessu", _gameMap.XCellCount, _gameMap.YCellCount));
-            _gameMap.Players.Add(_gameLogic.AddNewPlayer("Mika", _gameMap.XCellCount, _gameMap.YCellCount));
+            foreach (var name in _playerNames)
+            {
+                _gameMap.Players.Add(_gameLogic.AddNewPlayer(name, _gameMap.XCellCount, _gameMap.YCellCount));
+            }
+
+            await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
+
+            _logger.LogInformation("Game initialized");
 
             _isGameInitialized = true;
+
+            return _gameMap;
         }
 
-        return Task.CompletedTask;
+        return null;
     }
 
-    public Task<GameMap?> GetGameProgress()
+    public GameMap? GetGameProgress()
     {
         if (_isGameInitialized)
         {
-            return Task.FromResult<GameMap?>(_gameMap);
+            return _gameMap;
         }
 
-        return Task.FromResult<GameMap?>(null);
+        return null;
     }
 
     public async Task UpdateGameProgress()
     {
         if (_isGameInitialized)
         {
+            var tempGameMap = _gameMap;
+
             for (int x = 0; x < _gameMap.XCellCount; x++)
             {
                 for (int y = 0; y < _gameMap.XCellCount; y++)
@@ -72,9 +76,14 @@ public class GameProgressService
                     _gameMap.Map[x][y] = _gameLogic.GetRandomCellItem();
                 }
             }
-        }
 
-        await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
+            await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
+
+            lock (_gameMap)
+            {
+                _gameMap = tempGameMap;
+            }
+        }
     }
 
     public bool IsGameInitialized() => _isGameInitialized;
