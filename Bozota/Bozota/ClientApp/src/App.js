@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BattleMap } from './components/BattleMap';
+import { GameMap } from './components/GameMap';
 import { Stats } from './components/Stats';
 import './App.css';
 
@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
     return (
       <div className='mainPage'>
-        <BattleMap />
+        <GameMap />
         <Stats />
       </div>
     );

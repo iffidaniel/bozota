@@ -12,7 +12,7 @@ export const Stats = () => {
   return (
     <div>
       {stats.map((stat) => (
-        <div className='playerContainer'>
+        <div className='playerContainer' key={stat.name}>
           <h2>Name: {stat.name}</h2>
           <h2>Health: {stat.health}</h2>
           <h2>Ammo: {stat.ammo}</h2>

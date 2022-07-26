@@ -29,15 +29,19 @@
     background-color: yellow;
 }
 
+.errorCell {
+    background-color: white;
+}
 
-.battleMapContainer {
+
+.gameMapContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.battleMap {
+.gameMap {
     width:fit-content;
     padding-right: 12px;
     padding-left: 12px;
