@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetchGameStatus from '../api/fetchGameStatus';
+import fetchGameStatus from '../api/gameStatus';
 import './GameMap.css';
 
 const renderItem = (id, key) => {
@@ -24,7 +24,7 @@ export const GameMap = () => {
   const [gameMap, setGameMap] = useState([]);
   useEffect(() => {
     fetchGameStatus().then((res) => setGameMap(res.map));
-  });
+  }, []);
   return (
     <div className='gameMapContainer'>
       <h2>Battle Map</h2>
@@ -33,7 +33,7 @@ export const GameMap = () => {
           return (
             <div className='row' key={row}>
               {row.map((column, ci) => {
-                const cellKey = ri + 2 * ci + 1; // cell makes keys unique
+                const cellKey = ri + 2 * ci + 1; // makes keys unique
                 return renderItem(column, cellKey);
               })}
             </div>
