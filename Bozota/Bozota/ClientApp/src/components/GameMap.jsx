@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import fetchGameStatus from '../api/gameStatus';
+import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import './GameMap.css';
 
 const renderItem = (id, key) => {
@@ -20,26 +20,32 @@ const renderItem = (id, key) => {
   }
 };
 
-export const GameMap = () => {
-  const [gameMap, setGameMap] = useState([]);
-  useEffect(() => {
-    fetchGameStatus().then((res) => setGameMap(res.map));
-  }, []);
+export const GameMap = observer(({ game }) => {
+  const [mapArray, setMapArray] = useState(null);
+  setInterval(() => {
+    game.update();
+    setMapArray(game.state.map);
+  }, 1000);
+
   return (
     <div className='gameMapContainer'>
-      <h2>Battle Map</h2>
-      <div className='gameMap'>
-        {gameMap.map((row, ri) => {
-          return (
-            <div className='row' key={row}>
-              {row.map((column, ci) => {
-                const cellKey = ri + 2 * ci + 1; // makes keys unique
-                return renderItem(column, cellKey);
-              })}
-            </div>
-          );
-        })}
-      </div>
+      {mapArray && (
+        <>
+          <h2>Battle Map</h2>
+          <div className='gameMap'>
+            {mapArray.map((row, ri) => {
+              return (
+                <div className='row' key={row}>
+                  {row.map((column, ci) => {
+                    const cellKey = ri + 2 * ci + 1; // makes keys unique
+                    return renderItem(column, cellKey);
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
-};
+});

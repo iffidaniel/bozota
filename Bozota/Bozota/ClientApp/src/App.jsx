@@ -3,6 +3,7 @@ import { GameMap } from './components/GameMap';
 import { Stats } from './components/Stats';
 import { Controls } from './components/Controls';
 import './App.css';
+import game from './state/game';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -11,7 +12,7 @@ export default class App extends Component {
     return (
       <div className='mainPage'>
         <Controls />
-        <GameMap />
+        <GameMap game={new game()} />
         <Stats />
       </div>
     );
