@@ -12,16 +12,16 @@ public class GameLogicService
         _logger = logger;
     }
 
-    public Player AddNewPlayer(string name, int mapXCellCount, int mapYCellCount)
+    public Task<Player> AddNewPlayer(string name, int mapXCellCount, int mapYCellCount)
     {
         _logger.LogInformation("Adding new player: {player}", name);
 
-        return new Player
+        return Task.FromResult(new Player
         {
             Name = name,
             XPos = _random.Next(mapXCellCount), 
             YPos = _random.Next(mapYCellCount),
-        };
+        });
     }
 
     public Task UpdatePlayerPositions(List<List<CellItem>> map, List<Player> players)

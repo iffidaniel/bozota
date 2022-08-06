@@ -5,8 +5,8 @@ namespace Bozota.Services;
 public class GameTickerService : IAsyncDisposable
 {
     private readonly ILogger<GameTickerService> _logger;
+    private readonly GameTicker _gameTicker;
     private CancellationTokenSource _cts = new();
-    private GameTicker _gameTicker;
     private PeriodicTimer _timer;
     private Task? _timerTask;
     private readonly GameProgressService _gameProgress;
@@ -26,11 +26,11 @@ public class GameTickerService : IAsyncDisposable
         _gameProgress = gameProgress;
     }
 
-    public GameTicker GetTicker()
+    public Task<GameTicker> GetTicker()
     {
         _gameTicker.IsRunning = IsGameTickerRunning();
 
-        return _gameTicker;
+        return Task.FromResult(_gameTicker);
     }
 
     public async Task<GameTicker> SetTickerInterval(int intervalInMilliseconds)
@@ -48,7 +48,7 @@ public class GameTickerService : IAsyncDisposable
             await StopGameTicker();
             _timer.Dispose();
             _timer = new PeriodicTimer(new TimeSpan(0, 0, 0, 0, _gameTicker.Interval));
-            StartGameTicker();
+            await StartGameTicker();
         }
         else
         {
@@ -60,7 +60,7 @@ public class GameTickerService : IAsyncDisposable
         return _gameTicker;
     }
 
-    public GameTicker StartGameTicker()
+    public Task<GameTicker> StartGameTicker()
     {
         if (_timerTask is null)
         {
@@ -77,7 +77,7 @@ public class GameTickerService : IAsyncDisposable
         
         _logger.LogInformation("Game ticker started");
 
-        return _gameTicker;
+        return Task.FromResult(_gameTicker);
     }
 
     public async Task<GameTicker> StopGameTicker()

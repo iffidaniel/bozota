@@ -20,22 +20,22 @@ namespace Bozota.Controllers
 
         [HttpGet]
         [Route("start")]
-        public ActionResult<GameTicker> StartTicker()
+        public async Task<ActionResult<GameTicker>> StartTicker()
         {
             _logger.LogTrace("{request} requested", nameof(StartTicker));
 
-            _gameTicker.StartGameTicker();
+            await _gameTicker.StartGameTicker();
 
-            return _gameTicker.GetTicker();
+            return await _gameTicker.GetTicker();
         }
 
         [HttpGet]
         [Route("status")]
-        public ActionResult<GameTicker> GetTickerStatus()
+        public async Task<ActionResult<GameTicker>> GetTickerStatus()
         {
             _logger.LogTrace("{request} requested", nameof(GetTickerStatus));
 
-            return _gameTicker.GetTicker();
+            return await _gameTicker.GetTicker();
         }
 
         [HttpGet]
@@ -46,7 +46,7 @@ namespace Bozota.Controllers
 
             await _gameTicker.StopGameTicker();
 
-            return _gameTicker.GetTicker();
+            return await _gameTicker.GetTicker();
         }
 
         [HttpGet]

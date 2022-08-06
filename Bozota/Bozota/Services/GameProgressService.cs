@@ -38,7 +38,7 @@ public class GameProgressService
 
             foreach (var name in _playerNames)
             {
-                _gameMap.Players.Add(_gameLogic.AddNewPlayer(name, _gameMap.XCellCount, _gameMap.YCellCount));
+                _gameMap.Players.Add(await _gameLogic.AddNewPlayer(name, _gameMap.XCellCount, _gameMap.YCellCount));
             }
 
             await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
@@ -53,14 +53,14 @@ public class GameProgressService
         return null;
     }
 
-    public GameMap? GetGameProgress()
+    public Task<GameMap?> GetGameProgress()
     {
         if (_isGameInitialized)
         {
-            return _gameMap;
+            return Task.FromResult<GameMap?>(_gameMap);
         }
 
-        return null;
+        return Task.FromResult<GameMap?>(null);
     }
 
     public async Task UpdateGameProgress()
