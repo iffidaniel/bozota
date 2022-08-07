@@ -35,10 +35,9 @@ export const GameMap = observer(({ game }) => {
           <div className='gameMap'>
             {mapArray.map((row, ri) => {
               return (
-                <div className='row' key={row}>
+                <div className='row' key={ri}>
                   {row.map((column, ci) => {
-                    const cellKey = ri + 2 * ci + 1; // makes keys unique
-                    return renderItem(column, cellKey);
+                    return renderItem(column, ci);
                   })}
                 </div>
               );
