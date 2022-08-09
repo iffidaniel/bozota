@@ -1,16 +1,14 @@
-import { observable, makeAutoObservable } from 'mobx';
-import fetchGameStatus from '../api/gameStatus';
+import { observable } from 'mobx';
+import { updateGame } from '../api/gameControls';
 
 class game {
   state = observable({
-    xCellCount: 0,
-    yCellCount: 0,
     map: null,
     players: null,
   });
 
   update = () => {
-    fetchGameStatus().then((response) => {
+      updateGame().then((response) => {
       this.state = response;
     });
   };

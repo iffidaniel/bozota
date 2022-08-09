@@ -2,7 +2,7 @@ import React from 'react';
 import './Stats.css';
 
 export const Stats = () => {
-  const [stats, setStats] = React.useState([
+  const [stats] = React.useState([
     { name: 'robo 1', health: 100, ammo: 5, armor: 0 },
     { name: 'robo 2', health: 100, ammo: 5, armor: 0 },
     { name: 'robo 3', health: 100, ammo: 5, armor: 0 },
