@@ -28,12 +28,12 @@ namespace Bozota.Controllers
         }
 
         [HttpGet]
-        [Route("status")]
-        public async Task<ActionResult<GameMap?>> GetGameStatus()
+        [Route("update")]
+        public async Task<ActionResult<GameMap?>> UpdateGameProgress()
         {
-            _logger.LogTrace("{request} requested", nameof(GetGameStatus));
+            _logger.LogTrace("{request} requested", nameof(UpdateGameProgress));
 
-            return await _gameProgress.GetGameProgress();
+            return await _gameProgress.UpdateGameProgressAsync();
         }
     }
 }

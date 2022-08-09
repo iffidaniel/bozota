@@ -22,68 +22,77 @@ public class GameProgressService
 
     public async Task<GameMap?> InitializeGameAsync()
     {
+        _logger.LogInformation("Initializing game");
+
+        if (_isGameInitialized)
+        {
+            _logger.LogWarning("Game already initialized");
+
+            return null;
+        }
+
+        var tempGameMap = _gameMap;
+
+        for (int x = 0; x < tempGameMap.XCellCount; x++)
+        {
+            var xMap = new List<CellItem>();
+            for (int y = 0; y < tempGameMap.XCellCount; y++)
+            {
+                xMap.Add(_gameLogic.GetRandomCellItem());
+            }
+            tempGameMap.Map.Add(xMap);
+        }
+
+        foreach (var name in _playerNames)
+        {
+            tempGameMap.Players.Add(await _gameLogic.AddNewPlayer(name, tempGameMap.XCellCount, tempGameMap.YCellCount));
+        }
+
+        await _gameLogic.UpdatePlayerPositions(tempGameMap.Map, tempGameMap.Players);
+
+        lock (_gameMap)
+        {
+            _gameMap = tempGameMap;
+        }
+
+        _logger.LogInformation("Game initialized");
+
+        _isGameInitialized = true;
+
+        return _gameMap;
+    }
+
+    public async Task<GameMap?> UpdateGameProgressAsync()
+    {
+        _logger.LogTrace("Updating game progress");
+
         if (!_isGameInitialized)
         {
-            _logger.LogInformation("Initializing game");
+            _logger.LogWarning("Game already initialized");
 
-            for (int x = 0; x < _gameMap.XCellCount; x++)
-            {
-                var xMap = new List<CellItem>();
-                for (int y = 0; y < _gameMap.XCellCount; y++)
-                {
-                    xMap.Add(_gameLogic.GetRandomCellItem());
-                }
-                _gameMap.Map.Add(xMap);
-            }
-
-            foreach (var name in _playerNames)
-            {
-                _gameMap.Players.Add(await _gameLogic.AddNewPlayer(name, _gameMap.XCellCount, _gameMap.YCellCount));
-            }
-
-            await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
-
-            _logger.LogInformation("Game initialized");
-
-            _isGameInitialized = true;
-
-            return _gameMap;
+            return null;
         }
 
-        return null;
-    }
+        var tempGameMap = _gameMap;
 
-    public Task<GameMap?> GetGameProgress()
-    {
-        if (_isGameInitialized)
+        for (int x = 0; x < tempGameMap.XCellCount; x++)
         {
-            return Task.FromResult<GameMap?>(_gameMap);
+            for (int y = 0; y < tempGameMap.XCellCount; y++)
+            {
+                tempGameMap.Map[x][y] = _gameLogic.GetRandomCellItem();
+            }
         }
 
-        return Task.FromResult<GameMap?>(null);
-    }
+        await _gameLogic.UpdatePlayerPositions(tempGameMap.Map, tempGameMap.Players);
 
-    public async Task UpdateGameProgress()
-    {
-        if (_isGameInitialized)
+        lock (_gameMap)
         {
-            var tempGameMap = _gameMap;
-
-            for (int x = 0; x < _gameMap.XCellCount; x++)
-            {
-                for (int y = 0; y < _gameMap.XCellCount; y++)
-                {
-                    _gameMap.Map[x][y] = _gameLogic.GetRandomCellItem();
-                }
-            }
-
-            await _gameLogic.UpdatePlayerPositions(_gameMap.Map, _gameMap.Players);
-
-            lock (_gameMap)
-            {
-                _gameMap = tempGameMap;
-            }
+            _gameMap = tempGameMap;
         }
+
+        _logger.LogTrace("Game progress updated");
+
+        return _gameMap;
     }
 
     public bool IsGameInitialized() => _isGameInitialized;
