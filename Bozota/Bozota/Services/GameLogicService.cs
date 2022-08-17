@@ -16,50 +16,49 @@ public class GameLogicService
     {
         _logger.LogInformation("Adding new player: {player}", name);
 
-        return Task.FromResult(new Player
+        return Task.FromResult(new Player(name)
         {
-            Name = name,
             XPos = _random.Next(mapXCellCount), 
             YPos = _random.Next(mapYCellCount),
         });
     }
 
-    public Task UpdatePlayerPositions(List<List<CellItem>> map, List<Player> players)
+    public Task UpdatePlayerPositions(List<List<RenderId>> map, List<Player> players)
     {
         foreach (var player in players)
         {
-            map[player.XPos][player.YPos] = CellItem.Player;
+            map[player.XPos][player.YPos] = RenderId.Player;
         }
 
         return Task.CompletedTask;
     }
 
-    public CellItem GetRandomCellItem()
+    public RenderId GetRandomCellItem()
     {
         var randomNumber = _random.Next(100);
         if (randomNumber == 0 || randomNumber > 4)
         {
-            return CellItem.Empty;
+            return RenderId.Empty;
         }
         else if (randomNumber == 1)
         {
-            return CellItem.Health;
+            return RenderId.Health;
         }
         else if (randomNumber == 2)
         {
-            return CellItem.Ammo;
+            return RenderId.Ammo;
         }
         else if (randomNumber == 3)
         {
-            return CellItem.Wall;
+            return RenderId.Wall;
         }
         else if (randomNumber == 4)
         {
-            return CellItem.Bomb;
+            return RenderId.Bomb;
         }
         else
         {
-            return CellItem.Empty;
+            return RenderId.Empty;
         }
     }
 }

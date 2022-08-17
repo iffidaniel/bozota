@@ -1,4 +1,6 @@
-﻿namespace Bozota.Models
+﻿using Bozota.Models.Abstractions;
+
+namespace Bozota.Models
 {
     public class GameMap
     {
@@ -6,7 +8,9 @@
 
         public int YCellCount { get; private set; }
 
-        public List<List<CellItem>> Map { get; private set; }
+        public List<List<RenderId>> Map { get; private set; }
+
+        public List<IMapItem> Items { get; private set; }
 
         public List<Player> Players { get; private set; }
 
@@ -14,7 +18,9 @@
         {
             XCellCount = xCellCount;
             YCellCount = yCellCount;
+
             Map = new();
+            Items = new();
             Players = new();
         }
     }

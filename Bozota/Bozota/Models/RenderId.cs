@@ -1,6 +1,6 @@
 ﻿namespace Bozota.Models;
 
-public enum CellItem
+public enum RenderId
 {
     Empty = 0,
     Health = 1,

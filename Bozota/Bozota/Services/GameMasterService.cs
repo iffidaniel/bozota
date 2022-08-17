@@ -2,15 +2,15 @@
 
 namespace Bozota.Services;
 
-public class GameProgressService
+public class GameMasterService
 {
-    private readonly ILogger<GameProgressService> _logger;
+    private readonly ILogger<GameMasterService> _logger;
     private readonly GameLogicService _gameLogic;
     private GameMap _gameMap;
     private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
 
-    public GameProgressService(ILogger<GameProgressService> logger, IConfiguration config,
+    public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
         GameLogicService gameLogic)
     {
         _logger = logger;
@@ -35,7 +35,7 @@ public class GameProgressService
 
         for (int x = 0; x < tempGameMap.XCellCount; x++)
         {
-            var xMap = new List<CellItem>();
+            var xMap = new List<RenderId>();
             for (int y = 0; y < tempGameMap.XCellCount; y++)
             {
                 xMap.Add(_gameLogic.GetRandomCellItem());
@@ -62,7 +62,7 @@ public class GameProgressService
         return _gameMap;
     }
 
-    public async Task<GameMap?> UpdateGameProgressAsync()
+    public async Task<GameMap?> UpdateGameAsync()
     {
         _logger.LogTrace("Updating game progress");
 

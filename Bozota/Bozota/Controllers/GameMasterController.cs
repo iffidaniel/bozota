@@ -6,13 +6,13 @@ namespace Bozota.Controllers
 {
     [ApiController]
     [Route("game")]
-    public class GameProgressController : ControllerBase
+    public class GameMasterController : ControllerBase
     {
-        private readonly ILogger<GameProgressController> _logger;
-        private readonly GameProgressService _gameProgress;
+        private readonly ILogger<GameMasterController> _logger;
+        private readonly GameMasterService _gameProgress;
 
-        public GameProgressController(ILogger<GameProgressController> logger,
-            GameProgressService gameProgress)
+        public GameMasterController(ILogger<GameMasterController> logger,
+            GameMasterService gameProgress)
         {
             _logger = logger;
             _gameProgress = gameProgress;
@@ -29,11 +29,11 @@ namespace Bozota.Controllers
 
         [HttpGet]
         [Route("update")]
-        public async Task<ActionResult<GameMap?>> UpdateGameProgress()
+        public async Task<ActionResult<GameMap?>> UpdateGame()
         {
-            _logger.LogTrace("{request} requested", nameof(UpdateGameProgress));
+            _logger.LogTrace("{request} requested", nameof(UpdateGame));
 
-            return await _gameProgress.UpdateGameProgressAsync();
+            return await _gameProgress.UpdateGameAsync();
         }
     }
 }
