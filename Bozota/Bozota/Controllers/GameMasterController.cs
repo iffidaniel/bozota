@@ -11,6 +11,9 @@ namespace Bozota.Controllers
         private readonly ILogger<GameMasterController> _logger;
         private readonly GameMasterService _gameProgress;
 
+        private bool _isGameInitializing = false;
+        private bool _isGameUpdating = false;
+
         public GameMasterController(ILogger<GameMasterController> logger,
             GameMasterService gameProgress)
         {
@@ -24,7 +27,26 @@ namespace Bozota.Controllers
         {
             _logger.LogTrace("{request} requested", nameof(InitializeGame));
 
-            return await _gameProgress.InitializeGameAsync();
+            GameMap? gameMap = null;
+
+            try
+            {
+                if (!_isGameInitializing)
+                {
+                    _isGameInitializing = true;
+                    gameMap = await _gameProgress.InitializeGameAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed to update game {exception}", ex);
+            }
+            finally
+            {
+                _isGameInitializing = false;
+            }
+
+            return gameMap;
         }
 
         [HttpGet]
@@ -33,7 +55,26 @@ namespace Bozota.Controllers
         {
             _logger.LogTrace("{request} requested", nameof(UpdateGame));
 
-            return await _gameProgress.UpdateGameAsync();
+            GameMap? gameMap = null;
+
+            try
+            {
+                if (!_isGameUpdating)
+                {
+                    _isGameUpdating = true;
+                    gameMap = await _gameProgress.UpdateGameAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed to update game {exception}", ex);
+            }
+            finally
+            {
+                _isGameUpdating = false;
+            }
+
+            return gameMap;
         }
     }
 }
