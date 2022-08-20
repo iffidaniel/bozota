@@ -68,7 +68,7 @@ public class GameMasterService
 
         if (!_isGameInitialized)
         {
-            _logger.LogWarning("Game already initialized");
+            _logger.LogWarning("Game is not yet initialized");
 
             return null;
         }
