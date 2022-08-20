@@ -1,26 +1,27 @@
 ﻿using Bozota.Models.Abstractions;
+using Bozota.Models.Map;
 
 namespace Bozota.Models;
 
-public class Player : IMapItem
+public class Player : IPlayer
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-
     public string Name { get; }
 
     public RenderId Render { get => RenderId.Player; }
 
-    public int XPos { get; set; } = 0;
+    public int XPos { get; set; }
 
-    public int YPos { get; set; } = 0;
+    public int YPos { get; set; }
 
-    public Health Health { get; set; }
+    public Health Health { get; }
 
-    public List<string> Moves;
+    public List<PlayerMove> Moves { get; }
 
-    public Player(string name)
+    public Player(string name, int xpos, int ypos)
     {
         Name = name;
+        XPos = xpos;
+        YPos = ypos;
         Health = new(100, 200, 10);
         Moves = new();
     }

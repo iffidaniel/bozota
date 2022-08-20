@@ -6,7 +6,7 @@
 }
 
 .empty {
-    background-color: rgb(194, 194, 194);
+    background-color: lightgray;
 }
 
 .health {
@@ -14,15 +14,15 @@
 }
 
 .ammo {
-    background-color: blueviolet;
+    background-color: darkslateblue;
 }
 
 .wall {
-    background-color: gray;
+    background-color: saddlebrown;
 }
 
 .bomb {
-    background-color: red;
+    background-color: black;
 }
 
 .player {
@@ -45,5 +45,4 @@
     width:fit-content;
     padding-right: 12px;
     padding-left: 12px;
-    border: solid 5px black;
 }

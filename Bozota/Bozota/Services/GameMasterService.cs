@@ -1,4 +1,7 @@
 ﻿using Bozota.Models;
+using Bozota.Models.Map;
+using Bozota.Models.Map.Items;
+using Bozota.Models.Map.Objects;
 
 namespace Bozota.Services;
 
@@ -6,7 +9,7 @@ public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
     private readonly GameLogicService _gameLogic;
-    private GameMap _gameMap;
+    private GameState _gameState;
     private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
 
@@ -16,11 +19,13 @@ public class GameMasterService
         _logger = logger;
         _gameLogic = gameLogic;
 
-        _gameMap = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
+        _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
     }
 
-    public async Task<GameMap?> InitializeGameAsync()
+    public bool IsGameInitialized() => _isGameInitialized;
+
+    public async Task<GameState?> InitializeGameAsync()
     {
         _logger.LogInformation("Initializing game");
 
@@ -31,38 +36,63 @@ public class GameMasterService
             return null;
         }
 
-        var tempGameMap = _gameMap;
+        var tempState = _gameState;
 
-        for (int x = 0; x < tempGameMap.XCellCount; x++)
-        {
-            var xMap = new List<RenderId>();
-            for (int y = 0; y < tempGameMap.XCellCount; y++)
-            {
-                xMap.Add(_gameLogic.GetRandomCellItem());
-            }
-            tempGameMap.Map.Add(xMap);
-        }
-
+        // Add Players
         foreach (var name in _playerNames)
         {
-            tempGameMap.Players.Add(await _gameLogic.AddNewPlayer(name, tempGameMap.XCellCount, tempGameMap.YCellCount));
+            tempState.Players.Add(await _gameLogic.AddNewPlayer(name, tempState.MapXCellCount, tempState.MapYCellCount));
         }
 
-        await _gameLogic.UpdatePlayerPositions(tempGameMap.Map, tempGameMap.Players);
-
-        lock (_gameMap)
+        // Add Objects and Items and render them on map
+        for (int x = 0; x < tempState.MapXCellCount; x++)
         {
-            _gameMap = tempGameMap;
+            var row = new List<RenderId>();
+            for (int y = 0; y < tempState.MapXCellCount; y++)
+            {
+                if (x == 0 || x == tempState.MapXCellCount - 1 || y == 0 || y == tempState.MapYCellCount - 1)
+                {
+                    tempState.Objects.Add(new Wall(x, y, true));
+                }
+                else
+                {
+                    switch (_gameLogic.GetRandomMapItem(tempState.MapXCellCount * tempState.MapXCellCount / 4))
+                    {
+                        case RenderId.Health:
+                            tempState.Items.Add(new HealthItem(x, y, 40));
+                            break;
+                        case RenderId.Ammo:
+                            tempState.Items.Add(new AmmoItem(x, y, 10));
+                            break;
+                        case RenderId.Wall:
+                            tempState.Objects.Add(new Wall(x, y));
+                            break;
+                        case RenderId.Bomb:
+                            tempState.Objects.Add(new Bomb(x, y, 80, 2));
+                            break;
+                    };
+                }
+
+                row.Add(RenderId.Empty);
+            }
+            tempState.Map.Add(row);
+        }
+
+        await _gameLogic.RenderAllOnMap(tempState);
+
+        lock (_gameState)
+        {
+            _gameState = tempState;
         }
 
         _logger.LogInformation("Game initialized");
 
         _isGameInitialized = true;
 
-        return _gameMap;
+        return _gameState;
     }
 
-    public async Task<GameMap?> UpdateGameAsync()
+    public async Task<GameState?> UpdateGameAsync()
     {
         _logger.LogTrace("Updating game progress");
 
@@ -73,27 +103,29 @@ public class GameMasterService
             return null;
         }
 
-        var tempGameMap = _gameMap;
+        var tempState = _gameState;
 
-        for (int x = 0; x < tempGameMap.XCellCount; x++)
+        await _gameLogic.MovePlayers(tempState);
+
+        // Refresh map
+        for (int x = 0; x < tempState.MapXCellCount; x++)
         {
-            for (int y = 0; y < tempGameMap.XCellCount; y++)
+            for (int y = 0; y < tempState.MapXCellCount; y++)
             {
-                tempGameMap.Map[x][y] = _gameLogic.GetRandomCellItem();
+                tempState.Map[x][y] = RenderId.Empty;
             }
         }
 
-        await _gameLogic.UpdatePlayerPositions(tempGameMap.Map, tempGameMap.Players);
+        // Render map
+        await _gameLogic.RenderAllOnMap(tempState);
 
-        lock (_gameMap)
+        lock (_gameState)
         {
-            _gameMap = tempGameMap;
+            _gameState = tempState;
         }
 
-        _logger.LogTrace("Game progress updated");
+        _logger.LogTrace("Game updated");
 
-        return _gameMap;
+        return _gameState;
     }
-
-    public bool IsGameInitialized() => _isGameInitialized;
 }

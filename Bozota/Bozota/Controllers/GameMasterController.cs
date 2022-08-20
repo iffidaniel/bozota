@@ -23,11 +23,11 @@ namespace Bozota.Controllers
 
         [HttpGet]
         [Route("init")]
-        public async Task<ActionResult<GameMap?>> InitializeGame()
+        public async Task<ActionResult<GameState?>> InitializeGame()
         {
             _logger.LogTrace("{request} requested", nameof(InitializeGame));
 
-            GameMap? gameMap = null;
+            GameState? gameMap = null;
 
             try
             {
@@ -51,11 +51,11 @@ namespace Bozota.Controllers
 
         [HttpGet]
         [Route("update")]
-        public async Task<ActionResult<GameMap?>> UpdateGame()
+        public async Task<ActionResult<GameState?>> UpdateGame()
         {
             _logger.LogTrace("{request} requested", nameof(UpdateGame));
 
-            GameMap? gameMap = null;
+            GameState? gameMap = null;
 
             try
             {

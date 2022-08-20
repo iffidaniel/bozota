@@ -1,4 +1,6 @@
 ﻿using Bozota.Models;
+using Bozota.Models.Abstractions;
+using Bozota.Models.Map;
 
 namespace Bozota.Services;
 
@@ -12,53 +14,102 @@ public class GameLogicService
         _logger = logger;
     }
 
-    public Task<Player> AddNewPlayer(string name, int mapXCellCount, int mapYCellCount)
+    public Task<IPlayer> AddNewPlayer(string name, int mapXCellCount, int mapYCellCount)
     {
         _logger.LogInformation("Adding new player: {player}", name);
 
-        return Task.FromResult(new Player(name)
-        {
-            XPos = _random.Next(mapXCellCount), 
-            YPos = _random.Next(mapYCellCount),
-        });
+        return Task.FromResult<IPlayer>(new Player(name, _random.Next(mapXCellCount), _random.Next(mapYCellCount)));
     }
 
-    public Task UpdatePlayerPositions(List<List<RenderId>> map, List<Player> players)
+    public RenderId GetRandomMapItem(int seed)
     {
-        foreach (var player in players)
+        return (RenderId)_random.Next(seed) switch
         {
-            map[player.XPos][player.YPos] = RenderId.Player;
+            RenderId.Health => RenderId.Health,
+            RenderId.Ammo => RenderId.Ammo,
+            RenderId.Wall => RenderId.Wall,
+            RenderId.Bomb => RenderId.Bomb,
+            _ => RenderId.Empty,
+        };
+    }
+
+    public PlayerMove GetRandomPlayerMove()
+    {
+        return (PlayerMove)_random.Next(5);
+    }
+
+    public Task MovePlayers(GameState gameState)
+    {
+        foreach (var player in gameState.Players)
+        {
+            if (!player.Health.IsAlive)
+            {
+                continue;
+            }
+
+            player.Moves.Add(GetRandomPlayerMove());
+
+            if (player.Name == "Daniel")
+            {
+                _logger.LogDebug("player move: {move}", player.Moves.Last());
+            }
+
+            switch (player.Moves.Last())
+            {
+                case PlayerMove.Up:
+                    if (player.YPos < gameState.MapYCellCount - 1 && gameState.Map[player.XPos][player.YPos + 1] != RenderId.Wall)
+                    {
+                        player.YPos += 1;
+                    }
+                    break;
+                case PlayerMove.right:
+                    if (player.XPos < gameState.MapXCellCount - 1 && gameState.Map[player.XPos + 1][player.YPos] != RenderId.Wall)
+                    {
+                        player.XPos += 1;
+                    }
+                    break;
+                case PlayerMove.Down:
+                    if (player.YPos > 1 && gameState.Map[player.XPos][player.YPos - 1] != RenderId.Wall)
+                    {
+                        player.YPos -= 1;
+                    }
+                    break;
+                case PlayerMove.Left:
+                    if (player.XPos > 1 && gameState.Map[player.XPos - 1][player.YPos] != RenderId.Wall)
+                    {
+                        player.XPos -= 1;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (player.Name == "Daniel")
+            {
+                _logger.LogDebug("player pos: {x},{y}", player.XPos, player.YPos);
+            }
         }
 
         return Task.CompletedTask;
     }
 
-    public RenderId GetRandomCellItem()
+    public Task RenderAllOnMap(GameState gameState)
     {
-        var randomNumber = _random.Next(100);
-        if (randomNumber == 0 || randomNumber > 4)
+        foreach (var mapItem in gameState.Items)
         {
-            return RenderId.Empty;
+            gameState.Map[mapItem.XPos][mapItem.YPos] = mapItem.Render;
         }
-        else if (randomNumber == 1)
+
+        foreach (var mapObject in gameState.Objects)
         {
-            return RenderId.Health;
+            gameState.Map[mapObject.XPos][mapObject.YPos] = mapObject.Render;
         }
-        else if (randomNumber == 2)
+
+        foreach (var player in gameState.Players)
         {
-            return RenderId.Ammo;
+            gameState.Map[player.XPos][player.YPos] = player.Render;
         }
-        else if (randomNumber == 3)
-        {
-            return RenderId.Wall;
-        }
-        else if (randomNumber == 4)
-        {
-            return RenderId.Bomb;
-        }
-        else
-        {
-            return RenderId.Empty;
-        }
+
+        return Task.CompletedTask;
     }
 }

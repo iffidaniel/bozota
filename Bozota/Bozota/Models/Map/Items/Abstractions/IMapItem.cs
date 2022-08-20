@@ -1,4 +1,4 @@
-﻿namespace Bozota.Models.Abstractions
+﻿namespace Bozota.Models.Map.Items.Abstractions
 {
     public interface IMapItem
     {
