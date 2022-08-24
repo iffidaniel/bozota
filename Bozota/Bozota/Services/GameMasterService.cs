@@ -12,12 +12,14 @@ public class GameMasterService
     private GameState _gameState;
     private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
+    private int _count;
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
         GameLogicService gameLogic)
     {
         _logger = logger;
         _gameLogic = gameLogic;
+        _count = 0;
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
@@ -94,7 +96,8 @@ public class GameMasterService
 
     public async Task<GameState?> UpdateGameAsync()
     {
-        _logger.LogTrace("Updating game progress");
+        _count++;
+        _logger.LogInformation("Updating game progress, {count}", _count);
 
         if (!_isGameInitialized)
         {

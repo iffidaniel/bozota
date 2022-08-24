@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { GameMap } from './components/GameMap';
+import { GameTicker } from './components/GameTicker';
 import { Stats } from './components/Stats';
 import { Controls } from './components/Controls';
 import './App.css';
 import game from './state/game';
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
   render() {
     return (
       <div className='mainPage'>
         <Controls />
-        <GameMap game={new game()} />
+        <GameTicker game={new game()} />
         <Stats />
       </div>
     );

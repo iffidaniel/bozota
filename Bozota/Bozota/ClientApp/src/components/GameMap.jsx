@@ -20,12 +20,7 @@ const renderItem = (id, key) => {
   }
 };
 
-export const GameMap = observer(({ game }) => {
-  const [mapArray, setMapArray] = useState(null);
-  setInterval(() => {
-    game.update();
-    setMapArray(game.state.map);
-  }, 1000);
+export const GameMap = observer(({ mapArray }) => {
 
   return (
     <div className='gameMapContainer'>
