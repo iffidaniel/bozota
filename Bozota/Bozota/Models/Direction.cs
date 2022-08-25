@@ -1,10 +1,10 @@
 ﻿namespace Bozota.Models
 {
-    public enum PlayerMove
+    public enum Direction
     {
         None = 0,
         Up = 1,
-        right = 2,
+        Right = 2,
         Down = 3,
         Left = 4
     }

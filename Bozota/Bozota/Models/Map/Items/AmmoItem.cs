@@ -2,7 +2,7 @@
 
 namespace Bozota.Models.Map.Items
 {
-    public class AmmoItem : IMapItem
+    public class AmmoItem : IAmmoItem
     {
         public RenderId Render { get => RenderId.Ammo; }
 
@@ -10,13 +10,13 @@ namespace Bozota.Models.Map.Items
 
         public int YPos { get; set; }
 
-        public int Capacity { get; }
+        public int Amount { get; set; }
 
-        public AmmoItem(int xpos, int ypos, int capacity)
+        public AmmoItem(int xpos, int ypos, int amount)
         {
             XPos = xpos;
             YPos = ypos;
-            Capacity = capacity;
+            Amount = amount;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Bozota.Models.Map.Objects
 {
-    public class Bomb : IMapObject
+    public class BombObject : IBombObject
     {
         public RenderId Render { get => RenderId.Bomb; }
 
@@ -10,17 +10,17 @@ namespace Bozota.Models.Map.Objects
 
         public int YPos { get; set; }
 
-        public Health Health { get; }
+        public Health Health { get; set; }
 
-        public int ExplosionDamage { get; }
+        public int ExplosionDamage { get; set; }
 
-        public int ExplosionRadius { get; }
+        public int ExplosionRadius { get; set; }
 
-        public Bomb(int xpos, int ypos, int damage, int radius)
+        public BombObject(int xpos, int ypos, int healthAmount, int damage, int radius)
         {
             XPos = xpos;
             YPos = ypos;
-            Health = new(20);
+            Health = new(healthAmount);
             ExplosionDamage = damage;
             ExplosionRadius = radius;
         }

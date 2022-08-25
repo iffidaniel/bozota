@@ -2,7 +2,7 @@
 
 namespace Bozota.Models.Map.Objects
 {
-    public class Wall : IMapObject
+    public class WallObject : IWallObject
     {
         public RenderId Render { get => RenderId.Wall; }
 
@@ -10,13 +10,13 @@ namespace Bozota.Models.Map.Objects
 
         public int YPos { get; set; }
 
-        public Health Health { get; }
+        public Health Health { get; set; }
 
-        public Wall(int xpos, int ypos, bool isIndestructable = false)
+        public WallObject(int xpos, int ypos, int healthAmount, bool isIndestructable = false)
         {
             XPos = xpos;
             YPos = ypos;
-            Health = new(200, default, default, isIndestructable);
+            Health = new(healthAmount, default, default, isIndestructable);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Bozota.Models;
 using Bozota.Models.Abstractions;
 using Bozota.Models.Map;
+using Bozota.Models.Map.Items;
+using Bozota.Models.Map.Items.Abstractions;
 
 namespace Bozota.Services;
 
@@ -8,10 +10,25 @@ public class GamePlayerService
 {
     private readonly ILogger<GamePlayerService> _logger;
     private readonly Random _random = new();
+    private readonly int _playerHealth;
+    private readonly int _playerMinHealth;
+    private readonly int _playerMaxHealth;
+    private readonly int _playerSpeed;
+    private readonly int _playerStartingAmmo;
+    private readonly int _bulletSpeed;
+    private readonly int _bulletDamage;
 
     public GamePlayerService(ILogger<GamePlayerService> logger, IConfiguration config)
     {
         _logger = logger;
+
+        _playerHealth = config.GetValue("Game:PlayerHealth", 100);
+        _playerMinHealth = config.GetValue("Game:PlayerMinHealth", 10);
+        _playerMaxHealth = config.GetValue("Game:PlayerMaxHealth", 200);
+        _playerSpeed = config.GetValue("Game:PlayerSpeed", 1);
+        _playerStartingAmmo = config.GetValue("Game:PlayerStartingAmmo", 10);
+        _bulletSpeed = config.GetValue("Game:BulletSpeed", 3);
+        _bulletDamage = config.GetValue("Game:BulletDamage", 40);
     }
 
     public Task<IPlayer> AddNewPlayer(string name, GameState gameState)
@@ -20,61 +37,46 @@ public class GamePlayerService
 
         int x;
         int y;
-        bool cellTaken;
+        var tryCounter = 0;
         do
         {
             x = _random.Next(gameState.MapXCellCount);
             y = _random.Next(gameState.MapYCellCount);
-            cellTaken = false;
+            tryCounter++;
 
-            foreach (var mapItem in gameState.Items)
-            {
-                if (mapItem.XPos == x && mapItem.YPos == y)
-                {
-                    cellTaken = true;
-                    break;
-                }
-            }
+            if (IsMapCellTaken(x, y, gameState.AmmoItems)) { continue; }
+            if (IsMapCellTaken(x, y, gameState.HealthItems)) { continue; }
+            if (IsMapCellTaken(x, y, gameState.Bullets)) { continue; }
+            if (IsMapCellTaken(x, y, gameState.Bombs)) { continue; }
+            if (IsMapCellTaken(x, y, gameState.Walls)) { continue; }
+            if (IsMapCellTaken(x, y, gameState.Players)) { continue; }
 
-            if (cellTaken)
-            {
-                continue;
-            }
+            break;
+        }
+        while (tryCounter >= gameState.TotalCellCount);
 
-            foreach (var mapObject in gameState.Objects)
-            {
-                if (mapObject.XPos == x && mapObject.YPos == y)
-                {
-                    cellTaken = true;
-                    break;
-                }
-            }
+        return Task.FromResult<IPlayer>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo));
+    }
 
-            if (cellTaken)
+    public bool IsMapCellTaken<T>(int x, int y, List<T> items) where T : IMapItem
+    {
+        foreach (var item in items)
+        {
+            if (item.XPos == x && item.YPos == y)
             {
-                continue;
-            }
-
-            foreach (var player in gameState.Players)
-            {
-                if (player.XPos == x && player.YPos == y)
-                {
-                    cellTaken = true;
-                    break;
-                }
+                return true;
             }
         }
-        while (cellTaken);
 
-        return Task.FromResult<IPlayer>(new Player(name, x, y));
+        return false;
     }
 
-    public PlayerMove GetRandomPlayerMove()
+    public Tuple<PlayerAction, Direction> GetRandomPlayerAction()
     {
-        return (PlayerMove)_random.Next(5);
+        return new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5));
     }
 
-    public Task MovePlayers(GameState gameState)
+    public Task ProcessPlayerActions(GameState gameState)
     {
         foreach (var player in gameState.Players)
         {
@@ -83,46 +85,69 @@ public class GamePlayerService
                 continue;
             }
 
-            player.Moves.Add(GetRandomPlayerMove());
+            // TODO: This randomly added player action should be replaced with actualy action from player
+            player.Actions.Add(GetRandomPlayerAction());
 
-            if (player.Name == "Daniel")
+            switch (player.Actions.Last())
             {
-                _logger.LogDebug("player move: {move}", player.Moves.Last());
-            }
-
-            switch (player.Moves.Last())
-            {
-                case PlayerMove.Up:
-                    if (player.YPos < gameState.MapYCellCount - 1 && gameState.Map[player.XPos][player.YPos + 1] != RenderId.Wall)
+                case { Item1: PlayerAction.Move, Item2: Direction.Up }:
+                    if (player.YPos < gameState.MapYCellCount - 1 && 
+                        gameState.Map[player.XPos][player.YPos + 1] != RenderId.Wall && 
+                        gameState.Map[player.XPos][player.YPos + 1] != RenderId.Player)
                     {
                         player.YPos += 1;
                     }
                     break;
-                case PlayerMove.right:
-                    if (player.XPos < gameState.MapXCellCount - 1 && gameState.Map[player.XPos + 1][player.YPos] != RenderId.Wall)
+                case { Item1: PlayerAction.Move, Item2: Direction.Right }:
+                    if (player.XPos < gameState.MapXCellCount - 1 && 
+                        gameState.Map[player.XPos + 1][player.YPos] != RenderId.Wall && 
+                        gameState.Map[player.XPos + 1][player.YPos] != RenderId.Player)
                     {
                         player.XPos += 1;
                     }
                     break;
-                case PlayerMove.Down:
-                    if (player.YPos > 1 && gameState.Map[player.XPos][player.YPos - 1] != RenderId.Wall)
+                case { Item1: PlayerAction.Move, Item2: Direction.Down }:
+                    if (player.YPos > 1 && 
+                        gameState.Map[player.XPos][player.YPos - 1] != RenderId.Wall && 
+                        gameState.Map[player.XPos][player.YPos - 1] != RenderId.Player)
                     {
                         player.YPos -= 1;
                     }
                     break;
-                case PlayerMove.Left:
-                    if (player.XPos > 1 && gameState.Map[player.XPos - 1][player.YPos] != RenderId.Wall)
+                case { Item1: PlayerAction.Move, Item2: Direction.Left }:
+                    if (player.XPos > 1 && 
+                        gameState.Map[player.XPos - 1][player.YPos] != RenderId.Wall && 
+                        gameState.Map[player.XPos - 1][player.YPos] != RenderId.Player)
                     {
                         player.XPos -= 1;
                     }
                     break;
+                case { Item1: PlayerAction.Shoot, Item2: Direction.Up }:
+                    if (player.YPos < gameState.MapYCellCount - 1)
+                    {
+                        gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos + 1, Direction.Up, _bulletSpeed, _bulletDamage));
+                    }
+                    break;
+                case { Item1: PlayerAction.Shoot, Item2: Direction.Right }:
+                    if (player.XPos < gameState.MapXCellCount - 1)
+                    {
+                        gameState.Bullets.Add(new BulletItem(player.XPos + 1, player.YPos, Direction.Right, _bulletSpeed, _bulletDamage));
+                    }
+                    break;
+                case { Item1: PlayerAction.Shoot, Item2: Direction.Down }:
+                    if (player.YPos > 1)
+                    {
+                        gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos - 1, Direction.Down, _bulletSpeed, _bulletDamage));
+                    }
+                    break;
+                case { Item1: PlayerAction.Shoot, Item2: Direction.Left }:
+                    if (player.XPos > 1)
+                    {
+                        gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage));
+                    }
+                    break;
                 default:
                     break;
-            }
-
-            if (player.Name == "Daniel")
-            {
-                _logger.LogDebug("player pos: {x},{y}", player.XPos, player.YPos);
             }
         }
 

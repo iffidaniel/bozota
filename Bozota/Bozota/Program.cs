@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<GameMasterService>();
-builder.Services.AddTransient<GameLogicService>();
+builder.Services.AddTransient<GameMapService>();
 builder.Services.AddTransient<GamePlayerService>();
+builder.Services.AddTransient<GameObjectService>();
+builder.Services.AddTransient<GameItemService>();
 
 var app = builder.Build();
 

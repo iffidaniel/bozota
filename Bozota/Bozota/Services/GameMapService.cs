@@ -1,14 +1,15 @@
 ﻿using Bozota.Models;
 using Bozota.Models.Map;
+using Bozota.Models.Map.Items.Abstractions;
 
 namespace Bozota.Services;
 
-public class GameLogicService
+public class GameMapService
 {
-    private readonly ILogger<GameLogicService> _logger;
+    private readonly ILogger<GameMapService> _logger;
     private readonly Random _random = new();
 
-    public GameLogicService(ILogger<GameLogicService> logger, IConfiguration config)
+    public GameMapService(ILogger<GameMapService> logger, IConfiguration config)
     {
         _logger = logger;
     }
@@ -40,30 +41,33 @@ public class GameLogicService
 
     public Task RenderAllOnMap(GameState gameState)
     {
-        foreach (var mapItem in gameState.Items)
-        {
-            gameState.Map[mapItem.XPos][mapItem.YPos] = mapItem.Render;
-        }
-
-        foreach (var mapObject in gameState.Objects)
-        {
-            gameState.Map[mapObject.XPos][mapObject.YPos] = mapObject.Render;
-        }
-
-        foreach (var player in gameState.Players)
-        {
-            gameState.Map[player.XPos][player.YPos] = player.Render;
-        }
+        RenderOnMap(gameState.Map, gameState.AmmoItems);
+        RenderOnMap(gameState.Map, gameState.HealthItems);
+        RenderOnMap(gameState.Map, gameState.Bullets);
+        RenderOnMap(gameState.Map, gameState.Bombs);
+        RenderOnMap(gameState.Map, gameState.Walls);
+        RenderOnMap(gameState.Map, gameState.Players);
 
         return Task.CompletedTask;
+    }
+
+    public void RenderOnMap<T>(List<List<RenderId>> map, List<T> items) where T : IMapItem
+    {
+        foreach (var item in items)
+        {
+            map[item.XPos][item.YPos] = item.Render;
+        }
     }
 
     public Task RemoveAllFromGame(GameState gameState)
     {
         _logger.LogInformation("Clearing all Players, Objects and Items from game");
 
-        gameState.Items.Clear();
-        gameState.Objects.Clear();
+        gameState.AmmoItems.Clear();
+        gameState.HealthItems.Clear();
+        gameState.Bullets.Clear();
+        gameState.Bombs.Clear();
+        gameState.Walls.Clear();
         gameState.Players.Clear();
 
         return Task.CompletedTask;

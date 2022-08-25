@@ -6,6 +6,10 @@ namespace Bozota.Models.Abstractions
     {
         public string Name { get; }
 
-        public List<PlayerMove> Moves { get; }
+        public int MovementSpeed { get; set; }
+
+        public int Ammo { get; set; }
+
+        public List<Tuple<PlayerAction, Direction>> Actions { get; }
     }
 }

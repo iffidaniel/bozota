@@ -8,22 +8,38 @@ namespace Bozota.Services;
 public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
-    private readonly GameLogicService _gameLogic;
+    private readonly GameMapService _gameLogic;
     private readonly GamePlayerService _gamePlayerService;
+    private readonly GameItemService _gameItemService;
+    private readonly GameObjectService _gameObjectService;
     private GameState _gameState;
     private readonly List<string> _playerNames;
+    private readonly int _healAmount;
+    private readonly int _ammoAmount;
+    private readonly int _wallHealth;
+    private readonly int _bombHealth;
+    private readonly int _bombDamage;
+    private readonly int _bombRadius;
     private bool _isGameInitialized = false;
     private int updateCounter = 0;
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
-        GameLogicService gameLogic, GamePlayerService gamePlayerService)
+        GameMapService gameLogic, GamePlayerService gamePlayerService, GameObjectService gameObjectService, GameItemService gameItemService)
     {
         _logger = logger;
         _gameLogic = gameLogic;
         _gamePlayerService = gamePlayerService;
+        _gameItemService = gameItemService;
+        _gameObjectService = gameObjectService;
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
+        _healAmount = config.GetValue("Game:HealAmount", 40);
+        _ammoAmount = config.GetValue("Game:AmmoAmount", 10);
+        _wallHealth = config.GetValue("Game:WallHealth", 80);
+        _bombHealth = config.GetValue("Game:BombHealth", 80);
+        _bombDamage = config.GetValue("Game:BombDamage", 80);
+        _bombRadius = config.GetValue("Game:BombRadius", 3);
     }
 
     public bool IsGameInitialized() => _isGameInitialized;
@@ -41,7 +57,7 @@ public class GameMasterService
 
         var tempState = _gameState;
 
-        // Add Fixed walls, random Objects and Items and render empty map
+        // Add Fixed walls, random Objects, random Items and render empty map
         for (int x = 0; x < tempState.MapXCellCount; x++)
         {
             var row = new List<RenderId>();
@@ -49,23 +65,23 @@ public class GameMasterService
             {
                 if (x == 0 || x == tempState.MapXCellCount - 1 || y == 0 || y == tempState.MapYCellCount - 1)
                 {
-                    tempState.Objects.Add(new Wall(x, y, true));
+                    tempState.Walls.Add(new WallObject(x, y, _wallHealth, true));
                 }
                 else
                 {
-                    switch (_gameLogic.GetRandomMapItem(tempState.MapXCellCount * tempState.MapXCellCount / 4))
+                    switch (_gameLogic.GetRandomMapItem(tempState.TotalCellCount / 5))
                     {
                         case RenderId.Health:
-                            tempState.Items.Add(new HealthItem(x, y, 40));
+                            tempState.HealthItems.Add(new HealthItem(x, y, _healAmount));
                             break;
                         case RenderId.Ammo:
-                            tempState.Items.Add(new AmmoItem(x, y, 10));
+                            tempState.AmmoItems.Add(new AmmoItem(x, y, _ammoAmount));
                             break;
                         case RenderId.Wall:
-                            tempState.Objects.Add(new Wall(x, y));
+                            tempState.Walls.Add(new WallObject(x, y, _wallHealth));
                             break;
                         case RenderId.Bomb:
-                            tempState.Objects.Add(new Bomb(x, y, 80, 2));
+                            tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombRadius));
                             break;
                     };
                 }
@@ -113,7 +129,9 @@ public class GameMasterService
 
         var tempState = _gameState;
 
-        await _gamePlayerService.MovePlayers(tempState);
+        await _gameItemService.ProcessBullets(tempState);
+        await _gameObjectService.ProcessBombs(tempState);
+        await _gamePlayerService.ProcessPlayerActions(tempState);
         await _gameLogic.RenderEmptyMap(tempState);
         await _gameLogic.RenderAllOnMap(tempState);
 

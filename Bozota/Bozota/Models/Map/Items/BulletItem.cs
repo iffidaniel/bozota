@@ -2,20 +2,26 @@
 
 namespace Bozota.Models.Map.Items
 {
-    public class BulletItem : IMapItem
+    public class BulletItem : IBulletItem
     {
         public RenderId Render { get => RenderId.Bullet; }
 
-        public int XPos { get; set; } = 0;
+        public int XPos { get; set; }
 
-        public int YPos { get; set; } = 0;
+        public int YPos { get; set; }
 
-        public int DamageAmount { get; } = 0;
+        public Direction Direction { get; set; }
 
-        public BulletItem(int xpos, int ypos, int damageAmount)
+        public int Speed { get; set; }
+
+        public int DamageAmount { get; set; }
+
+        public BulletItem(int xpos, int ypos, Direction direction, int speed, int damageAmount)
         {
             XPos = xpos;
             YPos = ypos;
+            Direction = direction;
+            Speed = speed;
             DamageAmount = damageAmount;
         }
     }
