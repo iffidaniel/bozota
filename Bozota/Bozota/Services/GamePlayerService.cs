@@ -76,16 +76,25 @@ public class GamePlayerService
         return new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5));
     }
 
-    public Task ProcessPlayerActions(GameState gameState)
+    public Task ProcessPlayers(GameState gameState)
     {
+        // Remove dead players
+        List<IPlayer> deadPlayer = new();
         foreach (var player in gameState.Players)
         {
-            if (!player.Health.IsAlive)
+            if (!player.Health.IsAlive && !player.Health.IsInDestructable)
             {
-                continue;
+                deadPlayer.Add(player);
             }
+        }
+        foreach (var player in deadPlayer)
+        {
+            gameState.Players.Remove(player);
+        }
 
-            // TODO: This randomly added player action should be replaced with actualy action from player
+        foreach (var player in gameState.Players)
+        {
+            // TODO: This randomly added player action should be replaced with actual action from player
             player.Actions.Add(GetRandomPlayerAction());
 
             switch (player.Actions.Last())
@@ -123,27 +132,34 @@ public class GamePlayerService
                     }
                     break;
                 case { Item1: PlayerAction.Shoot, Item2: Direction.Up }:
-                    if (player.YPos < gameState.MapYCellCount - 1)
+                    if (player.Ammo > 0 && player.YPos < gameState.MapYCellCount - 1)
                     {
                         gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos + 1, Direction.Up, _bulletSpeed, _bulletDamage));
+                        player.Ammo -= 1;
+                        
                     }
                     break;
                 case { Item1: PlayerAction.Shoot, Item2: Direction.Right }:
-                    if (player.XPos < gameState.MapXCellCount - 1)
+                    if (player.Ammo > 0 && player.XPos < gameState.MapXCellCount - 1)
                     {
                         gameState.Bullets.Add(new BulletItem(player.XPos + 1, player.YPos, Direction.Right, _bulletSpeed, _bulletDamage));
+                        player.Ammo -= 1;
+                        
                     }
                     break;
                 case { Item1: PlayerAction.Shoot, Item2: Direction.Down }:
-                    if (player.YPos > 1)
+                    if (player.Ammo > 0 && player.YPos > 1)
                     {
                         gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos - 1, Direction.Down, _bulletSpeed, _bulletDamage));
+                        player.Ammo -= 1;
+                        
                     }
                     break;
                 case { Item1: PlayerAction.Shoot, Item2: Direction.Left }:
-                    if (player.XPos > 1)
+                    if (player.Ammo > 0 && player.XPos > 1)
                     {
                         gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage));
+                        player.Ammo -= 1;
                     }
                     break;
                 default:

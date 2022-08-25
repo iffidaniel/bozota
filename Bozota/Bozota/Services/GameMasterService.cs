@@ -14,6 +14,7 @@ public class GameMasterService
     private readonly GameObjectService _gameObjectService;
     private GameState _gameState;
     private readonly List<string> _playerNames;
+    private readonly int _randomGeneratorFrequency;
     private readonly int _healAmount;
     private readonly int _ammoAmount;
     private readonly int _wallHealth;
@@ -34,6 +35,7 @@ public class GameMasterService
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
+        _randomGeneratorFrequency = config.GetValue("Game:RandomGeneratorFrequency", 40);
         _healAmount = config.GetValue("Game:HealAmount", 40);
         _ammoAmount = config.GetValue("Game:AmmoAmount", 10);
         _wallHealth = config.GetValue("Game:WallHealth", 80);
@@ -69,7 +71,7 @@ public class GameMasterService
                 }
                 else
                 {
-                    switch (_gameLogic.GetRandomMapItem(tempState.TotalCellCount / 5))
+                    switch (_gameLogic.GetRandomMapItem(tempState.TotalCellCount / _randomGeneratorFrequency))
                     {
                         case RenderId.Health:
                             tempState.HealthItems.Add(new HealthItem(x, y, _healAmount));
@@ -129,9 +131,12 @@ public class GameMasterService
 
         var tempState = _gameState;
 
+        await _gameItemService.ProcessAmmoItems(tempState);
+        await _gameItemService.ProcessHealthItems(tempState);
         await _gameItemService.ProcessBullets(tempState);
         await _gameObjectService.ProcessBombs(tempState);
-        await _gamePlayerService.ProcessPlayerActions(tempState);
+        await _gameObjectService.ProcessWalls(tempState);
+        await _gamePlayerService.ProcessPlayers(tempState);
         await _gameLogic.RenderEmptyMap(tempState);
         await _gameLogic.RenderAllOnMap(tempState);
 
