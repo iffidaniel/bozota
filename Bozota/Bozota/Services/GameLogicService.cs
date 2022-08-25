@@ -112,4 +112,13 @@ public class GameLogicService
 
         return Task.CompletedTask;
     }
+
+    public Task RemoveAllOnMap(GameState gameState)
+    {
+        gameState.Items.Clear();
+        gameState.Objects.Clear();
+        gameState.Players.Clear();
+
+        return Task.CompletedTask;
+    }
 }

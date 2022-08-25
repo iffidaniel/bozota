@@ -12,14 +12,13 @@ public class GameMasterService
     private GameState _gameState;
     private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
-    private int _count;
+    private int updateCounter = 0;
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
         GameLogicService gameLogic)
     {
         _logger = logger;
         _gameLogic = gameLogic;
-        _count = 0;
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
@@ -84,20 +83,22 @@ public class GameMasterService
 
         lock (_gameState)
         {
-            _gameState = tempState;
+            if (!_isGameInitialized)
+            {
+                _gameState = tempState;
+                _isGameInitialized = true;
+            }
         }
 
         _logger.LogInformation("Game initialized");
-
-        _isGameInitialized = true;
 
         return _gameState;
     }
 
     public async Task<GameState?> UpdateGameAsync()
     {
-        _count++;
-        _logger.LogInformation("Updating game progress, {count}", _count);
+        updateCounter++;
+        _logger.LogInformation("Updating game progress, {count}", updateCounter);
 
         if (!_isGameInitialized)
         {
@@ -124,10 +125,51 @@ public class GameMasterService
 
         lock (_gameState)
         {
-            _gameState = tempState;
+            if (_isGameInitialized)
+            {
+                _gameState = tempState;
+            }
         }
 
         _logger.LogTrace("Game updated");
+
+        return _gameState;
+    }
+
+    public async Task<GameState?> StopGameAsync()
+    {
+        _logger.LogInformation("Stopping game");
+
+        if (!_isGameInitialized)
+        {
+            _logger.LogWarning("Game is not yet initialized");
+
+            return null;
+        }
+
+        var tempState = _gameState;
+
+        await _gameLogic.RemoveAllOnMap(tempState);
+
+        // Refresh map
+        for (int x = 0; x < tempState.MapXCellCount; x++)
+        {
+            for (int y = 0; y < tempState.MapXCellCount; y++)
+            {
+                tempState.Map[x][y] = RenderId.Empty;
+            }
+        }
+
+        lock (_gameState)
+        {
+            if (_isGameInitialized)
+            {
+                _gameState = tempState;
+                _isGameInitialized = false;
+            }
+        }
+
+        _logger.LogTrace("Game stopped");
 
         return _gameState;
     }

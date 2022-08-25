@@ -11,3 +11,10 @@ export const updateGame = async () => {
 
     return data;
 };
+
+export const stopGame = async () => {
+    const res = await fetch('game/stop');
+    const data = await res.json();
+
+    return data;
+};
