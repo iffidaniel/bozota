@@ -7,5 +7,6 @@ public enum RenderId
     Ammo = 2,
     Wall = 3,
     Bomb = 4,
-    Player = 5
+    Player = 5,
+    Bullet = 6
 }
