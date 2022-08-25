@@ -9,16 +9,18 @@ public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
     private readonly GameLogicService _gameLogic;
+    private readonly GamePlayerService _gamePlayerService;
     private GameState _gameState;
     private readonly List<string> _playerNames;
     private bool _isGameInitialized = false;
     private int updateCounter = 0;
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
-        GameLogicService gameLogic)
+        GameLogicService gameLogic, GamePlayerService gamePlayerService)
     {
         _logger = logger;
         _gameLogic = gameLogic;
+        _gamePlayerService = gamePlayerService;
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
         _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
@@ -39,13 +41,7 @@ public class GameMasterService
 
         var tempState = _gameState;
 
-        // Add Players
-        foreach (var name in _playerNames)
-        {
-            tempState.Players.Add(await _gameLogic.AddNewPlayer(name, tempState.MapXCellCount, tempState.MapYCellCount));
-        }
-
-        // Add Objects and Items and render them on map
+        // Add Fixed walls, random Objects and Items and render empty map
         for (int x = 0; x < tempState.MapXCellCount; x++)
         {
             var row = new List<RenderId>();
@@ -79,6 +75,14 @@ public class GameMasterService
             tempState.Map.Add(row);
         }
 
+        // Add Players
+        foreach (var name in _playerNames)
+        {
+            var newPlayer = await _gamePlayerService.AddNewPlayer(name, tempState);
+            tempState.Players.Add(newPlayer);
+        }
+
+        // Render Players, Object and Items on map
         await _gameLogic.RenderAllOnMap(tempState);
 
         lock (_gameState)
@@ -109,18 +113,8 @@ public class GameMasterService
 
         var tempState = _gameState;
 
-        await _gameLogic.MovePlayers(tempState);
-
-        // Refresh map
-        for (int x = 0; x < tempState.MapXCellCount; x++)
-        {
-            for (int y = 0; y < tempState.MapXCellCount; y++)
-            {
-                tempState.Map[x][y] = RenderId.Empty;
-            }
-        }
-
-        // Render map
+        await _gamePlayerService.MovePlayers(tempState);
+        await _gameLogic.RenderEmptyMap(tempState);
         await _gameLogic.RenderAllOnMap(tempState);
 
         lock (_gameState)
@@ -149,16 +143,8 @@ public class GameMasterService
 
         var tempState = _gameState;
 
-        await _gameLogic.RemoveAllOnMap(tempState);
-
-        // Refresh map
-        for (int x = 0; x < tempState.MapXCellCount; x++)
-        {
-            for (int y = 0; y < tempState.MapXCellCount; y++)
-            {
-                tempState.Map[x][y] = RenderId.Empty;
-            }
-        }
+        await _gameLogic.RemoveAllFromGame(tempState);
+        await _gameLogic.RenderEmptyMap(tempState);
 
         lock (_gameState)
         {

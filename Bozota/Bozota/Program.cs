@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<GameMasterService>();
 builder.Services.AddTransient<GameLogicService>();
+builder.Services.AddTransient<GamePlayerService>();
 
 var app = builder.Build();
 

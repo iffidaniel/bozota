@@ -1,5 +1,4 @@
 ﻿using Bozota.Models;
-using Bozota.Models.Abstractions;
 using Bozota.Models.Map;
 
 namespace Bozota.Services;
@@ -14,13 +13,6 @@ public class GameLogicService
         _logger = logger;
     }
 
-    public Task<IPlayer> AddNewPlayer(string name, int mapXCellCount, int mapYCellCount)
-    {
-        _logger.LogInformation("Adding new player: {player}", name);
-
-        return Task.FromResult<IPlayer>(new Player(name, _random.Next(mapXCellCount), _random.Next(mapYCellCount)));
-    }
-
     public RenderId GetRandomMapItem(int seed)
     {
         return (RenderId)_random.Next(seed) switch
@@ -33,60 +25,13 @@ public class GameLogicService
         };
     }
 
-    public PlayerMove GetRandomPlayerMove()
+    public Task RenderEmptyMap(GameState gameState)
     {
-        return (PlayerMove)_random.Next(5);
-    }
-
-    public Task MovePlayers(GameState gameState)
-    {
-        foreach (var player in gameState.Players)
+        for (int x = 0; x < gameState.MapXCellCount; x++)
         {
-            if (!player.Health.IsAlive)
+            for (int y = 0; y < gameState.MapXCellCount; y++)
             {
-                continue;
-            }
-
-            player.Moves.Add(GetRandomPlayerMove());
-
-            if (player.Name == "Daniel")
-            {
-                _logger.LogDebug("player move: {move}", player.Moves.Last());
-            }
-
-            switch (player.Moves.Last())
-            {
-                case PlayerMove.Up:
-                    if (player.YPos < gameState.MapYCellCount - 1 && gameState.Map[player.XPos][player.YPos + 1] != RenderId.Wall)
-                    {
-                        player.YPos += 1;
-                    }
-                    break;
-                case PlayerMove.right:
-                    if (player.XPos < gameState.MapXCellCount - 1 && gameState.Map[player.XPos + 1][player.YPos] != RenderId.Wall)
-                    {
-                        player.XPos += 1;
-                    }
-                    break;
-                case PlayerMove.Down:
-                    if (player.YPos > 1 && gameState.Map[player.XPos][player.YPos - 1] != RenderId.Wall)
-                    {
-                        player.YPos -= 1;
-                    }
-                    break;
-                case PlayerMove.Left:
-                    if (player.XPos > 1 && gameState.Map[player.XPos - 1][player.YPos] != RenderId.Wall)
-                    {
-                        player.XPos -= 1;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            if (player.Name == "Daniel")
-            {
-                _logger.LogDebug("player pos: {x},{y}", player.XPos, player.YPos);
+                gameState.Map[x][y] = RenderId.Empty;
             }
         }
 
@@ -113,8 +58,10 @@ public class GameLogicService
         return Task.CompletedTask;
     }
 
-    public Task RemoveAllOnMap(GameState gameState)
+    public Task RemoveAllFromGame(GameState gameState)
     {
+        _logger.LogInformation("Clearing all Players, Objects and Items from game");
+
         gameState.Items.Clear();
         gameState.Objects.Clear();
         gameState.Players.Clear();
