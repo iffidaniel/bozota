@@ -1,19 +1,29 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { GameMap } from './GameMap';
 
 export const GameTicker = (props) => {
-  const [mapArray, setMapArray] = useState(null);
-    
+    const [mapArray, setMapArray] = useState(null);
+
     const {
-        game      
-  } = props;    
+        game
+    } = props;
 
-    setInterval(() => {
-        game.update();
-      //  setMapArray(game.state.map);
-    }, 1000);
 
+    const updateGameFunction = async () => {
+        await game.update();
+        setMapArray(game.state.map);
+    }
+    useEffect(() => {
+        const handle = setInterval(() => {
+            updateGameFunction();
+        }, 1000);
+        return () => {
+            clearInterval(handle);
+        }
+    }, [mapArray])
+
+   
     return (
-        <GameMap mapArray={mapArray}/>  
-)        
+        <GameMap mapArray={mapArray}/>
+    )
 };

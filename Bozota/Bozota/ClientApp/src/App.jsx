@@ -3,18 +3,21 @@ import { GameTicker } from './components/GameTicker';
 import { Stats } from './components/Stats';
 import { Controls } from './components/Controls';
 import './App.css';
-import game from './state/game';
+import  Game  from './state/game';
 
-export default class App extends Component {
-    static displayName = App.name;
+export const App = () =>  {
+    const displayName = App.name;
+    const game = new Game();
 
-  render() {
+ 
     return (
       <div className='mainPage'>
         <Controls />
-        <GameTicker game={new game()} />
+        <GameTicker game={game} />
         <Stats />
       </div>
     );
-  }
+ 
 }
+
+export default App;

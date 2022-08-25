@@ -1,17 +1,21 @@
-import { observable } from 'mobx';
+import { makeAutoObservable, observable } from 'mobx';
 import { updateGame } from '../api/gameControls';
 
-class game {
-  state = observable({
-    map: null,
-    players: null,
-  });
+class Game {
+    state = {
+        map: null,
+        players: null,
+   };
 
-  update = () => {
-      updateGame().then((response) => {
-      this.state = response;
-    });
-  };
+  
+    constructor() {
+        makeAutoObservable(this);
+    }
+
+    async update() {
+        var res = await updateGame();
+        this.state = res;
+    }
 }
 
-export default game;
+export default Game;
