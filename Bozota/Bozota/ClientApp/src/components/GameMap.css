@@ -6,15 +6,15 @@
 }
 
 .empty {
-    background-color: lightgray;
+    background-color: floralwhite;
 }
 
 .health {
-    background-color: green;
+    background-color: forestgreen;
 }
 
 .ammo {
-    background-color: darkslateblue;
+    background-color: yellowgreen;
 }
 
 .wall {
@@ -26,11 +26,19 @@
 }
 
 .player {
-    background-color: yellow;
+    background-color: blue;
+}
+
+.bullet {
+    background-color: dimgrey;
+}
+
+.fire {
+    background-color: orange;
 }
 
 .errorCell {
-    background-color: white;
+    background-color: deeppink;
 }
 
 

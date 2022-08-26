@@ -43,6 +43,7 @@ public class GameMapService
     {
         RenderOnMap(gameState.Map, gameState.AmmoItems);
         RenderOnMap(gameState.Map, gameState.HealthItems);
+        RenderOnMap(gameState.Map, gameState.FireItems);
         RenderOnMap(gameState.Map, gameState.Bullets);
         RenderOnMap(gameState.Map, gameState.Bombs);
         RenderOnMap(gameState.Map, gameState.Walls);
@@ -65,6 +66,7 @@ public class GameMapService
 
         gameState.AmmoItems.Clear();
         gameState.HealthItems.Clear();
+        gameState.FireItems.Clear();
         gameState.Bullets.Clear();
         gameState.Bombs.Clear();
         gameState.Walls.Clear();

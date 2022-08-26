@@ -16,7 +16,7 @@ export const GameTicker = (props) => {
     useEffect(() => {
         const handle = setInterval(() => {
             updateGameFunction();
-        }, 100);
+        }, 400);
         return () => {
             clearInterval(handle);
         }

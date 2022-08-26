@@ -6,7 +6,7 @@ namespace Bozota.Models.Abstractions
     {
         public string Name { get; }
 
-        public int MovementSpeed { get; set; }
+        public int Speed { get; set; }
 
         public int Ammo { get; set; }
 

@@ -67,6 +67,35 @@ public class GameItemService
         return Task.CompletedTask;
     }
 
+    public Task ProcessFires(GameState gameState)
+    {
+        _logger.LogDebug("Processing fire items");
+
+        List<IFireItem> dimmedFires = new();
+        foreach (var fire in gameState.FireItems)
+        {
+            if (fire.Duration <= 0)
+            {
+                dimmedFires.Add(fire);
+                continue;
+            }
+
+            IsItemHitting(fire, gameState.Bombs);
+            IsItemHitting(fire, gameState.Walls);
+            IsItemHitting(fire, gameState.Players);
+
+            fire.Duration -= 1;
+        }
+
+        // Remove dimmed fires
+        foreach (var fire in dimmedFires)
+        {
+            gameState.FireItems.Remove(fire);
+        }
+
+        return Task.CompletedTask;
+    }
+
     public Task ProcessBullets(GameState gameState)
     {
         _logger.LogDebug("Processing bullets");
@@ -80,19 +109,19 @@ public class GameItemService
 
             foreach (var bullet in gameState.Bullets)
             {
-                if(IsBulletHitting(bullet, gameState.Players))
+                if(IsItemHitting(bullet, gameState.Players))
                 {
                     bulletHits.Add(bullet);
                     continue;
                 }
 
-                if (IsBulletHitting(bullet, gameState.Walls))
+                if (IsItemHitting(bullet, gameState.Walls))
                 {
                     bulletHits.Add(bullet);
                     continue;
                 }
 
-                if (IsBulletHitting(bullet, gameState.Bombs))
+                if (IsItemHitting(bullet, gameState.Bombs))
                 {
                     bulletHits.Add(bullet);
                     continue;
@@ -166,13 +195,13 @@ public class GameItemService
         return Task.CompletedTask;
     }
 
-    public bool IsBulletHitting<T>(IBulletItem bullet, List<T> items) where T : IMapObject
+    public bool IsItemHitting<ITEM, T>(ITEM hittingItem, List<T> items) where ITEM : IDamageItem where T : IMapObject
     {
         foreach (var item in items)
         {
-            if (item.XPos == bullet.XPos && item.YPos == bullet.YPos)
+            if (item.XPos == hittingItem.XPos && item.YPos == hittingItem.YPos)
             {
-                item.Health.Damage(bullet.DamageAmount);
+                item.Health.Damage(hittingItem.DamageAmount);
                 return true;
             }
         }

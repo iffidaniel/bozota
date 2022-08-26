@@ -21,6 +21,8 @@ namespace Bozota.Models
 
         public List<IBombObject> Bombs { get; private set; }
 
+        public List<IFireItem> FireItems { get; private set; }
+
         public List<IHealthItem> HealthItems { get; private set; }
 
         public List<IAmmoItem> AmmoItems { get; private set; }
@@ -38,6 +40,7 @@ namespace Bozota.Models
             Players = new();
             Walls = new();
             Bombs = new();
+            FireItems = new();
             HealthItems = new();
             AmmoItems = new();
             Bullets = new();

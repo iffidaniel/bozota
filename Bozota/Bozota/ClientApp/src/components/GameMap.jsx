@@ -15,6 +15,10 @@ const renderItem = (id, key) => {
     return <span className='bomb item' key={key} />;
   } else if (id === 5) {
     return <span className='player item' key={key} />;
+  } else if (id === 6) {
+    return <span className='bullet item' key={key} />;
+  } else if (id === 7) {
+    return <span className='fire item' key={key} />;
   } else {
     return <span className='errorCell item' key={key} />;
   }

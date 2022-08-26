@@ -135,6 +135,7 @@ public class GameMasterService
         await _gameItemService.ProcessHealthItems(tempState);
         await _gameItemService.ProcessBullets(tempState);
         await _gameObjectService.ProcessBombs(tempState);
+        await _gameItemService.ProcessFires(tempState);
         await _gameObjectService.ProcessWalls(tempState);
         await _gamePlayerService.ProcessPlayers(tempState);
         await _gameLogic.RenderEmptyMap(tempState);
