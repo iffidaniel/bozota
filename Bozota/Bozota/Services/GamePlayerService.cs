@@ -3,6 +3,7 @@ using Bozota.Models.Abstractions;
 using Bozota.Models.Map;
 using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Items.Abstractions;
+using Bozota.Models.Map.Objects;
 
 namespace Bozota.Services;
 
@@ -16,9 +17,11 @@ public class GamePlayerService
     private readonly int _playerSpeed;
     private readonly int _playerMaxSpeed;
     private readonly int _playerStartingAmmo;
+    private readonly int _playerStartingMaterials;
     private readonly int _bulletSpeed;
     private readonly int _bulletDamage;
     private readonly int _bombRadius;
+    private readonly int _wallHealth;
 
     public GamePlayerService(ILogger<GamePlayerService> logger, IConfiguration config)
     {
@@ -30,56 +33,76 @@ public class GamePlayerService
         _playerSpeed = config.GetValue("Game:PlayerSpeed", 1);
         _playerMaxSpeed = config.GetValue("Game:PlayerMaxSpeed", 5);
         _playerStartingAmmo = config.GetValue("Game:PlayerStartingAmmo", 10);
+        _playerStartingMaterials = config.GetValue("Game:PlayerStartingMaterials", 3);
         _bulletSpeed = config.GetValue("Game:BulletSpeed", 3);
         _bulletDamage = config.GetValue("Game:BulletDamage", 40);
         _bombRadius = config.GetValue("Game:BombRadius", 3);
+        _wallHealth = config.GetValue("Game:WallHealth", 50);
     }
 
-    public Task<IPlayer> AddNewPlayer(string name, GameState gameState)
+    public async Task<IPlayer?> AddNewPlayerWithRandomPosition(string name, GameState gameState)
     {
         _logger.LogInformation("Adding new player: {player}", name);
 
-        var x = 0;
-        var y = 0;
+        IPlayer? player = null;
+
+        // Check if randomly assigned position is already taken by other item or object on map
         var tryCounter = 0;
         while (tryCounter <= gameState.TotalCellCount)
         {
-            x = _random.Next(gameState.MapXCellCount);
-            y = _random.Next(gameState.MapYCellCount);
             tryCounter++;
 
-            if (IsMapCellTaken(x, y, gameState.AmmoItems)) { continue; }
-            if (IsMapCellTaken(x, y, gameState.HealthItems)) { continue; }
-            var mapCellTaken = false;
-            for (var bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
+            player = await AddNewPlayer(name, gameState, _random.Next(gameState.MapXCellCount), _random.Next(gameState.MapYCellCount));
+
+            if (player == null)
             {
-                for (var bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
-                {
-                    if (!(bombX == _bombRadius && bombY == _bombRadius) &&
-                        !(bombX == _bombRadius && bombY == 0 - _bombRadius) &&
-                        !(bombX == 0 - _bombRadius && bombY == _bombRadius) &&
-                        !(bombX == 0 - _bombRadius && bombY == 0 - _bombRadius))
-                    {
-                        if (IsMapCellTaken(x + bombX, y + bombY, gameState.Bombs))
-                        {
-                            mapCellTaken = true;
-                            break;
-                        }
-                    }
-                }
-                if (mapCellTaken) { break; }
+                continue;
             }
-            if (mapCellTaken) { continue; }
-            if (IsMapCellTaken(x, y, gameState.Walls)) { continue; }
-            if (IsMapCellTaken(x, y, gameState.Players)) { continue; }
 
             break;
         }
 
-        return Task.FromResult<IPlayer>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo));
+        return player;
     }
 
-    public bool IsMapCellTaken<T>(int x, int y, List<T> items) where T : IMapItem
+    public Task<IPlayer?> AddNewPlayer(string name, GameState gameState, int x, int y)
+    {
+        // Check if position is already occupied by other item or object on map
+        var isPositionOccupiedByBombOrBombRadius = false;
+        for (var bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
+        {
+            for (var bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
+            {
+                if (!(bombX == _bombRadius && bombY == _bombRadius) &&
+                    !(bombX == _bombRadius && bombY == 0 - _bombRadius) &&
+                    !(bombX == 0 - _bombRadius && bombY == _bombRadius) &&
+                    !(bombX == 0 - _bombRadius && bombY == 0 - _bombRadius))
+                {
+                    if (IsPositionOccupied(x + bombX, y + bombY, gameState.Bombs))
+                    {
+                        isPositionOccupiedByBombOrBombRadius = true;
+                        break;
+                    }
+                }
+            }
+            if (isPositionOccupiedByBombOrBombRadius) { break; }
+        }
+        if (isPositionOccupiedByBombOrBombRadius ||
+            IsPositionOccupied(x, y, gameState.Walls) ||
+            IsPositionOccupied(x, y, gameState.AmmoItems) ||
+            IsPositionOccupied(x, y, gameState.Bullets) ||
+            IsPositionOccupied(x, y, gameState.FireItems) ||
+            IsPositionOccupied(x, y, gameState.HealthItems) ||
+            IsPositionOccupied(x, y, gameState.MaterialsItems) ||
+            IsPositionOccupied(x, y, gameState.Players))
+        {
+            return Task.FromResult<IPlayer?>(null);
+        }
+
+        return Task.FromResult<IPlayer?>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo, _playerStartingMaterials));
+    }
+    
+    public static bool IsPositionOccupied<T>(int x, int y, List<T> items) where T : IMapItem
     {
         foreach (var item in items)
         {
@@ -90,11 +113,6 @@ public class GamePlayerService
         }
 
         return false;
-    }
-
-    public Tuple<PlayerAction, Direction> GetRandomPlayerAction()
-    {
-        return new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(3), (Direction)_random.Next(5));
     }
 
     public Task ProcessPlayers(GameState gameState)
@@ -113,6 +131,7 @@ public class GamePlayerService
             gameState.Players.Remove(player);
         }
 
+        // Process all player actions
         var actionCounter = 0;
         bool arePlayerActionsRemaining;
         do
@@ -129,66 +148,101 @@ public class GamePlayerService
                     switch (player.Actions.Last())
                     {
                         case { Item1: PlayerAction.Move, Item2: Direction.Up }:
-                            if (player.YPos < gameState.MapYCellCount - 1 &&
-                                gameState.Map[player.XPos][player.YPos + 1] != RenderId.Wall &&
-                                gameState.Map[player.XPos][player.YPos + 1] != RenderId.Player)
+                            if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
+                                PositionIsNotOccupiedByObject(player.XPos, player.YPos + 1, gameState))
                             {
                                 player.YPos += 1;
                             }
                             break;
                         case { Item1: PlayerAction.Move, Item2: Direction.Right }:
-                            if (player.XPos < gameState.MapXCellCount - 1 &&
-                                gameState.Map[player.XPos + 1][player.YPos] != RenderId.Wall &&
-                                gameState.Map[player.XPos + 1][player.YPos] != RenderId.Player)
+                            if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
+                                PositionIsNotOccupiedByObject(player.XPos + 1, player.YPos, gameState))
                             {
                                 player.XPos += 1;
                             }
                             break;
                         case { Item1: PlayerAction.Move, Item2: Direction.Down }:
-                            if (player.YPos > 1 &&
-                                gameState.Map[player.XPos][player.YPos - 1] != RenderId.Wall &&
-                                gameState.Map[player.XPos][player.YPos - 1] != RenderId.Player)
+                            if (PlayerPositionIsNotAtLowerBorder(player) &&
+                                PositionIsNotOccupiedByObject(player.XPos, player.YPos - 1, gameState))
                             {
                                 player.YPos -= 1;
                             }
                             break;
                         case { Item1: PlayerAction.Move, Item2: Direction.Left }:
-                            if (player.XPos > 1 &&
-                                gameState.Map[player.XPos - 1][player.YPos] != RenderId.Wall &&
-                                gameState.Map[player.XPos - 1][player.YPos] != RenderId.Player)
+                            if (PlayerPositionIsNotAtLeftBorder(player) &&
+                                PositionIsNotOccupiedByObject(player.XPos - 1, player.YPos, gameState))
                             {
                                 player.XPos -= 1;
                             }
                             break;
                         case { Item1: PlayerAction.Shoot, Item2: Direction.Up }:
-                            if (player.Ammo > 0 && player.YPos < gameState.MapYCellCount - 1)
+                            if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
+                                player.HasEnoughAmmo(1))
                             {
                                 gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos + 1, Direction.Up, _bulletSpeed, _bulletDamage));
-                                player.Ammo -= 1;
+                                player.ReduceAmmo(1);
 
                             }
                             break;
                         case { Item1: PlayerAction.Shoot, Item2: Direction.Right }:
-                            if (player.Ammo > 0 && player.XPos < gameState.MapXCellCount - 1)
+                            if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
+                                player.HasEnoughAmmo(1))
                             {
                                 gameState.Bullets.Add(new BulletItem(player.XPos + 1, player.YPos, Direction.Right, _bulletSpeed, _bulletDamage));
-                                player.Ammo -= 1;
+                                player.ReduceAmmo(1);
 
                             }
                             break;
                         case { Item1: PlayerAction.Shoot, Item2: Direction.Down }:
-                            if (player.Ammo > 0 && player.YPos > 1)
+                            if (PlayerPositionIsNotAtLowerBorder(player) &&
+                                player.HasEnoughAmmo(1))
                             {
                                 gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos - 1, Direction.Down, _bulletSpeed, _bulletDamage));
-                                player.Ammo -= 1;
+                                player.ReduceAmmo(1);
 
                             }
                             break;
                         case { Item1: PlayerAction.Shoot, Item2: Direction.Left }:
-                            if (player.Ammo > 0 && player.XPos > 1)
+                            if (PlayerPositionIsNotAtLeftBorder(player) && 
+                                player.HasEnoughAmmo(1))
                             {
                                 gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage));
-                                player.Ammo -= 1;
+                                player.ReduceAmmo(1);
+                            }
+                            break;
+                        case { Item1: PlayerAction.Build, Item2: Direction.Up }:
+                            if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
+                                player.HasEnoughMaterials(1))
+                            {
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth));
+                                player.ReduceMaterials(1);
+
+                            }
+                            break;
+                        case { Item1: PlayerAction.Build, Item2: Direction.Right }:
+                            if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
+                                player.HasEnoughMaterials(1))
+                            {
+                                gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth));
+                                player.ReduceMaterials(1);
+
+                            }
+                            break;
+                        case { Item1: PlayerAction.Build, Item2: Direction.Down }:
+                            if (PlayerPositionIsNotAtLowerBorder(player) &&
+                                player.HasEnoughMaterials(1))
+                            {
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth));
+                                player.ReduceMaterials(1);
+
+                            }
+                            break;
+                        case { Item1: PlayerAction.Build, Item2: Direction.Left }:
+                            if (PlayerPositionIsNotAtLeftBorder(player) &&
+                                player.HasEnoughMaterials(1))
+                            {
+                                gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth));
+                                player.ReduceMaterials(1);
                             }
                             break;
                         default:
@@ -204,5 +258,61 @@ public class GamePlayerService
         while (arePlayerActionsRemaining && actionCounter <= _playerMaxSpeed);
 
         return Task.CompletedTask;
+    }
+
+    public bool PlayerPositionIsNotAtUpperBorder(IPlayer player, int mapYCellCount)
+    {
+        if (player.YPos < mapYCellCount - 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PlayerPositionIsNotAtRightBorder(IPlayer player, int mapXCellCount)
+    {
+        if (player.XPos < mapXCellCount - 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PlayerPositionIsNotAtLowerBorder(IPlayer player)
+    {
+        if (player.YPos > 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PlayerPositionIsNotAtLeftBorder(IPlayer player)
+    {
+        if (player.XPos > 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PositionIsNotOccupiedByObject(int x, int y, GameState gameState)
+    {
+        if (gameState.Map[x][y] is RenderId.Bomb or RenderId.Wall or RenderId.Player)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    // TODO: remove this function
+    public Tuple<PlayerAction, Direction> GetRandomPlayerAction()
+    {
+        return new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5));
     }
 }

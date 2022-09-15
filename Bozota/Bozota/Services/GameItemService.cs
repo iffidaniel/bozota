@@ -40,6 +40,33 @@ public class GameItemService
         return Task.CompletedTask;
     }
 
+    public Task ProcessMaterialsItems(GameState gameState)
+    {
+        _logger.LogDebug("Processing materials items");
+
+        List<IMaterialsItem> consumedItems = new();
+        foreach (var player in gameState.Players)
+        {
+            foreach (var materialsItem in gameState.MaterialsItems)
+            {
+                if (player.XPos == materialsItem.XPos && player.YPos == materialsItem.YPos)
+                {
+                    player.Materials += materialsItem.Amount;
+                    consumedItems.Add(materialsItem);
+                }
+            }
+
+            // Remove consumed ammo items
+            foreach (var consumable in consumedItems)
+            {
+                gameState.MaterialsItems.Remove(consumable);
+            }
+            consumedItems.Clear();
+        }
+
+        return Task.CompletedTask;
+    }
+
     public Task ProcessHealthItems(GameState gameState)
     {
         _logger.LogDebug("Processing health items");

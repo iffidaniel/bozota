@@ -27,6 +27,8 @@ namespace Bozota.Models
 
         public List<IAmmoItem> AmmoItems { get; private set; }
 
+        public List<IMaterialsItem> MaterialsItems { get; private set; }
+
         public List<IBulletItem> Bullets { get; private set; }
 
 
@@ -43,6 +45,7 @@ namespace Bozota.Models
             FireItems = new();
             HealthItems = new();
             AmmoItems = new();
+            MaterialsItems = new();
             Bullets = new();
         }
     }

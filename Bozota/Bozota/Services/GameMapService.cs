@@ -20,6 +20,7 @@ public class GameMapService
         {
             RenderId.Health => RenderId.Health,
             RenderId.Ammo => RenderId.Ammo,
+            RenderId.Materials => RenderId.Materials,
             RenderId.Wall => RenderId.Wall,
             RenderId.Bomb => RenderId.Bomb,
             _ => RenderId.Empty,
@@ -42,6 +43,7 @@ public class GameMapService
     public Task RenderAllOnMap(GameState gameState)
     {
         RenderOnMap(gameState.Map, gameState.AmmoItems);
+        RenderOnMap(gameState.Map, gameState.MaterialsItems);
         RenderOnMap(gameState.Map, gameState.HealthItems);
         RenderOnMap(gameState.Map, gameState.FireItems);
         RenderOnMap(gameState.Map, gameState.Bullets);
@@ -65,6 +67,7 @@ public class GameMapService
         _logger.LogInformation("Clearing all Players, Objects and Items from game");
 
         gameState.AmmoItems.Clear();
+        gameState.MaterialsItems.Clear();
         gameState.HealthItems.Clear();
         gameState.FireItems.Clear();
         gameState.Bullets.Clear();

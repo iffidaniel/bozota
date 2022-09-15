@@ -19,6 +19,8 @@ const renderItem = (id, key) => {
     return <span className='bullet item' key={key} />;
   } else if (id === 7) {
     return <span className='fire item' key={key} />;
+  } else if (id === 8) {
+    return <span className='materials item' key={key} />;
   } else {
     return <span className='errorCell item' key={key} />;
   }

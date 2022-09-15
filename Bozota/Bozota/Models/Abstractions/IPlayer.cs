@@ -10,6 +10,16 @@ namespace Bozota.Models.Abstractions
 
         public int Ammo { get; set; }
 
+        public int Materials { get; set; }
+
         public List<Tuple<PlayerAction, Direction>> Actions { get; }
+
+        public bool HasEnoughAmmo(int amount);
+
+        public void ReduceAmmo(int amount);
+
+        public bool HasEnoughMaterials(int amount);
+
+        public void ReduceMaterials(int amount);
     }
 }

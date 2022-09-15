@@ -17,6 +17,7 @@ public class GameMasterService
     private readonly int _randomGeneratorFrequency;
     private readonly int _healAmount;
     private readonly int _ammoAmount;
+    private readonly int _materialsAmount;
     private readonly int _wallHealth;
     private readonly int _bombHealth;
     private readonly int _bombDamage;
@@ -38,6 +39,7 @@ public class GameMasterService
         _randomGeneratorFrequency = config.GetValue("Game:RandomGeneratorFrequency", 40);
         _healAmount = config.GetValue("Game:HealAmount", 40);
         _ammoAmount = config.GetValue("Game:AmmoAmount", 10);
+        _materialsAmount = config.GetValue("Game:MaterialsAmount", 5);
         _wallHealth = config.GetValue("Game:WallHealth", 80);
         _bombHealth = config.GetValue("Game:BombHealth", 80);
         _bombDamage = config.GetValue("Game:BombDamage", 80);
@@ -79,6 +81,9 @@ public class GameMasterService
                         case RenderId.Ammo:
                             tempState.AmmoItems.Add(new AmmoItem(x, y, _ammoAmount));
                             break;
+                        case RenderId.Materials:
+                            tempState.MaterialsItems.Add(new MaterialsItem(x, y, _materialsAmount));
+                            break;
                         case RenderId.Wall:
                             tempState.Walls.Add(new WallObject(x, y, _wallHealth));
                             break;
@@ -96,8 +101,11 @@ public class GameMasterService
         // Add Players
         foreach (var name in _playerNames)
         {
-            var newPlayer = await _gamePlayerService.AddNewPlayer(name, tempState);
-            tempState.Players.Add(newPlayer);
+            var newPlayer = await _gamePlayerService.AddNewPlayerWithRandomPosition(name, tempState);
+            if (newPlayer != null)
+            {
+                tempState.Players.Add(newPlayer);
+            }
         }
 
         // Render Players, Object and Items on map
@@ -132,6 +140,7 @@ public class GameMasterService
         var tempState = _gameState;
 
         await _gameItemService.ProcessAmmoItems(tempState);
+        await _gameItemService.ProcessMaterialsItems(tempState);
         await _gameItemService.ProcessHealthItems(tempState);
         await _gameItemService.ProcessBullets(tempState);
         await _gameObjectService.ProcessBombs(tempState);

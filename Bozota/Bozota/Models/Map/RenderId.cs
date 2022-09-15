@@ -9,5 +9,6 @@ public enum RenderId
     Bomb = 4,
     Player = 5,
     Bullet = 6,
-    Fire = 7
+    Fire = 7,
+    Materials = 8
 }
