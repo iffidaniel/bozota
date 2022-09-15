@@ -142,9 +142,6 @@ public class GamePlayerService
             {
                 if (player.Speed - actionCounter > 0)
                 {
-                    // TODO: This randomly added player action should be replaced with actual action from player
-                    player.Actions.Add(GetRandomPlayerAction());
-
                     switch (player.Actions.Last())
                     {
                         case { Item1: PlayerAction.Move, Item2: Direction.Up }:
@@ -308,11 +305,5 @@ public class GamePlayerService
         }
 
         return true;
-    }
-
-    // TODO: remove this function
-    public Tuple<PlayerAction, Direction> GetRandomPlayerAction()
-    {
-        return new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5));
     }
 }

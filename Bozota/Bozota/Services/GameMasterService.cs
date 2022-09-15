@@ -2,12 +2,14 @@
 using Bozota.Models.Map;
 using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Objects;
+using System;
 
 namespace Bozota.Services;
 
 public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
+    private readonly Random _random = new();
     private readonly GameMapService _gameLogic;
     private readonly GamePlayerService _gamePlayerService;
     private readonly GameItemService _gameItemService;
@@ -139,6 +141,13 @@ public class GameMasterService
 
         var tempState = _gameState;
 
+        // Add player actions
+        foreach (var player in tempState.Players)
+        {
+            player.Actions.Add(new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5)));
+        }
+
+        // Process 
         await _gameItemService.ProcessAmmoItems(tempState);
         await _gameItemService.ProcessMaterialsItems(tempState);
         await _gameItemService.ProcessHealthItems(tempState);
@@ -146,7 +155,9 @@ public class GameMasterService
         await _gameObjectService.ProcessBombs(tempState);
         await _gameItemService.ProcessFires(tempState);
         await _gameObjectService.ProcessWalls(tempState);
+
         await _gamePlayerService.ProcessPlayers(tempState);
+
         await _gameLogic.RenderEmptyMap(tempState);
         await _gameLogic.RenderAllOnMap(tempState);
 
