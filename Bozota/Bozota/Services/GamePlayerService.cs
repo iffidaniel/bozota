@@ -40,11 +40,11 @@ public class GamePlayerService
         _wallHealth = config.GetValue("Game:WallHealth", 50);
     }
 
-    public async Task<IPlayer?> AddNewPlayerWithRandomPosition(string name, GameState gameState)
+    public async Task<Player?> AddNewPlayerWithRandomPosition(string name, GameState gameState)
     {
         _logger.LogInformation("Adding new player: {player}", name);
 
-        IPlayer? player = null;
+        Player? player = null;
 
         // Check if randomly assigned position is already taken by other item or object on map
         var tryCounter = 0;
@@ -65,7 +65,7 @@ public class GamePlayerService
         return player;
     }
 
-    public Task<IPlayer?> AddNewPlayer(string name, GameState gameState, int x, int y)
+    public Task<Player?> AddNewPlayer(string name, GameState gameState, int x, int y)
     {
         // Check if position is already occupied by other item or object on map
         var isPositionOccupiedByBombOrBombRadius = false;
@@ -96,10 +96,10 @@ public class GamePlayerService
             IsPositionOccupied(x, y, gameState.MaterialsItems) ||
             IsPositionOccupied(x, y, gameState.Players))
         {
-            return Task.FromResult<IPlayer?>(null);
+            return Task.FromResult<Player?>(null);
         }
 
-        return Task.FromResult<IPlayer?>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo, _playerStartingMaterials));
+        return Task.FromResult<Player?>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo, _playerStartingMaterials));
     }
     
     public static bool IsPositionOccupied<T>(int x, int y, List<T> items) where T : IMapItem
@@ -118,7 +118,7 @@ public class GamePlayerService
     public Task ProcessPlayers(GameState gameState)
     {
         // Remove dead players
-        List<IPlayer> deadPlayer = new();
+        List<Player> deadPlayer = new();
         foreach (var player in gameState.Players)
         {
             if (!player.Health.IsAlive && !player.Health.IsInDestructable)

@@ -1,7 +1,7 @@
 ﻿using Bozota.Models.Abstractions;
 using Bozota.Models.Map;
-using Bozota.Models.Map.Items.Abstractions;
-using Bozota.Models.Map.Objects.Abstractions;
+using Bozota.Models.Map.Items;
+using Bozota.Models.Map.Objects;
 
 namespace Bozota.Models
 {
@@ -15,21 +15,21 @@ namespace Bozota.Models
 
         public List<List<RenderId>> Map { get; private set; }
 
-        public List<IPlayer> Players { get; private set; }
+        public List<Player> Players { get; private set; }
 
-        public List<IWallObject> Walls { get; private set; }
+        public List<WallObject> Walls { get; private set; }
 
-        public List<IBombObject> Bombs { get; private set; }
+        public List<BombObject> Bombs { get; private set; }
 
-        public List<IFireItem> FireItems { get; private set; }
+        public List<FireItem> FireItems { get; private set; }
 
-        public List<IHealthItem> HealthItems { get; private set; }
+        public List<HealthItem> HealthItems { get; private set; }
 
-        public List<IAmmoItem> AmmoItems { get; private set; }
+        public List<AmmoItem> AmmoItems { get; private set; }
 
-        public List<IMaterialsItem> MaterialsItems { get; private set; }
+        public List<MaterialsItem> MaterialsItems { get; private set; }
 
-        public List<IBulletItem> Bullets { get; private set; }
+        public List<BulletItem> Bullets { get; private set; }
 
 
         public GameState(int xCellCount, int yCellCount)

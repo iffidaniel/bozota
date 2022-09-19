@@ -1,8 +1,8 @@
-.item {
+.cell {
     margin: 0px;
     padding: 0px;
-    width: 7px;
-    height: 7px;
+    width: 18px;
+    height: 18px;
 }
 
 .empty {

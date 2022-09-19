@@ -1,6 +1,6 @@
 ﻿using Bozota.Models;
 using Bozota.Models.Map.Items;
-using Bozota.Models.Map.Objects.Abstractions;
+using Bozota.Models.Map.Objects;
 
 namespace Bozota.Services;
 
@@ -20,7 +20,7 @@ public class GameObjectService
     {
         _logger.LogDebug("Processing bombs");
 
-        List<IBombObject> explodedBombs = new();
+        List<BombObject> explodedBombs = new();
         foreach (var bomb in gameState.Bombs)
         {
             if (!bomb.Health.IsAlive && !bomb.Health.IsInDestructable)
@@ -71,7 +71,7 @@ public class GameObjectService
     {
         _logger.LogDebug("Processing walls");
 
-        List<IWallObject> brokenWalls = new();
+        List<WallObject> brokenWalls = new();
         foreach (var wall in gameState.Walls)
         {
             if (!wall.Health.IsAlive && !wall.Health.IsInDestructable)

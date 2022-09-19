@@ -1,4 +1,5 @@
 ﻿using Bozota.Models;
+using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Items.Abstractions;
 using Bozota.Models.Map.Objects.Abstractions;
 
@@ -17,7 +18,7 @@ public class GameItemService
     {
         _logger.LogDebug("Processing ammo items");
 
-        List<IAmmoItem> consumedItems = new();
+        List<AmmoItem> consumedItems = new();
         foreach (var player in gameState.Players)
         {
             foreach (var ammoItem in gameState.AmmoItems)
@@ -44,7 +45,7 @@ public class GameItemService
     {
         _logger.LogDebug("Processing materials items");
 
-        List<IMaterialsItem> consumedItems = new();
+        List<MaterialsItem> consumedItems = new();
         foreach (var player in gameState.Players)
         {
             foreach (var materialsItem in gameState.MaterialsItems)
@@ -71,7 +72,7 @@ public class GameItemService
     {
         _logger.LogDebug("Processing health items");
 
-        List<IHealthItem> consumedItems = new();
+        List<HealthItem> consumedItems = new();
         foreach (var player in gameState.Players)
         {
             foreach (var healthItem in gameState.HealthItems)
@@ -98,7 +99,7 @@ public class GameItemService
     {
         _logger.LogDebug("Processing fire items");
 
-        List<IFireItem> dimmedFires = new();
+        List<FireItem> dimmedFires = new();
         foreach (var fire in gameState.FireItems)
         {
             if (fire.Duration <= 0)
@@ -127,7 +128,7 @@ public class GameItemService
     {
         _logger.LogDebug("Processing bullets");
 
-        List<IBulletItem> bulletHits = new();
+        List<BulletItem> bulletHits = new();
         var moveCounter = 0;
         bool movingBulletsLeft;
         do

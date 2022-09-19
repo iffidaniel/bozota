@@ -61,6 +61,15 @@ public class GameMasterService
             return null;
         }
 
+        if (_gameState.Map.Count != 0)
+        {
+            foreach (var row in _gameState.Map)
+            {
+                row.Clear();
+            }
+            _gameState.Map.Clear();
+        }
+
         var tempState = _gameState;
 
         // Add Fixed walls, random Objects, random Items and render empty map
