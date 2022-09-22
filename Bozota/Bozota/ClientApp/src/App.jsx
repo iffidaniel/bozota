@@ -1,35 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Stats } from './components/Stats';
-import { Controls } from './components/Controls';
+import React from 'react';
 import './App.css';
 import Game from './state/game';
-import { GameMap } from './components/GameMap';
+import Controls from './state/controls';
+import { MainView } from './components/MainView';
 
 export const App = () => {
   const game = new Game();
-
-  const [gameState, setGameState] = useState(null);
-
-  const updateGameState = async () => {
-    await game.update();
-    setGameState(game.state);
-  };
-
-  useEffect(() => {
-    const handle = setInterval(() => {
-      updateGameState();
-    }, 400);
-
-    return () => {
-      clearInterval(handle);
-    };
-  }, [gameState]);
+  const controls = new Controls();
 
   return (
     <div className='mainPage'>
-      <Controls />
-      <GameMap gameState={gameState} />
-      <Stats />
+      <MainView controls={controls} game={game} />
     </div>
   );
 };
