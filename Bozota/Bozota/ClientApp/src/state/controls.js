@@ -11,7 +11,6 @@ class Controls {
   }
 
   toggleStopGame() {
-    console.log('stop');
     this.state.stopped = !this.state.stopped;
   }
 }

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react-lite';
+import React from 'react';
 import './GameMap.css';
 
 const renderItem = (id, key) => {
@@ -26,7 +25,7 @@ const renderItem = (id, key) => {
   }
 };
 
-export const GameMap = observer(({ gameState }) => {
+export const GameMap = ({ gameState }) => {
   return (
     <div className='gameMapContainer'>
       {gameState && (
@@ -47,4 +46,4 @@ export const GameMap = observer(({ gameState }) => {
       )}
     </div>
   );
-});
+};
