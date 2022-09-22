@@ -1,0 +1,2974 @@
+{
+  "mapXCellCount": 50,
+  "mapYCellCount": 50,
+  "totalCellCount": 2500,
+  "map": [
+    [
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 3, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,
+      0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+    ],
+    [
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
+    ]
+  ],
+  "players": [
+    {
+      "name": "Riku",
+      "render": 5,
+      "xPos": 36,
+      "yPos": 24,
+      "health": {
+        "points": 100,
+        "maxPoints": 200,
+        "minPoints": 10,
+        "isAlive": true
+      },
+      "speed": 1,
+      "ammo": 7,
+      "materials": 2,
+      "actions": [
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 3, "item2": 3 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 1, "item2": 1 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 0, "item2": 1 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 3, "item2": 0 }
+      ]
+    },
+    {
+      "name": "Ramesh",
+      "render": 5,
+      "xPos": 37,
+      "yPos": 46,
+      "health": {
+        "points": 100,
+        "maxPoints": 200,
+        "minPoints": 10,
+        "isAlive": true
+      },
+      "speed": 1,
+      "ammo": 8,
+      "materials": 0,
+      "actions": [
+        { "item1": 0, "item2": 0 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 3, "item2": 3 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 3, "item2": 4 },
+        { "item1": 2, "item2": 1 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 3, "item2": 1 }
+      ]
+    },
+    {
+      "name": "Krishna",
+      "render": 5,
+      "xPos": 21,
+      "yPos": 47,
+      "health": {
+        "points": 100,
+        "maxPoints": 200,
+        "minPoints": 10,
+        "isAlive": true
+      },
+      "speed": 1,
+      "ammo": 8,
+      "materials": 0,
+      "actions": [
+        { "item1": 0, "item2": 0 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 0, "item2": 1 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 0, "item2": 1 },
+        { "item1": 1, "item2": 1 },
+        { "item1": 0, "item2": 1 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 3, "item2": 3 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 0, "item2": 1 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 2, "item2": 4 },
+        { "item1": 1, "item2": 1 },
+        { "item1": 0, "item2": 2 }
+      ]
+    },
+    {
+      "name": "Raif",
+      "render": 5,
+      "xPos": 45,
+      "yPos": 9,
+      "health": {
+        "points": 100,
+        "maxPoints": 200,
+        "minPoints": 10,
+        "isAlive": true
+      },
+      "speed": 1,
+      "ammo": 12,
+      "materials": 0,
+      "actions": [
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 3, "item2": 4 },
+        { "item1": 3, "item2": 3 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 3, "item2": 4 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 3, "item2": 4 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 0, "item2": 4 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 0, "item2": 2 }
+      ]
+    },
+    {
+      "name": "Daniel",
+      "render": 5,
+      "xPos": 10,
+      "yPos": 16,
+      "health": {
+        "points": 100,
+        "maxPoints": 200,
+        "minPoints": 10,
+        "isAlive": true
+      },
+      "speed": 1,
+      "ammo": 10,
+      "materials": 0,
+      "actions": [
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 3, "item2": 3 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 1, "item2": 0 },
+        { "item1": 0, "item2": 3 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 3, "item2": 1 },
+        { "item1": 1, "item2": 4 },
+        { "item1": 2, "item2": 0 },
+        { "item1": 1, "item2": 2 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 2, "item2": 2 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 3, "item2": 0 },
+        { "item1": 3, "item2": 2 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 0, "item2": 0 },
+        { "item1": 1, "item2": 3 },
+        { "item1": 2, "item2": 3 },
+        { "item1": 0, "item2": 2 },
+        { "item1": 0, "item2": 1 }
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 1,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 2,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 3,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 4,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 5,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 6,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 7,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 8,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 9,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 10,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 11,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 12,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 13,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 14,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 15,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 16,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 17,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 18,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 19,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 20,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 21,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 22,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 23,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 24,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 25,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 26,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 27,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 28,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 29,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 30,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 31,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 32,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 33,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 34,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 35,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 36,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 37,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 38,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 39,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 40,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 41,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 42,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 43,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 44,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 45,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 46,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 47,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 48,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 0,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 1,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 1,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 2,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 2,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 3,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 3,
+      "yPos": 18,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 3,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 4,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 4,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 5,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 5,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 6,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 6,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 7,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 7,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 8,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 8,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 9,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 9,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 10,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 10,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 11,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 11,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 12,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 12,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 13,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 13,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 14,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 14,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 15,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 15,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 16,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 16,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 17,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 17,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 18,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 18,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 19,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 19,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 20,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 20,
+      "yPos": 2,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 20,
+      "yPos": 43,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 20,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 21,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 21,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 22,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 22,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 23,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 23,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 24,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 24,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 25,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 25,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 26,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 26,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 27,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 27,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 28,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 28,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 29,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 29,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 30,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 30,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 31,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 31,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 32,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 32,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 33,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 33,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 34,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 34,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 35,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 35,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 36,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 36,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 37,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 37,
+      "yPos": 45,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 37,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 38,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 38,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 39,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 39,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 40,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 40,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 41,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 41,
+      "yPos": 45,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 41,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 42,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 42,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 43,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 43,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 44,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 44,
+      "yPos": 23,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 44,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 45,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 45,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 46,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 46,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 47,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 47,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 48,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 48,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 0,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 1,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 2,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 3,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 4,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 5,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 6,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 7,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 8,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 9,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 10,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 11,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 12,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 13,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 14,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 15,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 16,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 17,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 18,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 19,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 20,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 21,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 22,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 23,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 24,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 25,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 26,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 27,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 28,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 29,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 30,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 31,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 32,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 33,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 34,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 35,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 36,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 37,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 38,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 39,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 40,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 41,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 42,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 43,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 44,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 45,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 46,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 47,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 48,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 49,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 44,
+      "yPos": 14,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 36,
+      "yPos": 49,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 21,
+      "yPos": 48,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 43,
+      "yPos": 12,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 11,
+      "yPos": 27,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 22,
+      "yPos": 47,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 11,
+      "yPos": 27,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 9,
+      "yPos": 19,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 21,
+      "yPos": 46,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    },
+    {
+      "render": 3,
+      "xPos": 36,
+      "yPos": 46,
+      "health": {
+        "points": 50,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      }
+    }
+  ],
+  "bombs": [
+    {
+      "render": 4,
+      "xPos": 1,
+      "yPos": 8,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 1,
+      "yPos": 16,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 2,
+      "yPos": 41,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 3,
+      "yPos": 8,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 7,
+      "yPos": 42,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 20,
+      "yPos": 32,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 32,
+      "yPos": 10,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 36,
+      "yPos": 12,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    },
+    {
+      "render": 4,
+      "xPos": 47,
+      "yPos": 43,
+      "health": {
+        "points": 20,
+        "maxPoints": 0,
+        "minPoints": 1,
+        "isAlive": true
+      },
+      "explosionDamage": 100,
+      "explosionRadius": 4
+    }
+  ],
+  "fireItems": [],
+  "healthItems": [
+    { "render": 1, "xPos": 8, "yPos": 11, "healAmount": 100 },
+    { "render": 1, "xPos": 16, "yPos": 30, "healAmount": 100 },
+    { "render": 1, "xPos": 17, "yPos": 8, "healAmount": 100 },
+    { "render": 1, "xPos": 19, "yPos": 8, "healAmount": 100 },
+    { "render": 1, "xPos": 19, "yPos": 22, "healAmount": 100 },
+    { "render": 1, "xPos": 21, "yPos": 34, "healAmount": 100 },
+    { "render": 1, "xPos": 31, "yPos": 11, "healAmount": 100 },
+    { "render": 1, "xPos": 35, "yPos": 39, "healAmount": 100 },
+    { "render": 1, "xPos": 39, "yPos": 47, "healAmount": 100 },
+    { "render": 1, "xPos": 41, "yPos": 13, "healAmount": 100 },
+    { "render": 1, "xPos": 44, "yPos": 29, "healAmount": 100 }
+  ],
+  "ammoItems": [
+    { "render": 2, "xPos": 1, "yPos": 17, "amount": 10 },
+    { "render": 2, "xPos": 6, "yPos": 36, "amount": 10 },
+    { "render": 2, "xPos": 7, "yPos": 14, "amount": 10 },
+    { "render": 2, "xPos": 15, "yPos": 38, "amount": 10 },
+    { "render": 2, "xPos": 19, "yPos": 33, "amount": 10 },
+    { "render": 2, "xPos": 25, "yPos": 37, "amount": 10 },
+    { "render": 2, "xPos": 39, "yPos": 15, "amount": 10 },
+    { "render": 2, "xPos": 43, "yPos": 4, "amount": 10 }
+  ],
+  "materialsItems": [
+    { "render": 8, "xPos": 1, "yPos": 28, "amount": 5 },
+    { "render": 8, "xPos": 9, "yPos": 43, "amount": 5 }
+  ],
+  "bullets": [
+    {
+      "render": 6,
+      "xPos": 35,
+      "yPos": 14,
+      "direction": 3,
+      "speed": 3,
+      "damageAmount": 50
+    },
+    {
+      "render": 6,
+      "xPos": 11,
+      "yPos": 47,
+      "direction": 4,
+      "speed": 3,
+      "damageAmount": 50
+    },
+    {
+      "render": 6,
+      "xPos": 14,
+      "yPos": 47,
+      "direction": 4,
+      "speed": 3,
+      "damageAmount": 50
+    },
+    {
+      "render": 6,
+      "xPos": 10,
+      "yPos": 9,
+      "direction": 3,
+      "speed": 3,
+      "damageAmount": 50
+    }
+  ]
+}
