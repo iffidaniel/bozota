@@ -1,5 +1,5 @@
 import React from 'react';
-import { initGame, updateGame, stopGame } from '../api/gameControls';
+import { initGame, updateGame, stopGame } from '../api';
 
 export const Controls = () => {
   return (

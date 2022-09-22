@@ -1,5 +1,5 @@
-import { makeAutoObservable, observable } from 'mobx';
-import { updateGame } from '../api/gameControls';
+import { makeAutoObservable } from 'mobx';
+import { updateGame } from '../api';
 
 class Game {
   state;
