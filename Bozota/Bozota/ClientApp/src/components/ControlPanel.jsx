@@ -1,19 +1,21 @@
 import React from 'react';
 import * as api from '../api';
 import { observer } from 'mobx-react-lite';
+import './ControlPanel.css';
 
 export const ControlPanel = observer(({ controls }) => {
   return (
-    <div>
-      <div>
-        <button onClick={api.initGame}>Init game</button>
-        <button onClick={api.updateGame}>Update game</button>
+    <div className='ControlPanel_outer'>
+      <div className='ControlPanel_inner'>
+        <button className='ControlPanel_button' onClick={() => api.initGame()}>
+          Reset
+        </button>
+        <div className='ControlPanel_buttonSeparator'>|</div>
         <button
-          onClick={() => {
-            controls.toggleStopGame();
-          }}
+          className='ControlPanel_button'
+          onClick={() => controls.toggleStopGame()}
         >
-          Stop game
+          {controls.state.stopped ? <>Start</> : <>Stop</>}
         </button>
       </div>
     </div>

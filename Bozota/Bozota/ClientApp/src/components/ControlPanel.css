@@ -1,0 +1,33 @@
+.ControlPanel_outer {
+    display: flex;
+    justify-content: center;
+}
+
+.ControlPanel_inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ControlPanel_button {
+    background-color: transparent;
+    border: none;
+    color: #c9c5c5;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-right: 0.6rem;
+    padding-left: 0.6rem;
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ControlPanel_button:hover {
+    background-color: #3f3e3e;
+}
+
+.ControlPanel_buttonSeparator {
+    font-size: 1.5em;
+}

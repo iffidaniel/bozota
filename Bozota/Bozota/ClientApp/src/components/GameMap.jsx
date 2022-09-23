@@ -30,7 +30,6 @@ export const GameMap = ({ gameState }) => {
     <div className='gameMapContainer'>
       {gameState && (
         <>
-          <h2>Battle Map</h2>
           <div className='gameMap'>
             {gameState.map.map((row, ri) => {
               return (
