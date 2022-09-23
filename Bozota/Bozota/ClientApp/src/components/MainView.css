@@ -1,0 +1,10 @@
+.MainView_outer {
+    display: flex;
+    flex-direction: column;
+}
+
+.MainView_inner {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+}

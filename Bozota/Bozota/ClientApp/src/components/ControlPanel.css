@@ -1,6 +1,7 @@
 .ControlPanel_outer {
     display: flex;
     justify-content: center;
+    margin: 3rem;
 }
 
 .ControlPanel_inner {
@@ -19,7 +20,7 @@
     padding-right: 0.6rem;
     padding-left: 0.6rem;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 3em;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -29,5 +30,5 @@
 }
 
 .ControlPanel_buttonSeparator {
-    font-size: 1.5em;
+    font-size: 3em;
 }
