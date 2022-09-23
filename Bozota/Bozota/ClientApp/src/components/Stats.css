@@ -1,4 +1,51 @@
 .Stats_playerContainer {
+    display: flex;
+    max-width: 40rem;
+    flex-wrap: wrap;
+    
+}
+
+.Stats_player {
     margin-top: 3rem;
     font-size: 1rem;
+    margin: 1rem;
+}
+
+.Stats_playerName {
+    font-weight: bolder;
+    font-size: 2.3rem;
+}
+
+.Stats_stat {
+    display: flex;
+}
+
+.Stats_counterContainer {
+    display: flex;
+    max-width: 10rem;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+}
+
+.Stats_counter {
+    display: inline-block;
+    margin: 1px;
+    height: 5px;
+    width: 5px;
+}
+
+.Stats_counter-red {
+    background-color: red;
+}
+
+.Stats_counter-yellow {
+    background-color: yellow;
+}
+
+.Stats_counter-blue {
+    background-color: blue;
+}
+
+.Stats_counter-brown {
+    background-color: brown;
 }
