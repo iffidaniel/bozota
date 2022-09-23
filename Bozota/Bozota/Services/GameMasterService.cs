@@ -10,7 +10,7 @@ public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
     private readonly Random _random = new();
-    private readonly GameMapService _gameLogic;
+    private readonly GameMapService _gameMapService;
     private readonly GamePlayerService _gamePlayerService;
     private readonly GameItemService _gameItemService;
     private readonly GameObjectService _gameObjectService;
@@ -28,10 +28,10 @@ public class GameMasterService
     private int updateCounter = 0;
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
-        GameMapService gameLogic, GamePlayerService gamePlayerService, GameObjectService gameObjectService, GameItemService gameItemService)
+        GameMapService gameMapService, GamePlayerService gamePlayerService, GameObjectService gameObjectService, GameItemService gameItemService)
     {
         _logger = logger;
-        _gameLogic = gameLogic;
+        _gameMapService = gameMapService;
         _gamePlayerService = gamePlayerService;
         _gameItemService = gameItemService;
         _gameObjectService = gameObjectService;
@@ -50,59 +50,43 @@ public class GameMasterService
 
     public bool IsGameInitialized() => _isGameInitialized;
 
-    public async Task<GameState?> InitializeGameAsync()
+    public async Task InitializeGameAsync()
     {
         _logger.LogInformation("Initializing game");
 
         if (_isGameInitialized)
         {
-            _logger.LogWarning("Game already initialized");
-
-            return null;
-        }
-
-        if (_gameState.Map.Count != 0)
-        {
-            foreach (var row in _gameState.Map)
-            {
-                row.Clear();
-            }
-            _gameState.Map.Clear();
+            _logger.LogInformation("Game already initialized");
         }
 
         var tempState = _gameState;
 
-        // Add Fixed walls, random Objects, random Items and render empty map
-        for (int x = 0; x < tempState.MapXCellCount; x++)
+        await _gameMapService.ClearAllFromGame(tempState);
+
+        // Add random Objects and random Items and render empty map
+        for (int y = 0; y < tempState.MapYCellCount; y++)
         {
             var row = new List<RenderId>();
-            for (int y = 0; y < tempState.MapXCellCount; y++)
+            for (int x = 0; x < tempState.MapXCellCount; x++)
             {
-                if (x == 0 || x == tempState.MapXCellCount - 1 || y == 0 || y == tempState.MapYCellCount - 1)
+                switch (_gameMapService.GetRandomMapItem(tempState.TotalCellCount / _randomGeneratorFrequency))
                 {
-                    tempState.Walls.Add(new WallObject(x, y, _wallHealth, true));
-                }
-                else
-                {
-                    switch (_gameLogic.GetRandomMapItem(tempState.TotalCellCount / _randomGeneratorFrequency))
-                    {
-                        case RenderId.Health:
-                            tempState.HealthItems.Add(new HealthItem(x, y, _healAmount));
-                            break;
-                        case RenderId.Ammo:
-                            tempState.AmmoItems.Add(new AmmoItem(x, y, _ammoAmount));
-                            break;
-                        case RenderId.Materials:
-                            tempState.MaterialsItems.Add(new MaterialsItem(x, y, _materialsAmount));
-                            break;
-                        case RenderId.Wall:
-                            tempState.Walls.Add(new WallObject(x, y, _wallHealth));
-                            break;
-                        case RenderId.Bomb:
-                            tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombRadius));
-                            break;
-                    };
-                }
+                    case RenderId.Health:
+                        tempState.HealthItems.Add(new HealthItem(x, y, _healAmount));
+                        break;
+                    case RenderId.Ammo:
+                        tempState.AmmoItems.Add(new AmmoItem(x, y, _ammoAmount));
+                        break;
+                    case RenderId.Materials:
+                        tempState.MaterialsItems.Add(new MaterialsItem(x, y, _materialsAmount));
+                        break;
+                    case RenderId.Wall:
+                        tempState.Walls.Add(new WallObject(x, y, _wallHealth));
+                        break;
+                    case RenderId.Bomb:
+                        tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombRadius));
+                        break;
+                };
 
                 row.Add(RenderId.Empty);
             }
@@ -120,7 +104,7 @@ public class GameMasterService
         }
 
         // Render Players, Object and Items on map
-        await _gameLogic.RenderAllOnMap(tempState);
+        await _gameMapService.RenderAllOnMap(tempState);
 
         lock (_gameState)
         {
@@ -132,8 +116,6 @@ public class GameMasterService
         }
 
         _logger.LogInformation("Game initialized");
-
-        return _gameState;
     }
 
     public async Task<GameState?> UpdateGameAsync()
@@ -167,8 +149,8 @@ public class GameMasterService
 
         await _gamePlayerService.ProcessPlayers(tempState);
 
-        await _gameLogic.RenderEmptyMap(tempState);
-        await _gameLogic.RenderAllOnMap(tempState);
+        await _gameMapService.RenderEmptyMap(tempState);
+        await _gameMapService.RenderAllOnMap(tempState);
 
         lock (_gameState)
         {
@@ -183,21 +165,18 @@ public class GameMasterService
         return _gameState;
     }
 
-    public async Task<GameState?> StopGameAsync()
+    public async Task StopGameAsync()
     {
         _logger.LogInformation("Stopping game");
 
         if (!_isGameInitialized)
         {
-            _logger.LogWarning("Game is not yet initialized");
-
-            return null;
+            _logger.LogInformation("Game is not yet initialized");
         }
 
         var tempState = _gameState;
 
-        await _gameLogic.RemoveAllFromGame(tempState);
-        await _gameLogic.RenderEmptyMap(tempState);
+        await _gameMapService.ClearAllFromGame(tempState);
 
         lock (_gameState)
         {
@@ -209,7 +188,5 @@ public class GameMasterService
         }
 
         _logger.LogTrace("Game stopped");
-
-        return _gameState;
     }
 }

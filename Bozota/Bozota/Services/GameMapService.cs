@@ -29,11 +29,11 @@ public class GameMapService
 
     public Task RenderEmptyMap(GameState gameState)
     {
-        for (int x = 0; x < gameState.MapXCellCount; x++)
+        for (int y = 0; y < gameState.MapYCellCount; y++)
         {
-            for (int y = 0; y < gameState.MapXCellCount; y++)
+            for (int x = 0; x < gameState.MapXCellCount; x++)
             {
-                gameState.Map[x][y] = RenderId.Empty;
+                gameState.Map[y][x] = RenderId.Empty;
             }
         }
 
@@ -58,11 +58,11 @@ public class GameMapService
     {
         foreach (var item in items)
         {
-            map[item.XPos][item.YPos] = item.Render;
+            map[item.YPos][item.XPos] = item.Render;
         }
     }
 
-    public Task RemoveAllFromGame(GameState gameState)
+    public Task ClearAllFromGame(GameState gameState)
     {
         _logger.LogInformation("Clearing all Players, Objects and Items from game");
 
@@ -74,7 +74,17 @@ public class GameMapService
         gameState.Bombs.Clear();
         gameState.Walls.Clear();
         gameState.Players.Clear();
+        ClearMap(gameState);
 
         return Task.CompletedTask;
+    }
+
+    public void ClearMap(GameState gameState)
+    {
+        foreach (var row in gameState.Map)
+        {
+            row.Clear();
+        }
+        gameState.Map.Clear();
     }
 }

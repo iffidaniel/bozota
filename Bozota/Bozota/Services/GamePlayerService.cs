@@ -69,9 +69,9 @@ public class GamePlayerService
     {
         // Check if position is already occupied by other item or object on map
         var isPositionOccupiedByBombOrBombRadius = false;
-        for (var bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
+        for (var bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
         {
-            for (var bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
+            for (var bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
             {
                 if (!(bombX == _bombRadius && bombY == _bombRadius) &&
                     !(bombX == _bombRadius && bombY == 0 - _bombRadius) &&
@@ -94,7 +94,11 @@ public class GamePlayerService
             IsPositionOccupied(x, y, gameState.FireItems) ||
             IsPositionOccupied(x, y, gameState.HealthItems) ||
             IsPositionOccupied(x, y, gameState.MaterialsItems) ||
-            IsPositionOccupied(x, y, gameState.Players))
+            IsPositionOccupied(x, y, gameState.Players) ||
+            IsPositionOccupied(x + 1, y, gameState.Players) ||
+            IsPositionOccupied(x - 1, y, gameState.Players) ||
+            IsPositionOccupied(x, y + 1, gameState.Players) ||
+            IsPositionOccupied(x, y - 1, gameState.Players))
         {
             return Task.FromResult<Player?>(null);
         }
@@ -299,7 +303,7 @@ public class GamePlayerService
 
     public bool PositionIsNotOccupiedByObject(int x, int y, GameState gameState)
     {
-        if (gameState.Map[x][y] is RenderId.Bomb or RenderId.Wall or RenderId.Player)
+        if (gameState.Map[y][x] is RenderId.Bomb or RenderId.Wall or RenderId.Player)
         {
             return false;
         }

@@ -11,9 +11,8 @@ namespace Bozota.Controllers
         private readonly ILogger<GameMasterController> _logger;
         private readonly GameMasterService _gameMaster;
 
-        private bool _isGameInitializing = false;
+        private bool _isGameResetting = false;
         private bool _isGameUpdating = false;
-        private bool _isGameStopping = false;
 
         public GameMasterController(ILogger<GameMasterController> logger,
             GameMasterService gameMaster)
@@ -23,31 +22,31 @@ namespace Bozota.Controllers
         }
 
         [HttpGet]
-        [Route("init")]
-        public async Task<ActionResult<GameState?>> InitializeGame()
+        [Route("reset")]
+        public async Task ResetGame()
         {
-            _logger.LogTrace("{request} requested", nameof(InitializeGame));
+            _logger.LogTrace("{request} requested", nameof(ResetGame));
 
-            GameState? gameMap = null;
-
+            if (_isGameResetting)
+            {
+                _logger.LogInformation("Game already resetting");
+                return;
+            }
+            
             try
             {
-                if (!_isGameInitializing)
-                {
-                    _isGameInitializing = true;
-                    gameMap = await _gameMaster.InitializeGameAsync();
-                }
+                _isGameResetting = true;
+                await _gameMaster.StopGameAsync();
+                await _gameMaster.InitializeGameAsync();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Failed to update game {exception}", ex);
+                _logger.LogError("Failed to reset game {exception}", ex);
             }
             finally
             {
-                _isGameInitializing = false;
+                _isGameResetting = false;
             }
-
-            return gameMap;
         }
 
         [HttpGet]
@@ -58,13 +57,16 @@ namespace Bozota.Controllers
 
             GameState? gameMap = null;
 
+            if (_isGameUpdating)
+            {
+                _logger.LogInformation("Game already updating");
+                return gameMap;
+            }
+
             try
             {
-                if (!_isGameUpdating)
-                {
-                    _isGameUpdating = true;
-                    gameMap = await _gameMaster.UpdateGameAsync();
-                }
+                _isGameUpdating = true;
+                gameMap = await _gameMaster.UpdateGameAsync();
             }
             catch (Exception ex)
             {
@@ -73,34 +75,6 @@ namespace Bozota.Controllers
             finally
             {
                 _isGameUpdating = false;
-            }
-
-            return gameMap;
-        }
-
-        [HttpGet]
-        [Route("stop")]
-        public async Task<ActionResult<GameState?>> StopGame()
-        {
-            _logger.LogTrace("{request} requested", nameof(StopGame));
-
-            GameState? gameMap = null;
-
-            try
-            {
-                if (!_isGameStopping)
-                {
-                    _isGameStopping = true;
-                    gameMap = await _gameMaster.StopGameAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Failed to stop game {exception}", ex);
-            }
-            finally
-            {
-                _isGameStopping = false;
             }
 
             return gameMap;

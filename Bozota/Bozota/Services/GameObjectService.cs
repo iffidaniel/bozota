@@ -45,12 +45,12 @@ public class GameObjectService
         // Create explosions and remove exploded bombs
         foreach (var bomb in explodedBombs)
         {
-            for (var x = 0 - bomb.ExplosionRadius; x <= bomb.ExplosionRadius; x++)
+            for (var y = 0 - bomb.ExplosionRadius; y <= bomb.ExplosionRadius; y++)
             {
-                for (var y = 0 - bomb.ExplosionRadius; y <= bomb.ExplosionRadius; y++)
+                for (var x = 0 - bomb.ExplosionRadius; x <= bomb.ExplosionRadius; x++)
                 {
-                    if (bomb.XPos + x > 0 && bomb.XPos + x < gameState.MapXCellCount - 1 &&
-                        bomb.YPos + y > 0 && bomb.YPos + y < gameState.MapYCellCount - 1 &&
+                    if (bomb.XPos + x >= 0 && bomb.XPos + x < gameState.MapXCellCount &&
+                        bomb.YPos + y >= 0 && bomb.YPos + y < gameState.MapYCellCount &&
                         !(x == bomb.ExplosionRadius && y == bomb.ExplosionRadius) &&
                         !(x == bomb.ExplosionRadius && y == 0 - bomb.ExplosionRadius) &&
                         !(x == 0 - bomb.ExplosionRadius && y == bomb.ExplosionRadius) &&

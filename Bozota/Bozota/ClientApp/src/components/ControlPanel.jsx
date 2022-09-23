@@ -7,7 +7,7 @@ export const ControlPanel = observer(({ controls }) => {
   return (
     <div className='ControlPanel_outer'>
       <div className='ControlPanel_inner'>
-        <button className='ControlPanel_button' onClick={() => api.initGame()}>
+        <button className='ControlPanel_button' onClick={() => api.resetGame()}>
           Reset
         </button>
         <div className='ControlPanel_buttonSeparator'>|</div>

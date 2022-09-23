@@ -1,5 +1,5 @@
-export const initGame = async () => {
-  const res = await fetch('game/init');
+export const resetGame = async () => {
+  const res = await fetch('game/reset');
   const data = await res.json();
 
   return data;
