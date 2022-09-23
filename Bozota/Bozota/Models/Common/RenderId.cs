@@ -1,4 +1,4 @@
-﻿namespace Bozota.Models.Map;
+﻿namespace Bozota.Models.Common;
 
 public enum RenderId
 {

@@ -1,7 +1,7 @@
 ﻿using Bozota.Models.Abstractions;
-using Bozota.Models.Map;
+using Bozota.Models.Common;
 
-namespace Bozota.Models;
+namespace Bozota.Models.Map.Players;
 
 public class Player : IPlayer
 {
@@ -21,7 +21,7 @@ public class Player : IPlayer
 
     public int Materials { get; set; }
 
-    public List<Tuple<PlayerAction, Direction>> Actions { get; set; }
+    public List<PlayerAction> Actions { get; set; }
 
     public Player(string name, int xpos, int ypos, int healthAmount, int minHealthAmount, int maxHealthAmount, int speed, int startingAmmo, int startingMaterials)
     {
@@ -32,7 +32,10 @@ public class Player : IPlayer
         Speed = speed;
         Ammo = startingAmmo;
         Materials = startingMaterials;
-        Actions = new List<Tuple<PlayerAction, Direction>> { new Tuple<PlayerAction, Direction>(PlayerAction.None, Direction.None) };
+        Actions = new List<PlayerAction>
+        {
+            new PlayerAction()
+        };
     }
 
     public bool HasEnoughAmmo(int amount)

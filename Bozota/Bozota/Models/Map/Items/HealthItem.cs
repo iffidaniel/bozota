@@ -1,4 +1,5 @@
-﻿using Bozota.Models.Map.Items.Abstractions;
+﻿using Bozota.Models.Common;
+using Bozota.Models.Map.Items.Abstractions;
 
 namespace Bozota.Models.Map.Items
 {

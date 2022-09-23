@@ -1,4 +1,6 @@
-﻿namespace Bozota.Models.Map.Items.Abstractions
+﻿using Bozota.Models.Common;
+
+namespace Bozota.Models.Map.Items.Abstractions
 {
     public interface IBulletItem : IDamageItem, IMapItem
     {

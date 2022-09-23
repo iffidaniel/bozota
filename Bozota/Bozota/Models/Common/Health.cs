@@ -1,4 +1,4 @@
-﻿namespace Bozota.Models
+﻿namespace Bozota.Models.Common
 {
     public class Health
     {

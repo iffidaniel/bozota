@@ -1,9 +1,9 @@
-﻿using Bozota.Models;
-using Bozota.Models.Abstractions;
-using Bozota.Models.Map;
+﻿using Bozota.Models.Abstractions;
+using Bozota.Models.Common;
 using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Items.Abstractions;
 using Bozota.Models.Map.Objects;
+using Bozota.Models.Map.Players;
 
 namespace Bozota.Services;
 
@@ -148,35 +148,35 @@ public class GamePlayerService
                 {
                     switch (player.Actions.Last())
                     {
-                        case { Item1: PlayerAction.Move, Item2: Direction.Up }:
+                        case { Action: GameAction.Move, Direction: Direction.Up }:
                             if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos + 1, gameState))
                             {
                                 player.YPos += 1;
                             }
                             break;
-                        case { Item1: PlayerAction.Move, Item2: Direction.Right }:
+                        case { Action: GameAction.Move, Direction: Direction.Right }:
                             if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
                                 PositionIsNotOccupiedByObject(player.XPos + 1, player.YPos, gameState))
                             {
                                 player.XPos += 1;
                             }
                             break;
-                        case { Item1: PlayerAction.Move, Item2: Direction.Down }:
+                        case { Action: GameAction.Move, Direction: Direction.Down }:
                             if (PlayerPositionIsNotAtLowerBorder(player) &&
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos - 1, gameState))
                             {
                                 player.YPos -= 1;
                             }
                             break;
-                        case { Item1: PlayerAction.Move, Item2: Direction.Left }:
+                        case { Action: GameAction.Move, Direction: Direction.Left }:
                             if (PlayerPositionIsNotAtLeftBorder(player) &&
                                 PositionIsNotOccupiedByObject(player.XPos - 1, player.YPos, gameState))
                             {
                                 player.XPos -= 1;
                             }
                             break;
-                        case { Item1: PlayerAction.Shoot, Item2: Direction.Up }:
+                        case { Action: GameAction.Shoot, Direction: Direction.Up }:
                             if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
                                 player.HasEnoughAmmo(1))
                             {
@@ -185,7 +185,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Shoot, Item2: Direction.Right }:
+                        case { Action: GameAction.Shoot, Direction: Direction.Right }:
                             if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
                                 player.HasEnoughAmmo(1))
                             {
@@ -194,7 +194,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Shoot, Item2: Direction.Down }:
+                        case { Action: GameAction.Shoot, Direction: Direction.Down }:
                             if (PlayerPositionIsNotAtLowerBorder(player) &&
                                 player.HasEnoughAmmo(1))
                             {
@@ -203,7 +203,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Shoot, Item2: Direction.Left }:
+                        case { Action: GameAction.Shoot, Direction: Direction.Left }:
                             if (PlayerPositionIsNotAtLeftBorder(player) && 
                                 player.HasEnoughAmmo(1))
                             {
@@ -211,7 +211,7 @@ public class GamePlayerService
                                 player.ReduceAmmo(1);
                             }
                             break;
-                        case { Item1: PlayerAction.Build, Item2: Direction.Up }:
+                        case { Action: GameAction.Build, Direction: Direction.Up }:
                             if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
                                 player.HasEnoughMaterials(1))
                             {
@@ -220,7 +220,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Build, Item2: Direction.Right }:
+                        case { Action: GameAction.Build, Direction: Direction.Right }:
                             if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
                                 player.HasEnoughMaterials(1))
                             {
@@ -229,7 +229,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Build, Item2: Direction.Down }:
+                        case { Action: GameAction.Build, Direction: Direction.Down }:
                             if (PlayerPositionIsNotAtLowerBorder(player) &&
                                 player.HasEnoughMaterials(1))
                             {
@@ -238,7 +238,7 @@ public class GamePlayerService
 
                             }
                             break;
-                        case { Item1: PlayerAction.Build, Item2: Direction.Left }:
+                        case { Action: GameAction.Build, Direction: Direction.Left }:
                             if (PlayerPositionIsNotAtLeftBorder(player) &&
                                 player.HasEnoughMaterials(1))
                             {

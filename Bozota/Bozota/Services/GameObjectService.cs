@@ -1,4 +1,4 @@
-﻿using Bozota.Models;
+﻿using Bozota.Models.Common;
 using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Objects;
 

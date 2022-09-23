@@ -1,9 +1,8 @@
-﻿using Bozota.Models.Abstractions;
-using Bozota.Models.Map;
-using Bozota.Models.Map.Items;
+﻿using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Objects;
+using Bozota.Models.Map.Players;
 
-namespace Bozota.Models
+namespace Bozota.Models.Common
 {
     public class GameState
     {

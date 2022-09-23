@@ -1,4 +1,4 @@
-﻿using Bozota.Models;
+﻿using Bozota.Models.Common;
 using Bozota.Services;
 using Microsoft.AspNetCore.Mvc;
 

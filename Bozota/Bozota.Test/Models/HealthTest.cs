@@ -1,4 +1,4 @@
-﻿using Bozota.Models;
+﻿using Bozota.Models.Common;
 
 namespace Bozota.Test.Models
 {

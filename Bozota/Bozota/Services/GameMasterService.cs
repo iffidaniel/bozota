@@ -1,8 +1,7 @@
-﻿using Bozota.Models;
-using Bozota.Models.Map;
+﻿using Bozota.Models.Common;
 using Bozota.Models.Map.Items;
 using Bozota.Models.Map.Objects;
-using System;
+using Bozota.Models.Map.Players;
 
 namespace Bozota.Services;
 
@@ -135,7 +134,7 @@ public class GameMasterService
         // Add player actions
         foreach (var player in tempState.Players)
         {
-            player.Actions.Add(new Tuple<PlayerAction, Direction>((PlayerAction)_random.Next(4), (Direction)_random.Next(5)));
+            player.Actions.Add(new PlayerAction((GameAction)_random.Next(4), (Direction)_random.Next(5)));
         }
 
         // Process 

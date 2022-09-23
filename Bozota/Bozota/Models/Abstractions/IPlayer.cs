@@ -1,4 +1,5 @@
 ﻿using Bozota.Models.Map.Objects.Abstractions;
+using Bozota.Models.Map.Players;
 
 namespace Bozota.Models.Abstractions
 {
@@ -12,7 +13,7 @@ namespace Bozota.Models.Abstractions
 
         public int Materials { get; set; }
 
-        public List<Tuple<PlayerAction, Direction>> Actions { get; }
+        public List<PlayerAction> Actions { get; }
 
         public bool HasEnoughAmmo(int amount);
 
