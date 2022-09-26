@@ -1,0 +1,13 @@
+.Legend_outer {
+    display: flex;
+    flex-direction: column;
+}
+
+.Legend_inner {
+    display: flex;
+    align-items: baseline;
+}
+
+.Legend_title {
+    margin-left: 1rem;
+}

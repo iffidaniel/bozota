@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { ControlPanel } from './ControlPanel';
 import { GameMap } from './GameMap';
 import { Stats } from './Stats';
+import { Legend } from './Legend';
 import './MainView.css';
 
 export const MainView = observer(({ game, controls }) => {
@@ -39,6 +40,7 @@ export const MainView = observer(({ game, controls }) => {
       <ControlPanel controls={controls} />
       {controls.state.started && (
         <div className='MainView_inner'>
+          <Legend />
           <GameMap gameState={gameState} />
           <Stats gameState={gameState} />
         </div>
