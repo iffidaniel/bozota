@@ -36,10 +36,12 @@ export const MainView = observer(({ game, controls }) => {
   return (
     <div className='MainView_outer'>
       <ControlPanel controls={controls} />
-      <div className='MainView_inner'>
-        <GameMap gameState={gameState} />
-        <Stats gameState={gameState} />
-      </div>
+      {controls.state.started && (
+        <div className='MainView_inner'>
+          <GameMap gameState={gameState} />
+          <Stats gameState={gameState} />
+        </div>
+      )}
     </div>
   );
 });

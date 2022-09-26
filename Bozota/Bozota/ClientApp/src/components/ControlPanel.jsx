@@ -7,16 +7,33 @@ export const ControlPanel = observer(({ controls }) => {
   return (
     <div className='ControlPanel_outer'>
       <div className='ControlPanel_inner'>
-        <button className='ControlPanel_button' onClick={() => api.resetGame()}>
-          Reset
-        </button>
-        <div className='ControlPanel_buttonSeparator'>|</div>
         <button
           className='ControlPanel_button'
-          onClick={() => controls.toggleStopGame()}
+          onClick={() => {
+            if (controls.state.stopped) {
+              controls.toggleStopGame();
+            }
+
+            controls.toggleStartGame();
+
+            if (!controls.state.started) {
+              api.resetGame();
+            }
+          }}
         >
-          {controls.state.stopped ? <>Start</> : <>Stop</>}
+          {controls.state.started ? <>Reset</> : <>Start</>}
         </button>
+        {controls.state.started && (
+          <>
+            <div className='ControlPanel_buttonSeparator'>|</div>
+            <button
+              className='ControlPanel_button'
+              onClick={() => controls.toggleStopGame()}
+            >
+              {controls.state.stopped ? <>Continue</> : <>Stop</>}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

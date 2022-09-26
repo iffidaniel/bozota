@@ -1,4 +1,5 @@
 import React from 'react';
+import Controls from '../state/controls';
 import './GameMap.css';
 
 const renderItem = (id, key) => {
