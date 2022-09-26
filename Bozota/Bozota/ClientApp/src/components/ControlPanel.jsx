@@ -55,11 +55,11 @@ export const ControlPanel = observer(({ controls }) => {
               controls.toggleStopGame();
             }
 
-            controls.toggleStartGame();
-
             if (!controls.state.started) {
               api.resetGame();
             }
+
+            controls.toggleStartGame();
           }}
         >
           {controls.state.started ? <>Reset</> : <>Start</>}
