@@ -9,7 +9,8 @@ export const MainView = observer(({ game, controls }) => {
   const [gameState, setGameState] = useState(null);
   const [controlsState, setControlsState] = useState({
     stopped: false,
-    speed: 400,
+    started: false,
+    interval: 400,
   });
 
   const updateGameState = async () => {
@@ -22,7 +23,7 @@ export const MainView = observer(({ game, controls }) => {
       if (!controlsState.stopped) {
         updateGameState().then(() => {});
       }
-    }, controlsState.speed);
+    }, controlsState.interval);
 
     return () => {
       clearInterval(handle);

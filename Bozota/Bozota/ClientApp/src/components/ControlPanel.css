@@ -1,7 +1,7 @@
 .ControlPanel_outer {
     display: flex;
-    justify-content: center;
-    margin: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .ControlPanel_inner {
@@ -9,6 +9,11 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    border:#c9c5c5 1px solid;
+    border-radius: 3%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 5rem;
 }
 
 .ControlPanel_button {
@@ -31,4 +36,47 @@
 
 .ControlPanel_buttonSeparator {
     font-size: 3em;
+}
+
+.ControlPanel_speed_outer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border:#c9c5c5 1px solid;
+    border-radius: 5%;
+    padding-top: 0.5rem;
+    min-width: 12rem;
+}
+
+.ControlPanel_speed_inner {
+    display: flex;
+    align-items: center;
+}
+
+.ControlPanel_speedTitle {
+    font-size: 1.3rem;
+}
+
+.ControlPanel_speedButton {
+    background-color: transparent;
+    border: none;
+    color: #c9c5c5;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding:0;
+}
+
+.ControlPanel_speedCounter{
+    margin-right: -2rem;
+    font-size: 3rem;
+}
+
+.ControlPanel_speedGauge {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: -2rem;
+    margin-bottom: -2rem;
 }

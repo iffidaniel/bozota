@@ -4,7 +4,9 @@ class Controls {
   state = {
     started: false,
     stopped: false,
-    speed: 400,
+    interval: 400,
+    maxInterval: 1000,
+    minInterval: 100,
   };
 
   constructor() {
@@ -17,6 +19,18 @@ class Controls {
 
   toggleStartGame() {
     this.state.started = !this.state.started;
+  }
+
+  increaseSpeed() {
+    if (this.state.interval > this.state.minInterval) {
+      this.state.interval -= 100;
+    }
+  }
+
+  decreaseSpeed() {
+    if (this.state.interval < this.state.maxInterval) {
+      this.state.interval += 100;
+    }
   }
 }
 
