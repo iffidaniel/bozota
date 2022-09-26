@@ -1,37 +1,36 @@
 import React from 'react';
-import Controls from '../state/controls';
 import './GameMap.css';
 
 const renderItem = (id, key) => {
   if (id === 0) {
-    return <span className='empty cell' key={key} />;
+    return <span className='GameMap_cell_empty GameMap_cell' key={key} />;
   } else if (id === 1) {
-    return <span className='health cell' key={key} />;
+    return <span className='GameMap_cell_health GameMap_cell' key={key} />;
   } else if (id === 2) {
-    return <span className='ammo cell' key={key} />;
+    return <span className='GameMap_cell_ammo GameMap_cell' key={key} />;
   } else if (id === 3) {
-    return <span className='wall cell' key={key} />;
+    return <span className='GameMap_cell_wall GameMap_cell' key={key} />;
   } else if (id === 4) {
-    return <span className='bomb cell' key={key} />;
+    return <span className='GameMap_cell_bomb GameMap_cell' key={key} />;
   } else if (id === 5) {
-    return <span className='player cell' key={key} />;
+    return <span className='GameMap_cell_player GameMap_cell' key={key} />;
   } else if (id === 6) {
-    return <span className='bullet cell' key={key} />;
+    return <span className='GameMap_cell_bullet GameMap_cell' key={key} />;
   } else if (id === 7) {
-    return <span className='fire cell' key={key} />;
+    return <span className='GameMap_cell_fire GameMap_cell' key={key} />;
   } else if (id === 8) {
-    return <span className='materials cell' key={key} />;
+    return <span className='GameMap_cell_materials GameMap_cell' key={key} />;
   } else {
-    return <span className='errorCell cell' key={key} />;
+    return <span className='GameMap_cell_error GameMap_cell' key={key} />;
   }
 };
 
 export const GameMap = ({ gameState }) => {
   return (
-    <div className='gameMapContainer'>
+    <div className='GameMap_outer'>
       {gameState && (
         <>
-          <div className='gameMap'>
+          <div className='GameMap_inner'>
             {gameState.map.map((row, ri) => {
               return (
                 <div className='row' key={ri}>

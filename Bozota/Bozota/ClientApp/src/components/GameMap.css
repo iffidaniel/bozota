@@ -1,60 +1,59 @@
-.cell {
-    margin: 0px;
-    padding: 0px;
-    width: 18px;
-    height: 18px;
-}
-
-.empty {
-    background-color: floralwhite;
-}
-
-.health {
-    background-color: forestgreen;
-}
-
-.ammo {
-    background-color: yellowgreen;
-}
-
-.wall {
-    background-color: saddlebrown;
-}
-
-.bomb {
-    background-color: black;
-}
-
-.player {
-    background-color: blue;
-}
-
-.bullet {
-    background-color: dimgrey;
-}
-
-.fire {
-    background-color: orange;
-}
-
-.materials {
-    background-color: aquamarine;
-}
-
-.errorCell {
-    background-color: deeppink;
-}
-
-
-.gameMapContainer {
+.GameMap_outer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.gameMap {
+.GameMap_inner {
     width:fit-content;
     padding-right: 12px;
     padding-left: 12px;
+}
+
+.GameMap_cell {
+    margin: 0px;
+    padding: 0px;
+    width: 18px;
+    height: 18px;
+}
+
+.GameMap_cell_empty {
+    background-color: floralwhite;
+}
+
+.GameMap_cell_health {
+    background-color: forestgreen;
+}
+
+.GameMap_cell_ammo {
+    background-color: yellowgreen;
+}
+
+.GameMap_cell_wall {
+    background-color: saddlebrown;
+}
+
+.GameMap_cell_bomb {
+    background-color: black;
+}
+
+.GameMap_cell_player {
+    background-color: blue;
+}
+
+.GameMap_cell_bullet {
+    background-color: dimgrey;
+}
+
+.GameMap_cell_fire {
+    background-color: orange;
+}
+
+.GameMap_cell_materials {
+    background-color: aquamarine;
+}
+
+.GameMap_cell_error {
+    background-color: deeppink;
 }
