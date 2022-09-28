@@ -213,6 +213,7 @@ public class GamePlayerService
                             break;
                         case { Action: GameAction.Build, Direction: Direction.Up }:
                             if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
+                                PositionIsNotOccupiedByObject(player.XPos, player.YPos + 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
                                 gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth));
@@ -222,6 +223,7 @@ public class GamePlayerService
                             break;
                         case { Action: GameAction.Build, Direction: Direction.Right }:
                             if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
+                                PositionIsNotOccupiedByObject(player.XPos + 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
                                 gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth));
@@ -231,6 +233,7 @@ public class GamePlayerService
                             break;
                         case { Action: GameAction.Build, Direction: Direction.Down }:
                             if (PlayerPositionIsNotAtLowerBorder(player) &&
+                                PositionIsNotOccupiedByObject(player.XPos, player.YPos - 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
                                 gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth));
@@ -240,6 +243,7 @@ public class GamePlayerService
                             break;
                         case { Action: GameAction.Build, Direction: Direction.Left }:
                             if (PlayerPositionIsNotAtLeftBorder(player) &&
+                                PositionIsNotOccupiedByObject(player.XPos - 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
                                 gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth));
