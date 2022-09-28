@@ -1,83 +1,82 @@
-﻿using Bozota.Models.Common;
+﻿using Bozota.Common.Models;
 using Bozota.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bozota.Controllers
+namespace Bozota.Controllers;
+
+[ApiController]
+[Route("game")]
+public class GameMasterController : ControllerBase
 {
-    [ApiController]
-    [Route("game")]
-    public class GameMasterController : ControllerBase
+    private readonly ILogger<GameMasterController> _logger;
+    private readonly GameMasterService _gameMaster;
+
+    private bool _isGameResetting = false;
+    private bool _isGameUpdating = false;
+
+    public GameMasterController(ILogger<GameMasterController> logger,
+        GameMasterService gameMaster)
     {
-        private readonly ILogger<GameMasterController> _logger;
-        private readonly GameMasterService _gameMaster;
+        _logger = logger;
+        _gameMaster = gameMaster;
+    }
 
-        private bool _isGameResetting = false;
-        private bool _isGameUpdating = false;
+    [HttpGet]
+    [Route("reset")]
+    public async Task ResetGame()
+    {
+        _logger.LogTrace("{request} requested", nameof(ResetGame));
 
-        public GameMasterController(ILogger<GameMasterController> logger,
-            GameMasterService gameMaster)
+        if (_isGameResetting)
         {
-            _logger = logger;
-            _gameMaster = gameMaster;
+            _logger.LogInformation("Game already resetting");
+            return;
         }
 
-        [HttpGet]
-        [Route("reset")]
-        public async Task ResetGame()
+        try
         {
-            _logger.LogTrace("{request} requested", nameof(ResetGame));
-
-            if (_isGameResetting)
-            {
-                _logger.LogInformation("Game already resetting");
-                return;
-            }
-            
-            try
-            {
-                _isGameResetting = true;
-                await _gameMaster.StopGameAsync();
-                await _gameMaster.InitializeGameAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Failed to reset game {exception}", ex);
-            }
-            finally
-            {
-                _isGameResetting = false;
-            }
+            _isGameResetting = true;
+            await _gameMaster.StopGameAsync();
+            await _gameMaster.InitializeGameAsync();
         }
-
-        [HttpGet]
-        [Route("update")]
-        public async Task<ActionResult<GameState?>> UpdateGame()
+        catch (Exception ex)
         {
-            _logger.LogTrace("{request} requested", nameof(UpdateGame));
+            _logger.LogError("Failed to reset game {exception}", ex);
+        }
+        finally
+        {
+            _isGameResetting = false;
+        }
+    }
 
-            GameState? gameMap = null;
+    [HttpGet]
+    [Route("update")]
+    public async Task<ActionResult<GameState?>> UpdateGame()
+    {
+        _logger.LogTrace("{request} requested", nameof(UpdateGame));
 
-            if (_isGameUpdating)
-            {
-                _logger.LogInformation("Game already updating");
-                return gameMap;
-            }
+        GameState? gameMap = null;
 
-            try
-            {
-                _isGameUpdating = true;
-                gameMap = await _gameMaster.UpdateGameAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Failed to update game {exception}", ex);
-            }
-            finally
-            {
-                _isGameUpdating = false;
-            }
-
+        if (_isGameUpdating)
+        {
+            _logger.LogInformation("Game already updating");
             return gameMap;
         }
+
+        try
+        {
+            _isGameUpdating = true;
+            gameMap = await _gameMaster.UpdateGameAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Failed to update game {exception}", ex);
+        }
+        finally
+        {
+            _isGameUpdating = false;
+        }
+
+        return gameMap;
     }
 }

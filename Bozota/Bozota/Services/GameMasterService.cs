@@ -1,7 +1,6 @@
-﻿using Bozota.Models.Common;
-using Bozota.Models.Map.Items;
-using Bozota.Models.Map.Objects;
-using Bozota.Models.Map.Players;
+﻿using Bozota.Common.Models;
+using Bozota.Common.Models.Items;
+using Bozota.Common.Models.Objects;
 
 namespace Bozota.Services;
 
@@ -47,7 +46,10 @@ public class GameMasterService
         _bombRadius = config.GetValue("Game:BombRadius", 3);
     }
 
-    public bool IsGameInitialized() => _isGameInitialized;
+    public bool IsGameInitialized()
+    {
+        return _isGameInitialized;
+    }
 
     public async Task InitializeGameAsync()
     {
@@ -58,14 +60,14 @@ public class GameMasterService
             _logger.LogInformation("Game already initialized");
         }
 
-        var tempState = _gameState;
+        GameState tempState = _gameState;
 
         await _gameMapService.ClearAllFromGame(tempState);
 
         // Add random Objects and random Items and render empty map
         for (int y = 0; y < tempState.MapYCellCount; y++)
         {
-            var row = new List<RenderId>();
+            List<RenderId> row = new();
             for (int x = 0; x < tempState.MapXCellCount; x++)
             {
                 switch (_gameMapService.GetRandomMapItem(tempState.TotalCellCount / _randomGeneratorFrequency))
@@ -85,7 +87,7 @@ public class GameMasterService
                     case RenderId.Bomb:
                         tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombRadius));
                         break;
-                };
+                }
 
                 row.Add(RenderId.Empty);
             }
@@ -93,9 +95,9 @@ public class GameMasterService
         }
 
         // Add Players
-        foreach (var name in _playerNames)
+        foreach (string name in _playerNames)
         {
-            var newPlayer = await _gamePlayerService.AddNewPlayerWithRandomPosition(name, tempState);
+            Common.Models.Players.Player? newPlayer = await _gamePlayerService.AddNewPlayerWithRandomPosition(name, tempState);
             if (newPlayer != null)
             {
                 tempState.Players.Add(newPlayer);
@@ -129,10 +131,10 @@ public class GameMasterService
             return null;
         }
 
-        var tempState = _gameState;
+        GameState tempState = _gameState;
 
         // Add player actions
-        foreach (var player in tempState.Players)
+        foreach (Common.Models.Players.Player player in tempState.Players)
         {
             player.Actions.Add(new PlayerAction((GameAction)_random.Next(4), (Direction)_random.Next(5)));
         }
@@ -173,7 +175,7 @@ public class GameMasterService
             _logger.LogInformation("Game is not yet initialized");
         }
 
-        var tempState = _gameState;
+        GameState tempState = _gameState;
 
         await _gameMapService.ClearAllFromGame(tempState);
 

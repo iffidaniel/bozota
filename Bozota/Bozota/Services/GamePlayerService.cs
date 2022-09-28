@@ -1,9 +1,9 @@
-﻿using Bozota.Models.Abstractions;
-using Bozota.Models.Common;
-using Bozota.Models.Map.Items;
-using Bozota.Models.Map.Items.Abstractions;
-using Bozota.Models.Map.Objects;
-using Bozota.Models.Map.Players;
+﻿using Bozota.Common.Models;
+using Bozota.Common.Models.Items;
+using Bozota.Common.Models.Items.Abstractions;
+using Bozota.Common.Models.Objects;
+using Bozota.Common.Models.Players;
+using Bozota.Common.Models.Players.Abstractions;
 
 namespace Bozota.Services;
 
@@ -47,7 +47,7 @@ public class GamePlayerService
         Player? player = null;
 
         // Check if randomly assigned position is already taken by other item or object on map
-        var tryCounter = 0;
+        int tryCounter = 0;
         while (tryCounter <= gameState.TotalCellCount)
         {
             tryCounter++;
@@ -68,21 +68,19 @@ public class GamePlayerService
     public Task<Player?> AddNewPlayer(string name, GameState gameState, int x, int y)
     {
         // Check if position is already occupied by other item or object on map
-        var isPositionOccupiedByBombOrBombRadius = false;
-        for (var bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
+        bool isPositionOccupiedByBombOrBombRadius = false;
+        for (int bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
         {
-            for (var bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
+            for (int bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
             {
                 if (!(bombX == _bombRadius && bombY == _bombRadius) &&
                     !(bombX == _bombRadius && bombY == 0 - _bombRadius) &&
                     !(bombX == 0 - _bombRadius && bombY == _bombRadius) &&
-                    !(bombX == 0 - _bombRadius && bombY == 0 - _bombRadius))
+                    !(bombX == 0 - _bombRadius && bombY == 0 - _bombRadius) &&
+                    IsPositionOccupied(x + bombX, y + bombY, gameState.Bombs))
                 {
-                    if (IsPositionOccupied(x + bombX, y + bombY, gameState.Bombs))
-                    {
                         isPositionOccupiedByBombOrBombRadius = true;
                         break;
-                    }
                 }
             }
             if (isPositionOccupiedByBombOrBombRadius) { break; }
@@ -105,10 +103,10 @@ public class GamePlayerService
 
         return Task.FromResult<Player?>(new Player(name, x, y, _playerHealth, _playerMinHealth, _playerMaxHealth, _playerSpeed, _playerStartingAmmo, _playerStartingMaterials));
     }
-    
+
     public static bool IsPositionOccupied<T>(int x, int y, List<T> items) where T : IMapItem
     {
-        foreach (var item in items)
+        foreach (T item in items)
         {
             if (item.XPos == x && item.YPos == y)
             {
@@ -123,26 +121,26 @@ public class GamePlayerService
     {
         // Remove dead players
         List<Player> deadPlayer = new();
-        foreach (var player in gameState.Players)
+        foreach (Player player in gameState.Players)
         {
             if (!player.Health.IsAlive && !player.Health.IsInDestructable)
             {
                 deadPlayer.Add(player);
             }
         }
-        foreach (var player in deadPlayer)
+        foreach (Player player in deadPlayer)
         {
             gameState.Players.Remove(player);
         }
 
         // Process all player actions
-        var actionCounter = 0;
+        int actionCounter = 0;
         bool arePlayerActionsRemaining;
         do
         {
             arePlayerActionsRemaining = false;
 
-            foreach (var player in gameState.Players)
+            foreach (Player player in gameState.Players)
             {
                 if (player.Speed - actionCounter > 0)
                 {
@@ -204,7 +202,7 @@ public class GamePlayerService
                             }
                             break;
                         case { Action: GameAction.Shoot, Direction: Direction.Left }:
-                            if (PlayerPositionIsNotAtLeftBorder(player) && 
+                            if (PlayerPositionIsNotAtLeftBorder(player) &&
                                 player.HasEnoughAmmo(1))
                             {
                                 gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage));

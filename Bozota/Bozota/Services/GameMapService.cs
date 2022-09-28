@@ -1,5 +1,5 @@
-﻿using Bozota.Models.Common;
-using Bozota.Models.Map.Items.Abstractions;
+﻿using Bozota.Common.Models;
+using Bozota.Common.Models.Items.Abstractions;
 
 namespace Bozota.Services;
 
@@ -55,7 +55,7 @@ public class GameMapService
 
     public void RenderOnMap<T>(List<List<RenderId>> map, List<T> items) where T : IMapItem
     {
-        foreach (var item in items)
+        foreach (T item in items)
         {
             map[item.YPos][item.XPos] = item.Render;
         }
@@ -80,7 +80,7 @@ public class GameMapService
 
     public void ClearMap(GameState gameState)
     {
-        foreach (var row in gameState.Map)
+        foreach (List<RenderId> row in gameState.Map)
         {
             row.Clear();
         }

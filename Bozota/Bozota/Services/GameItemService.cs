@@ -1,7 +1,7 @@
-﻿using Bozota.Models.Common;
-using Bozota.Models.Map.Items;
-using Bozota.Models.Map.Items.Abstractions;
-using Bozota.Models.Map.Objects.Abstractions;
+﻿using Bozota.Common.Models;
+using Bozota.Common.Models.Items;
+using Bozota.Common.Models.Items.Abstractions;
+using Bozota.Common.Models.Objects.Abstractions;
 
 namespace Bozota.Services;
 
@@ -19,9 +19,9 @@ public class GameItemService
         _logger.LogDebug("Processing ammo items");
 
         List<AmmoItem> consumedItems = new();
-        foreach (var player in gameState.Players)
+        foreach (Common.Models.Players.Player player in gameState.Players)
         {
-            foreach (var ammoItem in gameState.AmmoItems)
+            foreach (AmmoItem ammoItem in gameState.AmmoItems)
             {
                 if (player.XPos == ammoItem.XPos && player.YPos == ammoItem.YPos)
                 {
@@ -31,7 +31,7 @@ public class GameItemService
             }
 
             // Remove consumed ammo items
-            foreach (var consumable in consumedItems)
+            foreach (AmmoItem consumable in consumedItems)
             {
                 gameState.AmmoItems.Remove(consumable);
             }
@@ -46,9 +46,9 @@ public class GameItemService
         _logger.LogDebug("Processing materials items");
 
         List<MaterialsItem> consumedItems = new();
-        foreach (var player in gameState.Players)
+        foreach (Common.Models.Players.Player player in gameState.Players)
         {
-            foreach (var materialsItem in gameState.MaterialsItems)
+            foreach (MaterialsItem materialsItem in gameState.MaterialsItems)
             {
                 if (player.XPos == materialsItem.XPos && player.YPos == materialsItem.YPos)
                 {
@@ -58,7 +58,7 @@ public class GameItemService
             }
 
             // Remove consumed ammo items
-            foreach (var consumable in consumedItems)
+            foreach (MaterialsItem consumable in consumedItems)
             {
                 gameState.MaterialsItems.Remove(consumable);
             }
@@ -73,9 +73,9 @@ public class GameItemService
         _logger.LogDebug("Processing health items");
 
         List<HealthItem> consumedItems = new();
-        foreach (var player in gameState.Players)
+        foreach (Common.Models.Players.Player player in gameState.Players)
         {
-            foreach (var healthItem in gameState.HealthItems)
+            foreach (HealthItem healthItem in gameState.HealthItems)
             {
                 if (player.XPos == healthItem.XPos && player.YPos == healthItem.YPos)
                 {
@@ -85,7 +85,7 @@ public class GameItemService
             }
 
             // Remove consumed health items
-            foreach (var consumable in consumedItems)
+            foreach (HealthItem consumable in consumedItems)
             {
                 gameState.HealthItems.Remove(consumable);
             }
@@ -100,7 +100,7 @@ public class GameItemService
         _logger.LogDebug("Processing fire items");
 
         List<FireItem> dimmedFires = new();
-        foreach (var fire in gameState.FireItems)
+        foreach (FireItem fire in gameState.FireItems)
         {
             if (fire.Duration <= 0)
             {
@@ -116,7 +116,7 @@ public class GameItemService
         }
 
         // Remove dimmed fires
-        foreach (var fire in dimmedFires)
+        foreach (FireItem fire in dimmedFires)
         {
             gameState.FireItems.Remove(fire);
         }
@@ -129,15 +129,15 @@ public class GameItemService
         _logger.LogDebug("Processing bullets");
 
         List<BulletItem> bulletHits = new();
-        var moveCounter = 0;
+        int moveCounter = 0;
         bool movingBulletsLeft;
         do
         {
             movingBulletsLeft = false;
 
-            foreach (var bullet in gameState.Bullets)
+            foreach (BulletItem bullet in gameState.Bullets)
             {
-                if(IsItemHitting(bullet, gameState.Players))
+                if (IsItemHitting(bullet, gameState.Players))
                 {
                     bulletHits.Add(bullet);
                     continue;
@@ -210,7 +210,7 @@ public class GameItemService
             }
 
             // Remove hit bullets
-            foreach (var bulletHit in bulletHits)
+            foreach (BulletItem bulletHit in bulletHits)
             {
                 gameState.Bullets.Remove(bulletHit);
             }
@@ -225,7 +225,7 @@ public class GameItemService
 
     public bool IsItemHitting<ITEM, T>(ITEM hittingItem, List<T> items) where ITEM : IDamageItem where T : IMapObject
     {
-        foreach (var item in items)
+        foreach (T item in items)
         {
             if (item.XPos == hittingItem.XPos && item.YPos == hittingItem.YPos)
             {

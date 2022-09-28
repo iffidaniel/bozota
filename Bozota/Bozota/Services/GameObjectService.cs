@@ -1,6 +1,6 @@
-﻿using Bozota.Models.Common;
-using Bozota.Models.Map.Items;
-using Bozota.Models.Map.Objects;
+﻿using Bozota.Common.Models;
+using Bozota.Common.Models.Items;
+using Bozota.Common.Models.Objects;
 
 namespace Bozota.Services;
 
@@ -21,7 +21,7 @@ public class GameObjectService
         _logger.LogDebug("Processing bombs");
 
         List<BombObject> explodedBombs = new();
-        foreach (var bomb in gameState.Bombs)
+        foreach (BombObject bomb in gameState.Bombs)
         {
             if (!bomb.Health.IsAlive && !bomb.Health.IsInDestructable)
             {
@@ -29,7 +29,7 @@ public class GameObjectService
                 continue;
             }
 
-            foreach (var player in gameState.Players)
+            foreach (Common.Models.Players.Player player in gameState.Players)
             {
                 if (player.XPos >= bomb.XPos - bomb.ExplosionRadius &&
                     player.XPos <= bomb.XPos + bomb.ExplosionRadius &&
@@ -43,11 +43,11 @@ public class GameObjectService
         }
 
         // Create explosions and remove exploded bombs
-        foreach (var bomb in explodedBombs)
+        foreach (BombObject bomb in explodedBombs)
         {
-            for (var y = 0 - bomb.ExplosionRadius; y <= bomb.ExplosionRadius; y++)
+            for (int y = 0 - bomb.ExplosionRadius; y <= bomb.ExplosionRadius; y++)
             {
-                for (var x = 0 - bomb.ExplosionRadius; x <= bomb.ExplosionRadius; x++)
+                for (int x = 0 - bomb.ExplosionRadius; x <= bomb.ExplosionRadius; x++)
                 {
                     if (bomb.XPos + x >= 0 && bomb.XPos + x < gameState.MapXCellCount &&
                         bomb.YPos + y >= 0 && bomb.YPos + y < gameState.MapYCellCount &&
@@ -72,7 +72,7 @@ public class GameObjectService
         _logger.LogDebug("Processing walls");
 
         List<WallObject> brokenWalls = new();
-        foreach (var wall in gameState.Walls)
+        foreach (WallObject wall in gameState.Walls)
         {
             if (!wall.Health.IsAlive && !wall.Health.IsInDestructable)
             {
@@ -81,7 +81,7 @@ public class GameObjectService
         }
 
         // Remove broken walls
-        foreach (var wall in brokenWalls)
+        foreach (WallObject wall in brokenWalls)
         {
             gameState.Walls.Remove(wall);
         }
