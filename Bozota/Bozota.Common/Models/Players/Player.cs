@@ -33,7 +33,7 @@ public class Player : IPlayer
         Materials = startingMaterials;
         Actions = new List<PlayerAction>
         {
-            new PlayerAction()
+            new PlayerAction(name)
         };
     }
 

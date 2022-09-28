@@ -1,19 +1,20 @@
 ﻿using Bozota.Common.Models;
 using Bozota.Common.Models.Items;
 using Bozota.Common.Models.Objects;
+using Bozota.Common.Models.Players;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Bozota.Services;
 
 public class GameMasterService
 {
     private readonly ILogger<GameMasterService> _logger;
-    private readonly Random _random = new();
     private readonly GameMapService _gameMapService;
     private readonly GamePlayerService _gamePlayerService;
     private readonly GameItemService _gameItemService;
     private readonly GameObjectService _gameObjectService;
     private GameState _gameState;
-    private readonly List<string> _playerNames;
     private readonly int _randomGeneratorFrequency;
     private readonly int _healAmount;
     private readonly int _ammoAmount;
@@ -24,6 +25,7 @@ public class GameMasterService
     private readonly int _bombRadius;
     private bool _isGameInitialized = false;
     private int updateCounter = 0;
+    private static readonly HttpClient client = new HttpClient();
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
         GameMapService gameMapService, GamePlayerService gamePlayerService, GameObjectService gameObjectService, GameItemService gameItemService)
@@ -35,7 +37,6 @@ public class GameMasterService
         _gameObjectService = gameObjectService;
 
         _gameState = new(config.GetValue("Game:MapXCellCount", 100), config.GetValue("Game:MapYCellCount", 100));
-        _playerNames = config.GetSection("Game:Players")?.GetChildren()?.Select(x => x.Value)?.ToList() ?? new List<string>();
         _randomGeneratorFrequency = config.GetValue("Game:RandomGeneratorFrequency", 40);
         _healAmount = config.GetValue("Game:HealAmount", 40);
         _ammoAmount = config.GetValue("Game:AmmoAmount", 10);
@@ -95,12 +96,24 @@ public class GameMasterService
         }
 
         // Add Players
-        foreach (string name in _playerNames)
+        var playerNames = new List<string>();
+        try
         {
-            Common.Models.Players.Player? newPlayer = await _gamePlayerService.AddNewPlayerWithRandomPosition(name, tempState);
-            if (newPlayer != null)
+            playerNames = await client.GetFromJsonAsync<List<string>>("https://localhost:7175/all/players");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Failed to get player names, {error}", ex.Message);
+        }
+        if (playerNames != null)
+        {
+            foreach (var name in playerNames)
             {
-                tempState.Players.Add(newPlayer);
+                Player? newPlayer = await _gamePlayerService.AddNewPlayerWithRandomPosition(name, tempState);
+                if (newPlayer != null)
+                {
+                    tempState.Players.Add(newPlayer);
+                }
             }
         }
 
@@ -133,13 +146,7 @@ public class GameMasterService
 
         GameState tempState = _gameState;
 
-        // Add player actions
-        foreach (Common.Models.Players.Player player in tempState.Players)
-        {
-            player.Actions.Add(new PlayerAction((GameAction)_random.Next(4), (Direction)_random.Next(5)));
-        }
-
-        // Process 
+        // Process Items and Objects
         await _gameItemService.ProcessAmmoItems(tempState);
         await _gameItemService.ProcessMaterialsItems(tempState);
         await _gameItemService.ProcessHealthItems(tempState);
@@ -148,8 +155,45 @@ public class GameMasterService
         await _gameItemService.ProcessFires(tempState);
         await _gameObjectService.ProcessWalls(tempState);
 
+        // Add player actions
+        List<PlayerAction>? playerActions = null;
+        try
+        {
+            var response = await client.PostAsJsonAsync("https://localhost:7175/all/player/actions", JsonSerializer.Serialize(tempState));
+            if (response is not null && response.Content is not null)
+            {
+                playerActions = await response.Content.ReadFromJsonAsync<List<PlayerAction>>();
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Failed to get player actions, {error}", ex.Message);
+        }
+        if (playerActions != null)
+        {
+            foreach (var action in playerActions)
+            {
+                foreach (Player player in tempState.Players)
+                {
+                    if (player.Name == action.Name)
+                    {
+                        player.Actions.Add(new PlayerAction(action.Name, action.Action, action.Direction));
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (Player player in tempState.Players)
+            {
+                player.Actions.Add(new PlayerAction(player.Name));
+            }
+        }
+
+        // Process Players
         await _gamePlayerService.ProcessPlayers(tempState);
 
+        // Render Map
         await _gameMapService.RenderEmptyMap(tempState);
         await _gameMapService.RenderAllOnMap(tempState);
 

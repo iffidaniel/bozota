@@ -1,19 +1,53 @@
-var builder = WebApplication.CreateBuilder(args);
+using Bozota.Common.Models;
+using Bozota.Players;
+using Bozota.Players.DummyPlayer;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
-//builder.Services.AddScoped<SampleService>();
+var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-app.Logger.LogInformation("The app started");
-
-var message = app.Configuration["HelloKey"] ?? "Hello";
-
-app.MapGet("/", () => message);
-
-/*using (var scope = app.Services.CreateScope())
+var playerNames = app.Configuration.GetSection("Game:Players").GetChildren().Select(x => x.Value)?.ToList() ?? new List<string>();
+var players = new List<IPlayingPlayer>();
+foreach (var playerName in playerNames)
 {
-    var sampleService = scope.ServiceProvider.GetRequiredService<SampleService>();
-    sampleService.DoSomething();
-}*/
+    switch (playerName)
+    {
+        case "Daniel":
+            players.Add(new DummyPlayer(playerName));
+            break;
+        case "Veikko":
+            players.Add(new DummyPlayer(playerName));
+            break;
+        case "Krishna":
+            players.Add(new DummyPlayer(playerName));
+            break;
+        case "Raif":
+            players.Add(new DummyPlayer(playerName));
+            break;
+        case "Ramesh":
+            players.Add(new DummyPlayer(playerName));
+            break;
+        case "Riku":
+            players.Add(new DummyPlayer(playerName));
+            break;
+    }
+}
+
+app.MapGet("/all/players", () => playerNames);
+
+app.MapPost("/all/player/actions", ([FromBody]string gameState) =>
+{
+    var actions = new List<PlayerAction>();
+    foreach (var player in players)
+    {
+        actions.Add(player.NextAction());
+    }
+
+    return JsonSerializer.Serialize(actions);
+});
+
+app.Logger.LogInformation("The player API has started");
 
 app.Run();
