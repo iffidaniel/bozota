@@ -23,19 +23,22 @@
 }
 
 .GameMap_cell_health {
-    background-color: forestgreen;
+    background-color: floralwhite;
+    color:red;
 }
 
 .GameMap_cell_ammo {
-    background-color: yellowgreen;
+    background-color: floralwhite;
+    color:rgba(2, 2, 2, 0.956)
 }
 
 .GameMap_cell_wall {
-    background-color: saddlebrown;
+    color: saddlebrown;
 }
 
 .GameMap_cell_bomb {
-    background-color: black;
+    background-color: floralwhite;
+    color: black;
 }
 
 .GameMap_cell_player {
@@ -43,15 +46,16 @@
 }
 
 .GameMap_cell_bullet {
-    background-color: dimgrey;
+    color: dimgrey;
 }
 
 .GameMap_cell_fire {
-    background-color: orange;
+    color: orange;
 }
 
 .GameMap_cell_materials {
-    background-color: aquamarine;
+    background-color: floralwhite;
+    color: brown;
 }
 
 .GameMap_cell_error {
