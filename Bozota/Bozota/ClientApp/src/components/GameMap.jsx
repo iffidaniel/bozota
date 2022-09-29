@@ -6,7 +6,7 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { GiHeavyBullets, GiBrickWall, GiMineExplosion } from "react-icons/gi";
 import { GoPrimitiveDot } from "react-icons/go";
 
-const renderItem = (id, key, name) => {
+const renderItem = (id, key, name, wallName) => {
   if (id === 0) {
     return <span className="GameMap_cell_empty GameMap_cell" key={key} />;
   } else if (id === 1) {
@@ -18,7 +18,14 @@ const renderItem = (id, key, name) => {
       <GiHeavyBullets className="GameMap_cell_ammo GameMap_cell" key={key} />
     );
   } else if (id === 3) {
-    return <GiBrickWall className="GameMap_cell_wall GameMap_cell" key={key} />;
+    return (
+      <GiBrickWall
+        className={`GameMap_cell_wall ${
+          wallName ? wallName + "_icon" : ""
+        } GameMap_cell`}
+        key={key}
+      />
+    );
   } else if (id === 4) {
     return <FaBomb className="GameMap_cell_bomb GameMap_cell" key={key} />;
   } else if (id === 5 || id >= 10) {
@@ -83,6 +90,15 @@ const isBullet = (id, ri, ci, bullets) => {
   return correctBullet.playerName;
 };
 
+const isWall = (id, ri, ci, walls) => {
+  if (id !== 3) {
+    return;
+  }
+
+  var correctWall = walls.find((b) => b.yPos == ri && b.xPos == ci);
+  return correctWall.playerName;
+};
+
 export const GameMap = ({ gameState }) => {
   return (
     <div className="GameMap_outer">
@@ -94,8 +110,8 @@ export const GameMap = ({ gameState }) => {
                 <div className="row" key={ri}>
                   {row.map((column, ci) => {
                     var name = isBullet(column, ri, ci, gameState.bullets);
-
-                    return renderItem(column, ci, name);
+                    var wallName = isWall(column, ri, ci, gameState.walls);
+                    return renderItem(column, ci, name, wallName);
                   })}
                 </div>
               );

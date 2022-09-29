@@ -214,7 +214,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos + 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth, false ,player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -224,7 +224,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos + 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -234,7 +234,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos - 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -244,7 +244,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos - 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
                             }
                             break;

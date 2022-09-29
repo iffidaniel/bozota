@@ -12,12 +12,15 @@ public class WallObject : IWallObject
 
     public Health Health { get; set; }
 
+    public string PlayerName { get; set; }
+
     public WallObject() { }
 
-    public WallObject(int xpos, int ypos, int healthAmount, bool isIndestructable = false)
+    public WallObject(int xpos, int ypos, int healthAmount, bool isIndestructable = false, string playerName = null)
     {
         XPos = xpos;
         YPos = ypos;
         Health = new(healthAmount, default, default, isIndestructable);
+        PlayerName = playerName;
     }
 }
