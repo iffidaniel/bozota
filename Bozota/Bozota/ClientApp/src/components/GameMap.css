@@ -46,10 +46,12 @@
 }
 
 .GameMap_cell_bullet {
+    background-color: floralwhite;
     color: dimgrey;
 }
 
 .GameMap_cell_fire {
+    background-color: floralwhite;
     color: orange;
 }
 
