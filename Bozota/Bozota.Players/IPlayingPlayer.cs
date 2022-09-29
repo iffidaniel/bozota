@@ -6,5 +6,5 @@ public interface IPlayingPlayer
 {
     public string Name { get; }
 
-    public PlayerAction NextAction();
+    public PlayerAction NextAction(GameState gameState);
 }

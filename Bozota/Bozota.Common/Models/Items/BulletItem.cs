@@ -16,6 +16,8 @@ public class BulletItem : IBulletItem
 
     public int DamageAmount { get; set; }
 
+    public BulletItem() { }
+
     public BulletItem(int xpos, int ypos, Direction direction, int speed, int damageAmount)
     {
         XPos = xpos;

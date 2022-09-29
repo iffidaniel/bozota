@@ -40,9 +40,21 @@ app.MapGet("/all/players", () => playerNames);
 app.MapPost("/all/player/actions", ([FromBody]string gameState) =>
 {
     var actions = new List<PlayerAction>();
-    foreach (var player in players)
+    try
     {
-        actions.Add(player.NextAction());
+        var state = JsonSerializer.Deserialize<GameState>(gameState);
+
+        if (state is not null)
+        {
+            foreach (var player in players)
+            {
+                actions.Add(player.NextAction(state));
+            }
+            }
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError("Failed to get next player actions", ex.Message);
     }
 
     return JsonSerializer.Serialize(actions);

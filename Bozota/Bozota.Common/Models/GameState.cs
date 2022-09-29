@@ -6,30 +6,33 @@ namespace Bozota.Common.Models;
 
 public class GameState
 {
-    public int MapXCellCount { get; private set; }
+    public int MapXCellCount { get; set; }
 
-    public int MapYCellCount { get; private set; }
+    public int MapYCellCount { get; set; }
 
-    public int TotalCellCount { get; private set; }
+    public int TotalCellCount { get; set; }
 
-    public List<List<RenderId>> Map { get; private set; }
+    public List<List<RenderId>> Map { get; set; }
 
-    public List<Player> Players { get; private set; }
+    public List<Player> Players { get; set; }
 
-    public List<WallObject> Walls { get; private set; }
+    public List<WallObject> Walls { get; set; }
 
-    public List<BombObject> Bombs { get; private set; }
+    public List<BombObject> Bombs { get; set; }
 
-    public List<FireItem> FireItems { get; private set; }
+    public List<FireItem> FireItems { get; set; }
 
-    public List<HealthItem> HealthItems { get; private set; }
+    public List<HealthItem> HealthItems { get; set; }
 
-    public List<AmmoItem> AmmoItems { get; private set; }
+    public List<AmmoItem> AmmoItems { get; set; }
 
-    public List<MaterialsItem> MaterialsItems { get; private set; }
+    public List<MaterialsItem> MaterialsItems { get; set; }
 
-    public List<BulletItem> Bullets { get; private set; }
+    public List<BulletItem> Bullets { get; set; }
 
+    public GameState()
+    {
+    }
 
     public GameState(int xCellCount, int yCellCount)
     {

@@ -12,6 +12,8 @@ public class HealthItem : IHealthItem
 
     public int HealAmount { get; set; }
 
+    public HealthItem() { }
+
     public HealthItem(int xpos, int ypos, int healAmount)
     {
         XPos = xpos;

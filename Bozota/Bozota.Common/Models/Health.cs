@@ -18,6 +18,8 @@ public class Health
     /// </summary>
     public bool IsAlive => Points > 0;
 
+    public Health() { }
+
     /// <summary>
     /// Instantiates a new health object.
     /// </summary>

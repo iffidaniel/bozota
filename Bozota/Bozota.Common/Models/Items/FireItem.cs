@@ -14,6 +14,8 @@ public class FireItem : IFireItem
 
     public int DamageAmount { get; set; }
 
+    public FireItem() { }
+
     public FireItem(int xpos, int ypos, int duration, int damageAmount)
     {
         XPos = xpos;

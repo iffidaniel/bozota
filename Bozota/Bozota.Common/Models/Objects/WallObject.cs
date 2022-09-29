@@ -12,6 +12,8 @@ public class WallObject : IWallObject
 
     public Health Health { get; set; }
 
+    public WallObject() { }
+
     public WallObject(int xpos, int ypos, int healthAmount, bool isIndestructable = false)
     {
         XPos = xpos;

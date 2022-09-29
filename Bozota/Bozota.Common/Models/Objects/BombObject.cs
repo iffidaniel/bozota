@@ -16,6 +16,8 @@ public class BombObject : IBombObject
 
     public int ExplosionRadius { get; set; }
 
+    public BombObject() { }
+
     public BombObject(int xpos, int ypos, int healthAmount, int damage, int radius)
     {
         XPos = xpos;

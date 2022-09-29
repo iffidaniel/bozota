@@ -14,7 +14,7 @@ public class DummyPlayer : IPlayingPlayer
 
     public string Name { get; }
 
-    public PlayerAction NextAction()
+    public PlayerAction NextAction(GameState gameState)
     {
         return new PlayerAction(Name, (GameAction)_random.Next(4), (Direction)_random.Next(5));
     }

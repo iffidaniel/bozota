@@ -23,12 +23,14 @@ public class GameObjectService
         List<BombObject> explodedBombs = new();
         foreach (BombObject bomb in gameState.Bombs)
         {
+            // Checks if bombs health is below zero
             if (!bomb.Health.IsAlive && !bomb.Health.IsInDestructable)
             {
                 explodedBombs.Add(bomb);
                 continue;
             }
 
+            // Check if player is within bomb radius
             foreach (Common.Models.Players.Player player in gameState.Players)
             {
                 if (player.XPos >= bomb.XPos - bomb.ExplosionRadius &&

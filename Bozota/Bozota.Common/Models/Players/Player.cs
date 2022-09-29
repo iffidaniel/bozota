@@ -22,6 +22,8 @@ public class Player : IPlayer
 
     public List<PlayerAction> Actions { get; set; }
 
+    public Player() { }
+
     public Player(string name, int xpos, int ypos, int healthAmount, int minHealthAmount, int maxHealthAmount, int speed, int startingAmmo, int startingMaterials)
     {
         Name = name;

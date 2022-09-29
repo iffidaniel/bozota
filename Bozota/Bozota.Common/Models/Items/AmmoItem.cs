@@ -12,6 +12,8 @@ public class AmmoItem : IAmmoItem
 
     public int Amount { get; set; }
 
+    public AmmoItem() { }
+
     public AmmoItem(int xpos, int ypos, int amount)
     {
         XPos = xpos;

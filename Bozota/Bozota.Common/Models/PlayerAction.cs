@@ -8,6 +8,8 @@ public class PlayerAction
 
     public Direction Direction { get; set; }
 
+    public PlayerAction() { }
+
     public PlayerAction(string name, GameAction action = GameAction.None, Direction direction = Direction.None)
     {
         Name = name;

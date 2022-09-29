@@ -12,6 +12,8 @@ public class MaterialsItem : IMaterialsItem
 
     public int Amount { get; set; }
 
+    public MaterialsItem() { }
+
     public MaterialsItem(int xpos, int ypos, int amount)
     {
         XPos = xpos;
