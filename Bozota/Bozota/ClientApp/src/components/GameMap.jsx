@@ -32,6 +32,8 @@ import {
   GiMineExplosion,
 } from 'react-icons/gi';
 
+import {GoPrimitiveDot} from 'react/icons/go'
+
 const renderItem = (id, key) => {
   if (id === 0) {
     return <span className='GameMap_cell_empty GameMap_cell' key={key} />;
@@ -46,7 +48,7 @@ const renderItem = (id, key) => {
   } else if (id === 5) {
     return <span className='GameMap_cell_player GameMap_cell' key={key} />;
   } else if (id === 6) {
-    return <FaBahai className='GameMap_cell_bullet GameMap_cell' key={key} />;
+    return <GoPrimitiveDot  className='GameMap_cell_bullet GameMap_cell' key={key} />;
   } else if (id === 7) {
     return <GiMineExplosion className='GameMap_cell_fire GameMap_cell' key={key} />;
   } else if (id === 8) {
