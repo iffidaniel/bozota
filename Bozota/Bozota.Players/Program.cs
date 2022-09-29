@@ -2,6 +2,7 @@ using Bozota.Common.Models;
 using Bozota.Players;
 using Bozota.Players.Daniel;
 using Bozota.Players.DummyPlayer;
+using Bozota.Players.Veikko;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -36,20 +37,24 @@ foreach (var playerName in playerNames)
     }
 }
 
+var playerUtils = new PlayerUtils();
+
 app.MapGet("/all/players", () => playerNames);
 
-app.MapPost("/all/player/actions", ([FromBody] string gameState) =>
+app.MapPost("/all/player/actions", ([FromBody] string state) =>
 {
     var actions = new List<PlayerAction>();
     try
     {
-        var state = JsonSerializer.Deserialize<GameState>(gameState);
+        var gameState = JsonSerializer.Deserialize<GameState>(state);
 
-        if (state is not null)
+        if (gameState is not null)
         {
+            playerUtils.ProcessGameState(gameState);
+
             foreach (var player in players)
             {
-                actions.Add(player.NextAction(state));
+                actions.Add(player.NextAction(gameState, playerUtils));
             }
         }
     }

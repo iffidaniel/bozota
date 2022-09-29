@@ -1,12 +1,12 @@
-
 using Bozota.Common.Models;
-using Bozota.Players;
+
+namespace Bozota.Players.Veikko;
 
 public class Veikko : IPlayingPlayer
 {
     public string Name => "Veikko";
 
-    public PlayerAction NextAction(GameState gameState)
+    public PlayerAction NextAction(GameState gameState, PlayerUtils playerUtils)
     {
         var action = new PlayerAction(Name, GameAction.Move, Direction.Left);
 

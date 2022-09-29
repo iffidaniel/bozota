@@ -1,8 +1,7 @@
-namespace Bozota.Common.Models
+namespace Bozota.Common.Models;
+
+public class Position
 {
-    public class Position
-    {
-        public int Y { get; set; }
-        public int X { get; set; }
-    }
+    public int Y { get; set; }
+    public int X { get; set; }
 }

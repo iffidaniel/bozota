@@ -6,7 +6,7 @@ public class BestPlayer : IPlayingPlayer
 {
     public string Name => "Daniel";
 
-    public PlayerAction NextAction(GameState gameState)
+    public PlayerAction NextAction(GameState gameState, PlayerUtils playerUtils)
     {
         var action = GameAction.Move;
         var direction = Direction.Right;
