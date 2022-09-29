@@ -1,37 +1,23 @@
 import React from 'react';
 import './GameMap.css';
 import {
-  BiChevronDownSquare,
-  BiChevronUpSquare,
-  BiCaretRight,
   BiError
 } from 'react-icons/bi';
 import {
-  FaHeartbeat,
   FaBomb,
-  FaBattleNet,
-FaBahai
+  FaTools,
 } from 'react-icons/fa';
 import {
   BsSuitHeartFill,
-  
-  
 } from 'react-icons/bs';
-import {
-  AiOutlineBuild,
-  AiOutlineFire,
-  AiTwotoneGold
-  
-} from 'react-icons/ai';
 import {
   GiHeavyBullets,
   GiBrickWall,
-  GiClusterBomb,
-  GiBulletImpacts,
-  GiClayBrick,
   GiMineExplosion,
 } from 'react-icons/gi';
-
+import {
+  GoPrimitiveDot
+} from 'react-icons/go';
 const renderItem = (id, key) => {
   if (id === 0) {
     return <span className='GameMap_cell_empty GameMap_cell' key={key} />;
@@ -46,11 +32,11 @@ const renderItem = (id, key) => {
   } else if (id === 5) {
     return <span className='GameMap_cell_player GameMap_cell' key={key} />;
   } else if (id === 6) {
-    return <FaBahai className='GameMap_cell_bullet GameMap_cell' key={key} />;
+    return <GoPrimitiveDot className='GameMap_cell_bullet GameMap_cell' key={key} />;
   } else if (id === 7) {
     return <GiMineExplosion className='GameMap_cell_fire GameMap_cell' key={key} />;
   } else if (id === 8) {
-    return <AiOutlineBuild className='GameMap_cell_materials GameMap_cell' key={key} />;
+    return <FaTools className='GameMap_cell_materials GameMap_cell' key={key} />;
   } else {
     return <BiError className='GameMap_cell_error GameMap_cell' key={key} />;
   }

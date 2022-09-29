@@ -6,7 +6,7 @@
 }
 
 .GameMap_inner {
-    width:fit-content;
+    width: fit-content;
     padding-right: 12px;
     padding-left: 12px;
 }
@@ -24,12 +24,12 @@
 
 .GameMap_cell_health {
     background-color: floralwhite;
-    color:red;
+    color: red;
 }
 
 .GameMap_cell_ammo {
     background-color: floralwhite;
-    color:rgba(2, 2, 2, 0.956)
+    color: rgba(2, 2, 2, 0.956)
 }
 
 .GameMap_cell_wall {
@@ -57,7 +57,7 @@
 
 .GameMap_cell_materials {
     background-color: floralwhite;
-    color: brown;
+    color: black;
 }
 
 .GameMap_cell_error {
