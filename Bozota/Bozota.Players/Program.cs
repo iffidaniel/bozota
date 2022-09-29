@@ -18,7 +18,7 @@ foreach (var playerName in playerNames)
             players.Add(new DummyPlayer(playerName));
             break;
         case "Veikko":
-            players.Add(new DummyPlayer(playerName));
+            players.Add(new Veikko());
             break;
         case "Krishna":
             players.Add(new DummyPlayer(playerName));
@@ -37,7 +37,7 @@ foreach (var playerName in playerNames)
 
 app.MapGet("/all/players", () => playerNames);
 
-app.MapPost("/all/player/actions", ([FromBody]string gameState) =>
+app.MapPost("/all/player/actions", ([FromBody] string gameState) =>
 {
     var actions = new List<PlayerAction>();
     try
@@ -50,7 +50,7 @@ app.MapPost("/all/player/actions", ([FromBody]string gameState) =>
             {
                 actions.Add(player.NextAction(state));
             }
-            }
+        }
     }
     catch (Exception ex)
     {
