@@ -18,6 +18,11 @@ import {
 import {
   GoPrimitiveDot
 } from 'react-icons/go';
+
+import {
+  MdOutlineEmojiPeople
+} from 'react-icons/md'
+
 const renderItem = (id, key) => {
   if (id === 0) {
     return <span className='GameMap_cell_empty GameMap_cell' key={key} />;
@@ -44,20 +49,20 @@ const renderItem = (id, key) => {
 
 const renderPlayer = (id, key) => {
   if(id === 10){
-    return <span className='Daniel GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Daniel GameMap_cell' key={key} />;
   } else if(id === 11){
-    return <span className='Veikko GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Veikko GameMap_cell' key={key} />;
   } else if(id === 12){
-    return <span className='Krishna GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Krishna GameMap_cell' key={key} />;
   } else if(id === 13){
-    return <span className='Raif GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Raif GameMap_cell' key={key} />;
   } else if(id === 14){
-    return <span className='Ramesh GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Ramesh GameMap_cell' key={key} />;
   } else if(id === 15){
-    return <span className='Riku GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='Riku GameMap_cell' key={key} />;
   }
   else{
-    return <span className='GameMap_cell_player GameMap_cell' key={key} />;
+    return <MdOutlineEmojiPeople className='GameMap_cell_player GameMap_cell' key={key} />;
   }
 }
 
