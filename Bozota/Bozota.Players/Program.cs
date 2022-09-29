@@ -1,5 +1,6 @@
 using Bozota.Common.Models;
 using Bozota.Players;
+using Bozota.Players.Daniel;
 using Bozota.Players.DummyPlayer;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -15,7 +16,7 @@ foreach (var playerName in playerNames)
     switch (playerName)
     {
         case "Daniel":
-            players.Add(new DummyPlayer(playerName));
+            players.Add(new BestPlayer());
             break;
         case "Veikko":
             players.Add(new Veikko());

@@ -24,7 +24,7 @@ public class GameMasterService
     private readonly int _bombRadius;
     private bool _isGameInitialized = false;
     private int updateCounter = 0;
-    private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient client = new();
 
     public GameMasterService(ILogger<GameMasterService> logger, IConfiguration config,
         GameMapService gameMapService, GamePlayerService gamePlayerService, GameObjectService gameObjectService, GameItemService gameItemService)

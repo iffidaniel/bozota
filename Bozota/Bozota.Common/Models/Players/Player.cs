@@ -37,24 +37,16 @@ public class Player : IPlayer
         {
             new PlayerAction(name)
         };
-        switch (name)
+        Render = name switch
         {
-            case "Daniel":
-                Render = RenderId.Daniel; break;
-            case "Veikko":
-                Render = RenderId.Veikko; break;
-            case "Krishna":
-                Render = RenderId.Krishna; break;
-            case "Raif":
-                Render = RenderId.Raif; break;
-            case "Ramesh":
-                Render = RenderId.Ramesh; break;
-            case "Riku":
-                Render = RenderId.Riku; break;
-            default:
-                Render = RenderId.Player;
-                break;
-        }
+            "Daniel" => RenderId.Daniel,
+            "Veikko" => RenderId.Veikko,
+            "Krishna" => RenderId.Krishna,
+            "Raif" => RenderId.Raif,
+            "Ramesh" => RenderId.Ramesh,
+            "Riku" => RenderId.Riku,
+            _ => RenderId.Player,
+        };
     }
 
     public bool HasEnoughAmmo(int amount)
