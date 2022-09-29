@@ -15,15 +15,17 @@ public class BulletItem : IBulletItem
     public int Speed { get; set; }
 
     public int DamageAmount { get; set; }
+    public string PlayerName { get; set; }
 
     public BulletItem() { }
 
-    public BulletItem(int xpos, int ypos, Direction direction, int speed, int damageAmount)
+    public BulletItem(int xpos, int ypos, Direction direction, int speed, int damageAmount,string playerName)
     {
         XPos = xpos;
         YPos = ypos;
         Direction = direction;
         Speed = speed;
         DamageAmount = damageAmount;
+        PlayerName = playerName;
     }
 }

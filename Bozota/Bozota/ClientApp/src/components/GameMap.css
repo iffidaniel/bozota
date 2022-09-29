@@ -65,13 +65,16 @@
   background-color: deeppink;
 }
 
+.Player_icon{
+    width: 24px;
+    background-color: floralwhite;
+
+}
 .Daniel_icon {
-  background-color: floralwhite;
   color: rgb(216, 153, 25);
 }
 
 .Veikko_icon {
-  background-color: floralwhite;
   color: rgb(175, 207, 33);
 }
 
@@ -81,16 +84,13 @@
 }
 
 .Raif_icon {
-  background-color: floralwhite;
   color: rgb(38, 192, 192);
 }
 
 .Ramesh_icon {
-  background-color: floralwhite;
   color: rgb(180, 45, 185);
 }
 
 .Riku_icon {
-  background-color: floralwhite;
   color: rgb(179, 33, 48);
 }

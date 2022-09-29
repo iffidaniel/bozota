@@ -6,7 +6,7 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { GiHeavyBullets, GiBrickWall, GiMineExplosion } from "react-icons/gi";
 import { GoPrimitiveDot } from "react-icons/go";
 
-const renderItem = (id, key) => {
+const renderItem = (id, key, name) => {
   if (id === 0) {
     return <span className="GameMap_cell_empty GameMap_cell" key={key} />;
   } else if (id === 1) {
@@ -25,10 +25,12 @@ const renderItem = (id, key) => {
     return renderPlayer(id, key);
   } else if (id === 6) {
     return (
-      <GoPrimitiveDot className="GameMap_cell_bullet GameMap_cell" key={key} />
+      <GoPrimitiveDot
+        className={`GameMap_cell ${name}_icon GameMap_cell_empty`}
+        key={key}
+      />
     );
   } else if (id === 7) {
-    debugger;
     return (
       <GiMineExplosion className="GameMap_cell_fire GameMap_cell" key={key} />
     );
@@ -43,20 +45,42 @@ const renderItem = (id, key) => {
 
 const renderPlayer = (id, key) => {
   if (id === 10) {
-    return <FaRobot className="Daniel_icon GameMap_cell" key={key} />;
+    return (
+      <FaRobot className="Player_icon Daniel_icon GameMap_cell" key={key} />
+    );
   } else if (id === 11) {
-    return <FaRobot className="Veikko_icon GameMap_cell" key={key} />;
+    return (
+      <FaRobot className="Player_icon Veikko_icon GameMap_cell" key={key} />
+    );
   } else if (id === 12) {
-    return <FaRobot className="Krishna_icon GameMap_cell" key={key} />;
+    return (
+      <FaRobot className="Player_icon Krishna_icon GameMap_cell" key={key} />
+    );
   } else if (id === 13) {
-    return <FaRobot className="Raif_icon GameMap_cell" key={key} />;
+    return <FaRobot className="Player_icon Raif_icon GameMap_cell" key={key} />;
   } else if (id === 14) {
-    return <FaRobot className="Ramesh_icon GameMap_cell" key={key} />;
+    return (
+      <FaRobot className="Player_icon Ramesh_icon GameMap_cell" key={key} />
+    );
   } else if (id === 15) {
-    return <FaRobot className="Riku_icon GameMap_cell" key={key} />;
+    return <FaRobot className="Player_icon Riku_icon GameMap_cell" key={key} />;
   } else {
-    return <FaRobot className="GameMap_cell_player GameMap_cell" key={key} />;
+    return (
+      <FaRobot
+        className="Player_icon GameMap_cell_player GameMap_cell"
+        key={key}
+      />
+    );
   }
+};
+
+const isBullet = (id, ri, ci, bullets) => {
+  if (id !== 6) {
+    return;
+  }
+
+  var correctBullet = bullets.find((b) => b.yPos == ri && b.xPos == ci);
+  return correctBullet.playerName;
 };
 
 export const GameMap = ({ gameState }) => {
@@ -69,7 +93,9 @@ export const GameMap = ({ gameState }) => {
               return (
                 <div className="row" key={ri}>
                   {row.map((column, ci) => {
-                    return renderItem(column, ci);
+                    var name = isBullet(column, ri, ci, gameState.bullets);
+
+                    return renderItem(column, ci, name);
                   })}
                 </div>
               );
