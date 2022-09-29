@@ -23,7 +23,7 @@ export const Stats = ({ gameState }) => {
         <>
           {gameState.players.map((player) => (
             <div className='Stats_player' key={player.name}>
-              <h2 className='Stats_stat Stats_playerName'>{player.name}</h2>
+              <h2 className={`Stats_stat Stats_playerName ${player.name}`}>{player.name}</h2>
               <h2 className='Stats_stat'>
                 <AiOutlineHeart />{' '}
                 <div className='Stats_counterContainer'>

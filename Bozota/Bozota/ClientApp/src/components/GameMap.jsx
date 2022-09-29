@@ -29,8 +29,8 @@ const renderItem = (id, key) => {
     return <GiBrickWall className='GameMap_cell_wall GameMap_cell' key={key} />;
   } else if (id === 4) {
     return <FaBomb className='GameMap_cell_bomb GameMap_cell' key={key} />;
-  } else if (id === 5) {
-    return <span className='GameMap_cell_player GameMap_cell' key={key} />;
+  } else if (id === 5 || id >= 10) {
+    return renderPlayer(id, key);
   } else if (id === 6) {
     return <GoPrimitiveDot className='GameMap_cell_bullet GameMap_cell' key={key} />;
   } else if (id === 7) {
@@ -41,6 +41,25 @@ const renderItem = (id, key) => {
     return <BiError className='GameMap_cell_error GameMap_cell' key={key} />;
   }
 };
+
+const renderPlayer = (id, key) => {
+  if(id === 10){
+    return <span className='Daniel GameMap_cell' key={key} />;
+  } else if(id === 11){
+    return <span className='Veikko GameMap_cell' key={key} />;
+  } else if(id === 12){
+    return <span className='Krishna GameMap_cell' key={key} />;
+  } else if(id === 13){
+    return <span className='Raif GameMap_cell' key={key} />;
+  } else if(id === 14){
+    return <span className='Ramesh GameMap_cell' key={key} />;
+  } else if(id === 15){
+    return <span className='Riku GameMap_cell' key={key} />;
+  }
+  else{
+    return <span className='GameMap_cell_player GameMap_cell' key={key} />;
+  }
+}
 
 export const GameMap = ({ gameState }) => {
   return (
