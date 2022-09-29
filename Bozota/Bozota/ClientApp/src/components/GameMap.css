@@ -1,89 +1,96 @@
 .GameMap_outer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .GameMap_inner {
-    width: fit-content;
-    padding-right: 12px;
-    padding-left: 12px;
+  width: fit-content;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
 .GameMap_cell {
-    margin: 0px;
-    padding: 0px;
-    width: 18px;
-    height: 18px;
+  margin: 0px;
+  padding: 0px;
+  width: 18px;
+  height: 18px;
 }
 
 .GameMap_cell_empty {
-    background-color: floralwhite;
+  background-color: floralwhite;
 }
 
 .GameMap_cell_health {
-    background-color: floralwhite;
-    color: red;
+  background-color: floralwhite;
+  color: rgb(214, 120, 120);
 }
 
 .GameMap_cell_ammo {
-    background-color: floralwhite;
-    color: rgba(2, 2, 2, 0.956)
+  background-color: floralwhite;
+  color: rgba(2, 2, 2, 0.956);
 }
 
 .GameMap_cell_wall {
-    color: saddlebrown;
+  color: saddlebrown;
 }
 
 .GameMap_cell_bomb {
-    background-color: floralwhite;
-    color: black;
+  background-color: floralwhite;
+  color: black;
 }
 
 .GameMap_cell_player {
-    background-color: blue;
+  background-color: blue;
 }
 
 .GameMap_cell_bullet {
-    background-color: floralwhite;
-    color: dimgrey;
+  background-color: floralwhite;
+  color: dimgrey;
 }
 
 .GameMap_cell_fire {
-    background-color: floralwhite;
-    color: orange;
+  background-color: floralwhite;
+  color: orange;
 }
 
 .GameMap_cell_materials {
-    background-color: floralwhite;
-    color: black;
+  background-color: floralwhite;
+  color: black;
+  width: 14px;
 }
 
 .GameMap_cell_error {
-    background-color: deeppink;
+  background-color: deeppink;
 }
 
-.Daniel {
-    background-color: rgb(216, 153, 25);
+.Daniel_icon {
+  background-color: floralwhite;
+  color: rgb(216, 153, 25);
 }
 
-.Veikko {
-    background-color: rgb(175, 207, 33);
+.Veikko_icon {
+  background-color: floralwhite;
+  color: rgb(175, 207, 33);
 }
 
-.Krishna {
-    background-color: rgb(33, 172, 65);
+.Krishna_icon {
+  background-color: floralwhite;
+  color: rgb(33, 172, 65);
 }
 
-.Raif {
-    background-color: rgb(38, 192, 192);    
+.Raif_icon {
+  background-color: floralwhite;
+  color: rgb(38, 192, 192);
 }
 
-.Ramesh {
-    background-color: rgb(180, 45, 185);
+.Ramesh_icon {
+  background-color: floralwhite;
+  color: rgb(180, 45, 185);
 }
 
-.Riku {
-    background-color: rgb(179, 33, 48);
+.Riku_icon {
+  background-color: floralwhite;
+  color: rgb(179, 33, 48);
 }
