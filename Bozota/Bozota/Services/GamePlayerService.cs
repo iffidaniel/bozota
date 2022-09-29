@@ -285,7 +285,7 @@ public class GamePlayerService
 
     public bool PlayerPositionIsNotAtLowerBorder(IPlayer player)
     {
-        if (player.YPos > 1)
+        if (player.YPos > 0)
         {
             return true;
         }
@@ -295,7 +295,7 @@ public class GamePlayerService
 
     public bool PlayerPositionIsNotAtLeftBorder(IPlayer player)
     {
-        if (player.XPos > 1)
+        if (player.XPos > 0)
         {
             return true;
         }
