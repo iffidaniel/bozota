@@ -1,4 +1,5 @@
 ﻿using Bozota.Common.Models;
+using Bozota.Players.Utils;
 
 namespace Bozota.Players;
 
@@ -6,5 +7,5 @@ public interface IPlayingPlayer
 {
     public string Name { get; }
 
-    public PlayerAction NextAction(GameState gameState, PlayerUtils playerUtils);
+    public PlayerAction NextAction(GameStateUtils gameStateUtils);
 }

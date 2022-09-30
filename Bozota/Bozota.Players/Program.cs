@@ -3,6 +3,7 @@ using Bozota.Players;
 using Bozota.Players.Daniel;
 using Bozota.Players.DummyPlayer;
 using Bozota.Players.Veikko;
+using Bozota.Players.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -37,7 +38,7 @@ foreach (var playerName in playerNames)
     }
 }
 
-var playerUtils = new PlayerUtils();
+var gameStateUtils = new GameStateUtils();
 
 app.MapGet("/all/players", () => playerNames);
 
@@ -50,11 +51,11 @@ app.MapPost("/all/player/actions", ([FromBody] string state) =>
 
         if (gameState is not null)
         {
-            playerUtils.ProcessGameState(gameState);
+            gameStateUtils.ProcessGameState(gameState);
 
             foreach (var player in players)
             {
-                actions.Add(player.NextAction(gameState, playerUtils));
+                actions.Add(player.NextAction(gameStateUtils));
             }
         }
     }

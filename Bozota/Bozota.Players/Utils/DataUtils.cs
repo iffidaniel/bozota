@@ -1,6 +1,7 @@
 using Bozota.Common.Models;
 
 namespace Bozota.Players.Utils;
+
 public static class DataUtils
 {
     public static int GetDistance(Position posA, Position posB)

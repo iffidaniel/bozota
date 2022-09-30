@@ -4,7 +4,7 @@ namespace Bozota.Common.Models.Players;
 
 public class Player : IPlayer
 {
-    public string Name { get; }
+    public string Name { get; set; }
 
     public RenderId Render { get; set; }
 
