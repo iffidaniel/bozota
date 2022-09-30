@@ -111,7 +111,11 @@ export const GameMap = ({ gameState }) => {
                   {row.map((column, ci) => {
                     var name = isBullet(column, ri, ci, gameState.bullets);
                     var wallName = isWall(column, ri, ci, gameState.walls);
-                    return renderItem(column, ci, name, wallName);
+                    return (
+                      <span className="GameMap_default">
+                        {renderItem(column, ci, name, wallName)};
+                      </span>
+                    );
                   })}
                 </div>
               );
