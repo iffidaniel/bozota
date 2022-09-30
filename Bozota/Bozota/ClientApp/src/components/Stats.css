@@ -1,76 +1,78 @@
 .Stats_playerContainer {
-    display: flex;
-    max-width: 40rem;
-    flex-wrap: wrap;
-    
+  display: flex;
+  max-width: 40rem;
+  flex-wrap: wrap;
 }
 
 .Stats_player {
-    margin-top: 3rem;
-    font-size: 1rem;
-    margin: 1rem;
+  margin-top: 3rem;
+  font-size: 1rem;
+  margin: 1rem;
 }
 
 .Stats_playerName {
-    font-weight: bolder;
-    font-size: 2.3rem;
+  font-weight: bolder;
+  font-size: 2.3rem;
+  border: 3px solid;
+  border-radius: 8px;
+  width: fit-content;
+  padding: 0 0.5rem;
 }
 
 .Stats_stat {
-    display: flex;
+  display: flex;
 }
 
 .Stats_counterContainer {
-    display: flex;
-    max-width: 10rem;
-    flex-wrap: wrap;
-    margin-left: 1rem;
+  display: flex;
+  max-width: 10rem;
+  flex-wrap: wrap;
+  margin-left: 1rem;
 }
 
 .Stats_counter {
-    display: inline-block;
-    margin: 1px;
-    height: 5px;
-    width: 5px;
+  display: inline-block;
+  margin: 1px;
+  height: 5px;
+  width: 5px;
 }
 
 .Stats_counter-red {
-    background-color: red;
+  background-color: red;
 }
 
 .Stats_counter-yellow {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 .Stats_counter-blue {
-    background-color: blue;
+  background-color: blue;
 }
 
 .Stats_counter-brown {
-    background-color: brown;
+  background-color: brown;
 }
 
 .Daniel {
-    background-color: rgb(216, 153, 25);
+  background-color: rgb(216, 153, 25);
 }
 
 .Veikko {
-    background-color: rgb(175, 207, 33);
+  background-color: rgb(175, 207, 33);
 }
 
 .Krishna {
-    background-color: rgb(33, 172, 65);
+  background-color: rgb(33, 172, 65);
 }
 
 .Raif {
-    background-color: rgb(38, 192, 192);    
+  background-color: rgb(38, 192, 192);
 }
 
 .Ramesh {
-    background-color: rgb(180, 45, 185);
+  background-color: rgb(180, 45, 185);
 }
 
 .Riku {
-    background-color: rgb(179, 33, 48);
+  background-color: rgb(179, 33, 48);
 }
-
