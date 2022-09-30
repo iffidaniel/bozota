@@ -14,7 +14,7 @@
 .GameMap_default {
   height: 18px;
   width: 24px;
-  background-color: floralwhite;
+  background-color: white;
 }
 
 .GameMap_cell {
@@ -26,26 +26,27 @@
 }
 
 .GameMap_cell_empty {
-  background-color: floralwhite;
+  background-color: white;
 }
 
 .GameMap_cell_health {
-  background-color: floralwhite;
+  background-color: white;
   color: rgb(214, 120, 120);
   padding-right: 1px;
 }
 
 .GameMap_cell_ammo {
-  background-color: floralwhite;
+  background-color: white;
   color: rgba(2, 2, 2, 0.956);
 }
 
 .GameMap_cell_wall {
+  width: 24px;
   color: saddlebrown;
 }
 
 .GameMap_cell_bomb {
-  background-color: floralwhite;
+  background-color: white;
   color: black;
 }
 
@@ -54,19 +55,20 @@
 }
 
 .GameMap_cell_bullet {
-  background-color: floralwhite;
+  background-color: white;
   color: dimgrey;
 }
 
 .GameMap_cell_fire {
-  background-color: floralwhite;
+  background-color: white;
   color: orange;
 }
 
 .GameMap_cell_materials {
-  background-color: floralwhite;
+  background-color: white;
   color: black;
   width: 14px;
+  padding-left: "0.3%";
 }
 
 .GameMap_cell_error {
@@ -86,7 +88,6 @@
 }
 
 .Krishna_icon {
-  background-color: floralwhite;
   color: rgb(33, 172, 65);
 }
 

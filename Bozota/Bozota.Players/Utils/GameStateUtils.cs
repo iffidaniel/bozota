@@ -7,26 +7,27 @@ namespace Bozota.Players.Utils;
 
 public class GameStateUtils
 {
-    private GameState _gameState = new();
+    public GameState GameState { get; private set; }
 
     public List<Position> TakenPositions { get; private set; }
 
     public GameStateUtils()
     {
         TakenPositions = new();
+        GameState = new();
     }
 
     public void ProcessGameState(GameState gameState)
     {
-        _gameState = gameState;
+        GameState = gameState;
 
         TakenPositions.Clear();
-        TakenPositions.AddRange(FindTakenPositions());
+        TakenPositions.AddRange(GetImpassablePositions());
     }
 
     public Player? GetPlayerStats(string name)
     {
-        foreach (var player in _gameState.Players)
+        foreach (var player in GameState.Players)
         {
             if (player.Name == name)
             {
@@ -40,13 +41,13 @@ public class GameStateUtils
     public IAmmoItem? FindClosestAmmoItem(Position origin)
     {
         IAmmoItem? itemWithLeastDistance = null;
-        if (_gameState.AmmoItems.Count <= 0)
+        if (GameState.AmmoItems.Count <= 0)
         {
             return itemWithLeastDistance;
         }
 
-        var leastDistance = DataUtils.GetDistance(origin, new Position { X = _gameState.AmmoItems[0].XPos, Y = _gameState.AmmoItems[0].YPos });
-        foreach (var item in _gameState.AmmoItems)
+        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.AmmoItems[0].XPos, Y = GameState.AmmoItems[0].YPos });
+        foreach (var item in GameState.AmmoItems)
         {
             var distance = DataUtils.GetDistance(origin, new Position { X = item.XPos, Y = item.YPos });
             if (distance < leastDistance)
@@ -72,7 +73,7 @@ public class GameStateUtils
                 continue;
             }
 
-            var itemList = (List<T>?)prop.GetValue(_gameState);
+            var itemList = (List<T>?)prop.GetValue(GameState);
             if (itemList == null || itemList.Count <= 0)
             {
                 return itemWithLeastDistance;
@@ -98,22 +99,22 @@ public class GameStateUtils
         return itemWithLeastDistance;
     }
 
-    private List<Position> FindTakenPositions()
+    public List<Position> GetImpassablePositions()
     {
         var takenPositions = new List<Position>();
 
-        AddTakenPositions(takenPositions, _gameState.Players);
-        AddTakenPositions(takenPositions, _gameState.Bombs);
-        AddTakenPositions(takenPositions, _gameState.Walls);
+        AddTakenPositions(takenPositions, GameState.Players);
+        AddTakenPositions(takenPositions, GameState.Bombs);
+        AddTakenPositions(takenPositions, GameState.Walls);
 
-        for (int y = 0; y < _gameState.MapYCellCount; y++)
+        for (int y = 0; y < GameState.MapYCellCount; y++)
         {
-            takenPositions.Add(new Position { X = _gameState.MapXCellCount, Y = y });
+            takenPositions.Add(new Position { X = GameState.MapXCellCount, Y = y });
         }
 
-        for (int x = 0; x < _gameState.MapXCellCount; x++)
+        for (int x = 0; x < GameState.MapXCellCount; x++)
         {
-            takenPositions.Add(new Position { X = x, Y = _gameState.MapYCellCount });
+            takenPositions.Add(new Position { X = x, Y = GameState.MapYCellCount });
         }
 
         return takenPositions;
