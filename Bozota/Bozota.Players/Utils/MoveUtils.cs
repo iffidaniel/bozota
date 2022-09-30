@@ -15,15 +15,13 @@ public static class MoveUtils
     /// <returns>best direction to go on next turn</returns>
     public static Direction MoveTowards(Position current, Position target, List<Position> impassable)
     {
-        var positions = new List<Position>();
-
         var disallowed = new List<Direction>();
 
         // calculate disallowed
         foreach (var dir in everyDirection)
         {
-            var position = PositionAfterMove(current, dir);
-            if (impassable.Contains(position))
+            var newPos = PositionAfterMove(current, dir);
+            if (impassable.Contains(newPos))
             {
                 disallowed.Add(dir);
             }
