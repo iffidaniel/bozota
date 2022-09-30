@@ -4,7 +4,6 @@ using Confluent.Kafka;
 
 var configBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddIniFile("kafka.properties")
     .AddJsonFile($"appsettings.json");
 
 var config = configBuilder.Build();
@@ -16,8 +15,12 @@ var playerTopic = config.GetValue<string>("KafkaPlayersTopic");
 var gameStateTopic = config.GetValue<string>("KafkaGameStateTopic");
 
 
+var kafkaConfig = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddIniFile("kafka.properties").Build();
+
 using (var producer = new ProducerBuilder<string, string>(
-         config.AsEnumerable()).Build())
+         kafkaConfig.AsEnumerable()).Build())
 {
     Console.WriteLine("Trying to send message to ");
     producer.Produce(playerTopic, new Message<string, string> { Key = "Player1", Value = "moveRight" },
