@@ -2,6 +2,7 @@
 using Bozota.Common.Models.Items.Abstractions;
 using Bozota.Common.Models.Objects.Abstractions;
 using Bozota.Common.Models.Players;
+using Bozota.Common.Models.Players.Abstractions;
 
 namespace Bozota.Players.Utils;
 
@@ -38,16 +39,16 @@ public class GameStateUtils
         return null;
     }
 
-    public IAmmoItem? FindClosestAmmoItem(Position origin)
+    public IMaterialsItem? FindClosestMaterialsItem(Position origin)
     {
-        IAmmoItem? itemWithLeastDistance = null;
-        if (GameState.AmmoItems.Count <= 0)
+        if (GameState.MaterialsItems.Count <= 0)
         {
-            return itemWithLeastDistance;
+            return null;
         }
 
-        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.AmmoItems[0].XPos, Y = GameState.AmmoItems[0].YPos });
-        foreach (var item in GameState.AmmoItems)
+        IMaterialsItem? itemWithLeastDistance = GameState.MaterialsItems[0];
+        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.MaterialsItems[0].XPos, Y = GameState.MaterialsItems[0].YPos });
+        foreach (var item in GameState.MaterialsItems)
         {
             var distance = DataUtils.GetDistance(origin, new Position { X = item.XPos, Y = item.YPos });
             if (distance < leastDistance)
@@ -60,40 +61,73 @@ public class GameStateUtils
         return itemWithLeastDistance;
     }
 
-    public T? FindClosestItem<T>(Position origin) where T : IMapItem
+    public IHealthItem? FindClosestHealthItem(Position origin)
     {
-        var itemWithLeastDistance = default(T?);
-
-        var props = typeof(GameState).GetProperties();
-        foreach (var prop in props)
+        if (GameState.HealthItems.Count <= 0)
         {
-            var type = typeof(List<T>);
-            if (prop.GetType() == type)
-            {
-                continue;
-            }
+            return null;
+        }
 
-            var itemList = (List<T>?)prop.GetValue(GameState);
-            if (itemList == null || itemList.Count <= 0)
+        IHealthItem? itemWithLeastDistance = GameState.HealthItems[0];
+        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.HealthItems[0].XPos, Y = GameState.HealthItems[0].YPos });
+        foreach (var item in GameState.HealthItems)
+        {
+            var distance = DataUtils.GetDistance(origin, new Position { X = item.XPos, Y = item.YPos });
+            if (distance < leastDistance)
             {
-                return itemWithLeastDistance;
+                leastDistance = distance;
+                itemWithLeastDistance = item;
             }
+        }
 
-            var leastDistance = DataUtils.GetDistance(origin, new Position { X = itemList[0].XPos, Y = itemList[0].YPos });
-            foreach (var item in itemList)
+        return itemWithLeastDistance;
+    }
+
+    public IPlayer? FindClosestPlayer(Position origin, string ownPlayerName)
+    {
+        if (GameState.Players.Count <= 0)
+        {
+            return null;
+        }
+
+        IPlayer? itemWithLeastDistance = GameState.Players[0];
+        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.Players[0].XPos, Y = GameState.Players[0].YPos });
+        if (GameState.Players[0].Name == ownPlayerName)
+        {
+            itemWithLeastDistance = GameState.Players[1];
+            leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.Players[1].XPos, Y = GameState.Players[1].YPos });
+        }
+
+        foreach (var player in GameState.Players)
+        {
+            var distance = DataUtils.GetDistance(origin, new Position { X = player.XPos, Y = player.YPos });
+            if (distance < leastDistance && player.Name != ownPlayerName)
             {
-                if (item != null)
-                {
-                    var distance = DataUtils.GetDistance(origin, new Position { X = item.XPos, Y = item.YPos });
-                    if (distance < leastDistance)
-                    {
-                        leastDistance = distance;
-                        itemWithLeastDistance = item;
-                    }
-                }
+                leastDistance = distance;
+                itemWithLeastDistance = player;
             }
+        }
 
-            break;
+        return itemWithLeastDistance;
+    }
+
+    public IAmmoItem? FindClosestAmmoItem(Position origin)
+    {
+        if (GameState.AmmoItems.Count <= 0)
+        {
+            return null;
+        }
+
+        IAmmoItem? itemWithLeastDistance = GameState.AmmoItems[0];
+        var leastDistance = DataUtils.GetDistance(origin, new Position { X = GameState.AmmoItems[0].XPos, Y = GameState.AmmoItems[0].YPos });
+        foreach (var item in GameState.AmmoItems)
+        {
+            var distance = DataUtils.GetDistance(origin, new Position { X = item.XPos, Y = item.YPos });
+            if (distance < leastDistance)
+            {
+                leastDistance = distance;
+                itemWithLeastDistance = item;
+            }
         }
 
         return itemWithLeastDistance;

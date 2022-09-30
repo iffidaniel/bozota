@@ -15,8 +15,10 @@ public class BestPlayer : IPlayingPlayer
 
         if (player != null)
         {
-            var closestAmmoItem1 = gameStateUtils.FindClosestAmmoItem(new Position { X = player.XPos, Y = player.YPos });
-            //var closestAmmoItem2 = gameStateUtils.FindClosestItem<AmmoItem>(new Position { X = player.XPos, Y = player.YPos });
+            var closestAmmo = gameStateUtils.FindClosestAmmoItem(new Position { X = player.XPos, Y = player.YPos });
+            var closestPlayer = gameStateUtils.FindClosestPlayer(new Position { X = player.XPos, Y = player.YPos }, Name);
+            var closestHealth = gameStateUtils.FindClosestHealthItem(new Position { X = player.XPos, Y = player.YPos });
+            var closestMaterials = gameStateUtils.FindClosestMaterialsItem(new Position { X = player.XPos, Y = player.YPos });
         }
 
         var action = GameAction.Move;
