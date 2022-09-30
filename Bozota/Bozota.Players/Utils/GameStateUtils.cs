@@ -22,7 +22,7 @@ public class GameStateUtils
         GameState = gameState;
 
         TakenPositions.Clear();
-        TakenPositions.AddRange(FindTakenPositions());
+        TakenPositions.AddRange(GetImpassablePositions());
     }
 
     public Player? GetPlayerStats(string name)
@@ -54,7 +54,7 @@ public class GameStateUtils
         return null;
     }
 
-    private List<Position> FindTakenPositions()
+    public List<Position> GetImpassablePositions()
     {
         var takenPositions = new List<Position>();
 
