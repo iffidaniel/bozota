@@ -4,7 +4,7 @@ namespace Bozota.Players.Utils;
 
 public static class MoveUtils
 {
-    private static Direction[] everyDirection = { Direction.Down, Direction.Left, Direction.Right, Direction.Up };
+    private readonly static Direction[] everyDirection = { Direction.Down, Direction.Left, Direction.Right, Direction.Up };
 
     /// <summary>
     /// Rules out impassable directions and decides best direction towards certain coordinates
@@ -27,12 +27,12 @@ public static class MoveUtils
             }
         }
 
-        var preferredNextDirection = bestDirection(current, target, disallowed);
+        var preferredNextDirection = BestDirection(current, target, disallowed);
 
         return preferredNextDirection;
     }
 
-    private static Direction bestDirection(Position current, Position target, List<Direction> disallowed)
+    private static Direction BestDirection(Position current, Position target, List<Direction> disallowed)
     {
         var yDiff = current.Y - target.Y;
         var xDiff = current.X - target.X;
