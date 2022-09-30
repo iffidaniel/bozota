@@ -9,10 +9,10 @@ public static class MoveUtils
     /// <summary>
     /// Rules out impassable directions and decides best direction towards certain coordinates
     /// </summary>
-    /// <param name="current">where robot is stationed now</param>
-    /// <param name="target">where robot needs to ge to</param>
-    /// <param name="impassable">impassable positions like walls</param>
-    /// <returns>best direction to go on next turn</returns>
+    /// <param name="current">Where robot is now</param>
+    /// <param name="target">Where robot needs to get to</param>
+    /// <param name="impassable">Impassable positions like walls</param>
+    /// <returns>Best direction to go on next turn</returns>
     public static Direction MoveTowards(Position current, Position target, List<Position> impassable)
     {
         var disallowed = new List<Direction>();
@@ -27,12 +27,50 @@ public static class MoveUtils
             }
         }
 
-        var preferredNextDirection = BestDirection(current, target, disallowed);
+        var preferredNextDirection = bestDirection(current, target, disallowed);
 
         return preferredNextDirection;
     }
 
-    private static Direction BestDirection(Position current, Position target, List<Direction> disallowed)
+    /// <summary>
+    /// Rules out impassable directions and decides best direct away from certain coordinates
+    /// </summary>
+    /// <param name="current">Where robot is now</param>
+    /// <param name="target">Where robot needs to get to</param>
+    /// <param name="disallowed">Impassable positions like walls</param>
+    /// <returns>Best direction to go to next turn</returns>
+    public static Direction MoveAway(Position current, Position target, List<Position> disallowed)
+    {
+        var reverseTarget = new Position { Y = target.Y * -1, X = target.X * -1 };
+        return MoveTowards(current, reverseTarget, disallowed);
+    }
+
+    public static Position PositionAfterMove(Position current, Direction direction)
+    {
+        var newPos = new Position();
+
+        switch (direction)
+        {
+            case Direction.Up:
+                ++newPos.Y;
+                break;
+            case Direction.Down:
+                --newPos.Y;
+                break;
+            case Direction.Right:
+                ++newPos.X;
+                break;
+            case Direction.Left:
+                --newPos.X;
+                break;
+            default:
+                break;
+        }
+
+        return newPos;
+    }
+
+    private static Direction bestDirection(Position current, Position target, List<Direction> disallowed)
     {
         var yDiff = current.Y - target.Y;
         var xDiff = current.X - target.X;
@@ -110,30 +148,5 @@ public static class MoveUtils
         }
 
         return preferred;
-    }
-
-    public static Position PositionAfterMove(Position current, Direction direction)
-    {
-        var newPos = new Position();
-
-        switch (direction)
-        {
-            case Direction.Up:
-                ++newPos.Y;
-                break;
-            case Direction.Down:
-                --newPos.Y;
-                break;
-            case Direction.Right:
-                ++newPos.X;
-                break;
-            case Direction.Left:
-                --newPos.X;
-                break;
-            default:
-                break;
-        }
-
-        return newPos;
     }
 }
