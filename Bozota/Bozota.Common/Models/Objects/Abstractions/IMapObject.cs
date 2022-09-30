@@ -4,5 +4,5 @@ namespace Bozota.Common.Models.Objects.Abstractions;
 
 public interface IMapObject : IMapItem
 {
-    public Health Health { get; }
+    public Health Health { get; set; }
 }

@@ -10,7 +10,7 @@ public class BombObject : IBombObject
 
     public int YPos { get; set; }
 
-    public Health Health { get; set; }
+    public Health Health { get; set; } = new Health();
 
     public int ExplosionDamage { get; set; }
 
