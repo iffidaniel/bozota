@@ -11,11 +11,18 @@
   padding-left: 12px;
 }
 
+.GameMap_default {
+  height: 18px;
+  width: 24px;
+  background-color: floralwhite;
+}
+
 .GameMap_cell {
   margin: 0px;
   padding: 0px;
-  width: 18px;
+  width: 24px;
   height: 18px;
+  position: absolute;
 }
 
 .GameMap_cell_empty {
@@ -25,6 +32,7 @@
 .GameMap_cell_health {
   background-color: floralwhite;
   color: rgb(214, 120, 120);
+  padding-right: 1px;
 }
 
 .GameMap_cell_ammo {
@@ -65,13 +73,15 @@
   background-color: deeppink;
 }
 
-.Daniel_icon {
+.Player_icon {
+  width: 24px;
   background-color: floralwhite;
+}
+.Daniel_icon {
   color: rgb(216, 153, 25);
 }
 
 .Veikko_icon {
-  background-color: floralwhite;
   color: rgb(175, 207, 33);
 }
 
@@ -81,16 +91,13 @@
 }
 
 .Raif_icon {
-  background-color: floralwhite;
   color: rgb(38, 192, 192);
 }
 
 .Ramesh_icon {
-  background-color: floralwhite;
   color: rgb(180, 45, 185);
 }
 
 .Riku_icon {
-  background-color: floralwhite;
   color: rgb(179, 33, 48);
 }

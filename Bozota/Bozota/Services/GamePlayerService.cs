@@ -178,7 +178,7 @@ public class GamePlayerService
                             if (PlayerPositionIsNotAtUpperBorder(player, gameState.MapYCellCount) &&
                                 player.HasEnoughAmmo(1))
                             {
-                                gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos + 1, Direction.Up, _bulletSpeed, _bulletDamage));
+                                gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos + 1, Direction.Up, _bulletSpeed, _bulletDamage, player.Name));
                                 player.ReduceAmmo(1);
 
                             }
@@ -187,7 +187,7 @@ public class GamePlayerService
                             if (PlayerPositionIsNotAtRightBorder(player, gameState.MapXCellCount) &&
                                 player.HasEnoughAmmo(1))
                             {
-                                gameState.Bullets.Add(new BulletItem(player.XPos + 1, player.YPos, Direction.Right, _bulletSpeed, _bulletDamage));
+                                gameState.Bullets.Add(new BulletItem(player.XPos + 1, player.YPos, Direction.Right, _bulletSpeed, _bulletDamage, player.Name));
                                 player.ReduceAmmo(1);
 
                             }
@@ -196,7 +196,7 @@ public class GamePlayerService
                             if (PlayerPositionIsNotAtLowerBorder(player) &&
                                 player.HasEnoughAmmo(1))
                             {
-                                gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos - 1, Direction.Down, _bulletSpeed, _bulletDamage));
+                                gameState.Bullets.Add(new BulletItem(player.XPos, player.YPos - 1, Direction.Down, _bulletSpeed, _bulletDamage, player.Name));
                                 player.ReduceAmmo(1);
 
                             }
@@ -205,7 +205,7 @@ public class GamePlayerService
                             if (PlayerPositionIsNotAtLeftBorder(player) &&
                                 player.HasEnoughAmmo(1))
                             {
-                                gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage));
+                                gameState.Bullets.Add(new BulletItem(player.XPos - 1, player.YPos, Direction.Left, _bulletSpeed, _bulletDamage, player.Name));
                                 player.ReduceAmmo(1);
                             }
                             break;
@@ -214,7 +214,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos + 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos + 1, _wallHealth, false ,player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -224,7 +224,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos + 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos + 1, player.YPos, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -234,7 +234,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos, player.YPos - 1, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos, player.YPos - 1, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
 
                             }
@@ -244,7 +244,7 @@ public class GamePlayerService
                                 PositionIsNotOccupiedByObject(player.XPos - 1, player.YPos, gameState) &&
                                 player.HasEnoughMaterials(1))
                             {
-                                gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth));
+                                gameState.Walls.Add(new WallObject(player.XPos - 1, player.YPos, _wallHealth, false, player.Name));
                                 player.ReduceMaterials(1);
                             }
                             break;
