@@ -16,14 +16,17 @@ public class BombObject : IBombObject
 
     public int ExplosionRadius { get; set; }
 
+    public int TriggerRadius { get; set; }
+
     public BombObject() { }
 
-    public BombObject(int xpos, int ypos, int healthAmount, int damage, int radius)
+    public BombObject(int xpos, int ypos, int healthAmount, int damage, int explosionradius, int triggerRadius)
     {
         XPos = xpos;
         YPos = ypos;
         Health = new(healthAmount);
         ExplosionDamage = damage;
-        ExplosionRadius = radius;
+        ExplosionRadius = explosionradius;
+        TriggerRadius = triggerRadius;
     }
 }

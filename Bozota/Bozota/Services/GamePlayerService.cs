@@ -20,7 +20,7 @@ public class GamePlayerService
     private readonly int _playerStartingMaterials;
     private readonly int _bulletSpeed;
     private readonly int _bulletDamage;
-    private readonly int _bombRadius;
+    private readonly int _bombTriggerRadius;
     private readonly int _wallHealth;
 
     public GamePlayerService(ILogger<GamePlayerService> logger, IConfiguration config)
@@ -36,7 +36,7 @@ public class GamePlayerService
         _playerStartingMaterials = config.GetValue("Game:PlayerStartingMaterials", 3);
         _bulletSpeed = config.GetValue("Game:BulletSpeed", 3);
         _bulletDamage = config.GetValue("Game:BulletDamage", 40);
-        _bombRadius = config.GetValue("Game:BombRadius", 3);
+        _bombTriggerRadius = config.GetValue("Game:BombTriggerRadius", 2);
         _wallHealth = config.GetValue("Game:WallHealth", 50);
     }
 
@@ -69,14 +69,14 @@ public class GamePlayerService
     {
         // Check if position is already occupied by other item or object on map
         bool isPositionOccupiedByBombOrBombRadius = false;
-        for (int bombY = 0 - _bombRadius; bombY <= _bombRadius; ++bombY)
+        for (int bombY = 0 - _bombTriggerRadius; bombY <= _bombTriggerRadius; ++bombY)
         {
-            for (int bombX = 0 - _bombRadius; bombX <= _bombRadius; ++bombX)
+            for (int bombX = 0 - _bombTriggerRadius; bombX <= _bombTriggerRadius; ++bombX)
             {
-                if (!(bombX == _bombRadius && bombY == _bombRadius) &&
-                    !(bombX == _bombRadius && bombY == 0 - _bombRadius) &&
-                    !(bombX == 0 - _bombRadius && bombY == _bombRadius) &&
-                    !(bombX == 0 - _bombRadius && bombY == 0 - _bombRadius) &&
+                if (!(bombX == _bombTriggerRadius && bombY == _bombTriggerRadius) &&
+                    !(bombX == _bombTriggerRadius && bombY == 0 - _bombTriggerRadius) &&
+                    !(bombX == 0 - _bombTriggerRadius && bombY == _bombTriggerRadius) &&
+                    !(bombX == 0 - _bombTriggerRadius && bombY == 0 - _bombTriggerRadius) &&
                     IsPositionOccupied(x + bombX, y + bombY, gameState.Bombs))
                 {
                         isPositionOccupiedByBombOrBombRadius = true;

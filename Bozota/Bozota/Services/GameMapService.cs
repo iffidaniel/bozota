@@ -57,6 +57,10 @@ public class GameMapService
     {
         foreach (T item in items)
         {
+            if (item.YPos < 0 || item.YPos > map.Count || item.XPos < 0 || item.XPos > map[0].Count)
+            {
+                continue;
+            }
             map[item.YPos][item.XPos] = item.Render;
         }
     }

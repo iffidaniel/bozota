@@ -30,13 +30,13 @@ public class GameObjectService
                 continue;
             }
 
-            // Check if player is within bomb radius
+            // Check if player is within bomb trigger radius
             foreach (Common.Models.Players.Player player in gameState.Players)
             {
-                if (player.XPos >= bomb.XPos - bomb.ExplosionRadius &&
-                    player.XPos <= bomb.XPos + bomb.ExplosionRadius &&
-                    player.YPos >= bomb.YPos - bomb.ExplosionRadius &&
-                    player.YPos <= bomb.YPos + bomb.ExplosionRadius)
+                if (player.XPos >= bomb.XPos - bomb.TriggerRadius &&
+                    player.XPos <= bomb.XPos + bomb.TriggerRadius &&
+                    player.YPos >= bomb.YPos - bomb.TriggerRadius &&
+                    player.YPos <= bomb.YPos + bomb.TriggerRadius)
                 {
                     explodedBombs.Add(bomb);
                     break;

@@ -5,4 +5,6 @@ public interface IBombObject : IMapObject
     public int ExplosionDamage { get; set; }
 
     public int ExplosionRadius { get; set; }
+
+    public int TriggerRadius { get; set; }
 }

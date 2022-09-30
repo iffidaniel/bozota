@@ -21,7 +21,8 @@ public class GameMasterService
     private readonly int _wallHealth;
     private readonly int _bombHealth;
     private readonly int _bombDamage;
-    private readonly int _bombRadius;
+    private readonly int _bombExplosionRadius;
+    private readonly int _bombtriggerRadius;
     private bool _isGameInitialized = false;
     private int updateCounter = 0;
     private static readonly HttpClient client = new();
@@ -43,7 +44,8 @@ public class GameMasterService
         _wallHealth = config.GetValue("Game:WallHealth", 80);
         _bombHealth = config.GetValue("Game:BombHealth", 80);
         _bombDamage = config.GetValue("Game:BombDamage", 80);
-        _bombRadius = config.GetValue("Game:BombRadius", 3);
+        _bombExplosionRadius = config.GetValue("Game:BombExplosionRadius", 4);
+        _bombtriggerRadius = config.GetValue("Game:BombTriggerRadius", 2);
     }
 
     public bool IsGameInitialized()
@@ -85,7 +87,7 @@ public class GameMasterService
                         tempState.Walls.Add(new WallObject(x, y, _wallHealth));
                         break;
                     case RenderId.Bomb:
-                        tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombRadius));
+                        tempState.Bombs.Add(new BombObject(x, y, _bombHealth, _bombDamage, _bombExplosionRadius, _bombtriggerRadius));
                         break;
                 }
 
