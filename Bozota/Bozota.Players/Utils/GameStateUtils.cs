@@ -7,18 +7,19 @@ namespace Bozota.Players.Utils;
 
 public class GameStateUtils
 {
-    private GameState _gameState = new();
+    public GameState GameState { get; private set; }
 
     public List<Position> TakenPositions { get; private set; }
 
     public GameStateUtils()
     {
         TakenPositions = new();
+        GameState = new();
     }
 
     public void ProcessGameState(GameState gameState)
     {
-        _gameState = gameState;
+        GameState = gameState;
 
         TakenPositions.Clear();
         TakenPositions.AddRange(FindTakenPositions());
@@ -26,7 +27,7 @@ public class GameStateUtils
 
     public Player? GetPlayerStats(string name)
     {
-        foreach (var player in _gameState.Players)
+        foreach (var player in GameState.Players)
         {
             if (player.Name == name)
             {
@@ -41,7 +42,7 @@ public class GameStateUtils
     {
         var leastDistance = 0;
 
-        foreach (var ammo in _gameState.AmmoItems)
+        foreach (var ammo in GameState.AmmoItems)
         {
             var distance = DataUtils.GetDistance(origin, new Position { X = ammo.XPos, Y = ammo.YPos });
             if (distance < leastDistance)
@@ -57,9 +58,9 @@ public class GameStateUtils
     {
         var takenPositions = new List<Position>();
 
-        AddTakenPositions(takenPositions, _gameState.Players);
-        AddTakenPositions(takenPositions, _gameState.Bombs);
-        AddTakenPositions(takenPositions, _gameState.Walls);
+        AddTakenPositions(takenPositions, GameState.Players);
+        AddTakenPositions(takenPositions, GameState.Bombs);
+        AddTakenPositions(takenPositions, GameState.Walls);
 
         return takenPositions;
     }
