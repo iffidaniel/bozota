@@ -1,12 +1,13 @@
-using System.Net;
 using Bozota.Common.Models;
 
 namespace Bozota.Players.Utils;
 
 public static class MoveUtils
 {
+    private static Direction[] everyDirection = { Direction.Down, Direction.Left, Direction.Right, Direction.Up };
+
     /// <summary>
-    /// Calculates the most optimal next move according to the current map
+    /// Rules out impassable directions and decides best direction towards certain coordinates
     /// </summary>
     /// <param name="current">where robot is stationed now</param>
     /// <param name="target">where robot needs to ge to</param>
@@ -15,57 +16,21 @@ public static class MoveUtils
     public static Direction MoveTowards(Position current, Position target, List<Position> impassable)
     {
         var positions = new List<Position>();
-        var deadEnds = new List<Position>();
 
-        var preferredNextDirection = new Direction();
+        var disallowed = new List<Direction>();
 
-        // fill positions list as long as not in the target position
-        while (current.X == target.X && current.Y == target.Y)
+        // calculate disallowed
+        foreach (var dir in everyDirection)
         {
-            var disallowed = new List<Direction>();
-
-            var rerun = false;
-            var newPos = new Position();
-
-            // run as long as valid direction is found
-            // invalid directions are towards:
-            // - impassable
-            // - dead end
-            do
+            var position = PositionAfterMove(current, dir);
+            if (impassable.Contains(position))
             {
-                preferredNextDirection = bestDirection(current, target, disallowed);
-
-                newPos = PositionAfterMove(current, preferredNextDirection);
-                if (impassable.Contains(newPos) && deadEnds.Contains(newPos))
-                {
-                    disallowed.Add(preferredNextDirection);
-                    rerun = true;
-                }
-                else
-                {
-                    rerun = false;
-                }
-            } while (rerun == true);
-
-            //Unfinished. Use: [U,L,R,D]
-
-            // check if position is already visited = running from dead end
-            var oldPosition = positions.FirstOrDefault(x => x.X == newPos.X && x.Y == newPos.Y);
-            if (oldPosition != null)
-            {
-                positions.Remove(oldPosition);
-                deadEnds.Add(oldPosition); // position is an dead end
+                disallowed.Add(dir);
             }
-
-            positions.Add(newPos);
-
-            current = newPos;
         }
 
-        // reach target position
-        // filled position list with way there
+        var preferredNextDirection = bestDirection(current, target, disallowed);
 
-        // return first move
         return preferredNextDirection;
     }
 
@@ -76,75 +41,73 @@ public static class MoveUtils
 
         var preferred = Direction.None;
 
+        // Will be eg. yDiff = 2, xDiff = -4: [Right, Down, Up, Left]
+        //
+        // NOTE Abs(yDiff) == Abs(xDiff) favors yDiff
+        // eg. yDiff = 3, xDiff = -3: [Down, Right, Left, Up]
+        var preferredSeq = new Direction[4];
+
+        // preferred direction is horizontal
         if (Math.Abs(yDiff) < Math.Abs(xDiff))
         {
-            //target is more to horizontal direction
+            // decide worst and best
             if (xDiff < 0)
             {
-                if (!disallowed.Contains(Direction.Right))
-                {
-                    preferred = Direction.Right;
-                }
-                else
-                {
-                    if (yDiff < 0)
-                    {
-                        if (!disallowed.Contains(Direction.Up))
-                        {
-                            preferred = Direction.Up;
-                        }
-                        else
-                        {
-                            if (disallowed.Contains(Direction.Down))
-                            {
-                                preferred = Direction.Down;
-                            }
-                            else
-                            {
-                                preferred = Direction.Left;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (!disallowed.Contains(Direction.Down))
-                        {
-                            preferred = Direction.Down;
-                        }
-                        else
-                        {
-                            preferred = Direction.Up;
-                        }
-                    }
-                }
-            }
-            else if (!disallowed.Contains(Direction.Left))
-            {
-                preferred = Direction.Left;
+                preferredSeq[0] = Direction.Right;
+                preferredSeq[3] = Direction.Left;
             }
             else
             {
-                //target is more to vertical direction or diagonal direction
-                if (yDiff < 0)
-                {
-                    preferred = Direction.Up;
-                }
-                else
-                {
-                    preferred = Direction.Down;
-                }
+                preferredSeq[0] = Direction.Left;
+                preferredSeq[3] = Direction.Right;
+            }
+
+            // decide 2nd best and 3rd best
+            if (yDiff < 0)
+            {
+                preferredSeq[1] = Direction.Up;
+                preferredSeq[2] = Direction.Down;
+            }
+            else
+            {
+                preferredSeq[1] = Direction.Down;
+                preferredSeq[2] = Direction.Up;
             }
         }
+        //preffered direction vertical
         else
         {
-            //target is more to vertical direction or diagonal direction
-            if (yDiff < 0 && !disallowed.Contains(Direction.Up))
+            // decide worst and best
+            if (yDiff < 0)
             {
-                preferred = Direction.Up;
+                preferredSeq[0] = Direction.Up;
+                preferredSeq[3] = Direction.Down;
             }
             else
             {
-                preferred = Direction.Down;
+                preferredSeq[0] = Direction.Down;
+                preferredSeq[3] = Direction.Up;
+            }
+
+            // decide 2nd best and 3rd best
+            if (xDiff < 0)
+            {
+                preferredSeq[1] = Direction.Right;
+                preferredSeq[2] = Direction.Left;
+            }
+            else
+            {
+                preferredSeq[1] = Direction.Left;
+                preferredSeq[2] = Direction.Right;
+            }
+        }
+
+        foreach (var dir in preferredSeq)
+        {
+            if (!disallowed.Contains(dir))
+            {
+                preferred = dir;
+                break;
             }
         }
 
