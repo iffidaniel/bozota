@@ -4,7 +4,7 @@ namespace Bozota.Common.Models.Players.Abstractions;
 
 public interface IPlayer : IMapObject
 {
-    public string Name { get; }
+    public string Name { get; set; }
 
     public int Speed { get; set; }
 
@@ -12,7 +12,7 @@ public interface IPlayer : IMapObject
 
     public int Materials { get; set; }
 
-    public List<PlayerAction> Actions { get; }
+    public List<PlayerAction> Actions { get; set; }
 
     public bool HasEnoughAmmo(int amount);
 

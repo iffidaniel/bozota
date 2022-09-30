@@ -4,15 +4,15 @@ namespace Bozota.Common.Models.Players;
 
 public class Player : IPlayer
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
-    public RenderId Render { get; set; }
+    public RenderId Render { get; set; } = RenderId.Player;
 
     public int XPos { get; set; }
 
     public int YPos { get; set; }
 
-    public Health Health { get; set; }
+    public Health Health { get; set; } = new();
 
     public int Speed { get; set; }
 
@@ -20,7 +20,7 @@ public class Player : IPlayer
 
     public int Materials { get; set; }
 
-    public List<PlayerAction> Actions { get; set; }
+    public List<PlayerAction> Actions { get; set; } = new();
 
     public Player() { }
 

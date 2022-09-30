@@ -10,9 +10,9 @@ public class WallObject : IWallObject
 
     public int YPos { get; set; }
 
-    public Health Health { get; set; }
+    public Health Health { get; set; } = new Health();
 
-    public string PlayerName { get; set; }
+    public string PlayerName { get; set; } = string.Empty;
 
     public WallObject() { }
 
