@@ -15,17 +15,7 @@ public static class MoveUtils
     /// <returns>Best direction to go on next turn</returns>
     public static Direction MoveTowards(Position current, Position target, List<Position> impassable)
     {
-        var disallowed = new List<Direction>();
-
-        // calculate disallowed
-        foreach (var dir in everyDirection)
-        {
-            var newPos = PositionAfterMove(current, dir);
-            if (impassable.Contains(newPos))
-            {
-                disallowed.Add(dir);
-            }
-        }
+        var disallowed = getDisallowedDirections(current, impassable);
 
         var preferredNextDirection = bestDirection(current, target, disallowed);
 
@@ -45,6 +35,57 @@ public static class MoveUtils
         return MoveTowards(current, reverseTarget, disallowed);
     }
 
+    /// <summary>
+    /// Calculates the best direction to go to on next move in order to dodge a bullet
+    /// </summary>
+    /// <param name="current">Where robot is located now</param>
+    /// <param name="bulletFlyingTo">To which direction bullet is flying to on a map</param>
+    /// <param name="impassable">List of impassable positions like walls</param>
+    /// <returns>Best direction to dodge the bullet to</returns>
+    public static Direction DodgeBullet(Position current, Direction bulletFlyingTo, List<Position> impassable)
+    {
+        var disallowed = getDisallowedDirections(current, impassable);
+        var preferredSeq = new Direction[3];
+
+        switch (bulletFlyingTo)
+        {
+            case Direction.Up:
+                preferredSeq = new Direction[] { Direction.Right, Direction.Left, Direction.Up };
+                break;
+
+            case Direction.Down:
+                preferredSeq = new Direction[] { Direction.Right, Direction.Left, Direction.Down };
+                break;
+
+            case Direction.Left:
+                preferredSeq = new Direction[] { Direction.Up, Direction.Down, Direction.Left };
+                break;
+
+            case Direction.Right:
+                preferredSeq = new Direction[] { Direction.Up, Direction.Down, Direction.Right };
+                break;
+
+            default:
+                break;
+        }
+
+        foreach (var dir in preferredSeq)
+        {
+            if (!disallowed.Contains(dir))
+            {
+                return dir;
+            }
+        }
+
+        return Direction.None;
+    }
+
+    /// <summary>
+    /// Get position after move to give direction
+    /// </summary>
+    /// <param name="current">Where robot is now</param>
+    /// <param name="direction">Suggested direction for the next move</param>
+    /// <returns>Position after suggested move</returns>
     public static Position PositionAfterMove(Position current, Direction direction)
     {
         var newPos = new Position();
@@ -148,5 +189,22 @@ public static class MoveUtils
         }
 
         return preferred;
+    }
+
+    private static List<Direction> getDisallowedDirections(Position current, List<Position> impassable)
+    {
+        var disallowed = new List<Direction>();
+
+        // calculate disallowed
+        foreach (var dir in everyDirection)
+        {
+            var newPos = PositionAfterMove(current, dir);
+            if (impassable.Contains(newPos))
+            {
+                disallowed.Add(dir);
+            }
+        }
+
+        return disallowed;
     }
 }
