@@ -6,9 +6,9 @@ namespace Bozota.Players.Utils;
 
 public static class ActionUtils
 {
-    public static PlayerAction? ShootEnemy(string Name, List<Player> players)
+    public static PlayerAction? ShootClosest(string shooterName, List<Player> players)
     {
-        var me = players.First(p => p.Name == Name);
+        var me = players.First(p => p.Name == shooterName);
         var otherplayers = new List<Player>(players);
         otherplayers.Remove(me);
 
@@ -33,7 +33,7 @@ public static class ActionUtils
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    action = new PlayerAction(Name, GameAction.Shoot, direction);
+                    action = new PlayerAction(shooterName, GameAction.Shoot, direction);
                 }
             }
             else if (p.XPos == me.XPos)
@@ -51,7 +51,7 @@ public static class ActionUtils
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    action = new PlayerAction(Name, GameAction.Shoot, direction);
+                    action = new PlayerAction(shooterName, GameAction.Shoot, direction);
                 }
             }
         }
