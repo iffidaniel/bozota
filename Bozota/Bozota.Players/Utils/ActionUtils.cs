@@ -42,11 +42,11 @@ public static class ActionUtils
 
                 if (p.YPos > me.YPos)
                 {
-                    direction = Direction.Down;
+                    direction = Direction.Up;
                 }
                 else
                 {
-                    direction = Direction.Up;
+                    direction = Direction.Down;
                 }
                 if (distance < closestDistance)
                 {
