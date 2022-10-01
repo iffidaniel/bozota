@@ -6,6 +6,9 @@ namespace Bozota.Players.Utils;
 
 public static class ActionUtils
 {
+    /// <summary>
+    /// Shoot the closest if the player is in x or y axis sector
+    /// </summary>
     public static PlayerAction? ShootClosest(string shooterName, List<Player> players)
     {
         var me = players.First(p => p.Name == shooterName);
@@ -17,42 +20,21 @@ public static class ActionUtils
         Direction direction = Direction.None;
         foreach (var p in otherplayers)
         {
-            int distance;
+            int distance = int.MaxValue;
             if (p.YPos == me.YPos)
             {
                 distance = Math.Abs(p.XPos - me.XPos);
-
-                if (p.XPos > me.XPos)
-                {
-                    direction = Direction.Right;
-                }
-                if ((me.XPos - p.XPos) < closestDistance)
-                {
-                    direction = Direction.Left;
-                }
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    action = new PlayerAction(shooterName, GameAction.Shoot, direction);
-                }
+                direction = p.XPos > me.XPos ? Direction.Right : Direction.Left;
             }
             else if (p.XPos == me.XPos)
             {
                 distance = Math.Abs(p.YPos - me.YPos);
-
-                if (p.YPos > me.YPos)
-                {
-                    direction = Direction.Up;
-                }
-                else
-                {
-                    direction = Direction.Down;
-                }
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    action = new PlayerAction(shooterName, GameAction.Shoot, direction);
-                }
+                direction = p.YPos > me.YPos ? Direction.Up : Direction.Down;
+            }
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                action = new PlayerAction(shooterName, GameAction.Shoot, direction);
             }
         }
         return action;
